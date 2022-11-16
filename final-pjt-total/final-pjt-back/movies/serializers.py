@@ -9,9 +9,17 @@ class MovieListSerializer(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
 
+# 전체 리뷰
+class ReviewListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Review
+        fields = '__all__'
+
 # 특정 영화 정보
 class MovieDetailerializer(serializers.ModelSerializer):
 
+    review_set = ReviewListSerializer(many=True, read_only=True)
     class Meta:
         model = Movie
         exclude = ('id',)
@@ -31,12 +39,6 @@ class GenreDetailSerializer(serializers.ModelSerializer):
         model = Genre
         fields = '__all__'
 
-# 전체 리뷰
-class ReviewListSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Review
-        fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
