@@ -10,17 +10,19 @@ class Movie(models.Model):
     overview = models.TextField()
     popularity = models.FloatField()
     poster_path = models.CharField(max_length=150)
-    # innermovie_id = models.IntegerField()
+
 
 
 class Genre(models.Model):
     movies = models.ManyToManyField(Movie)
     name = models.CharField(max_length=150)
-    # innergenre_id = models.IntegerField()
+
+
 
 class Review(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    like_review_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_user_reviews")
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # like_review_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_user_reviews")
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, default=0)
     title = models.CharField(max_length=150)
     movie_title = models.CharField(max_length=150)
     rank = models.IntegerField()
