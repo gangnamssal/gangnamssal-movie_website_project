@@ -1,92 +1,79 @@
-# final-pjt
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+# 과정
+## 2022/11/16
+1. 기획서 작성
+2. 모델 만들기
+3. How do I get data from API to database?
+   1. api data 받아올 py파일 만들기
+   2. pip install requests
+   3. import requests
+   4. 가져온 데이터에서 우리가 쓸 데이터만 뽑아서 새로운 json파일 생성 성공
 ```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/ggnsall/final-pjt.git
-git branch -M master
-git push -uf origin master
+import requests
+import json
+
+API_KEY = '42584510a0a43e09681fec8c6f36f050'
+language = 'ko-kr'
+page = '1'
+url = 'https://api.themoviedb.org/3/movie/popular'
+
+def get_data(url, PAGE):
+    API_URL = f'{url}?api_key={API_KEY}&language={language}&page={PAGE}'
+    return API_URL
+
+
+new_list = []
+for i in range(1,5):
+    get_data(url, i)
+    response = requests.get(get_data(url,i)).json()
+
+    for data in response['results']:
+        new_data = {'model' : 'movies.movie'}
+        new_data['pk'] = data['id']
+        new_data['fields'] = {}
+        new_data['fields']['title'] = data['title']
+        new_data['fields']['release_date'] = data['release_date']
+        new_data['fields']['adult'] = data['adult']
+        new_data['fields']['overview'] = data['overview']
+        new_data['fields']['popularity'] = data['popularity']
+        new_data['fields']['poster_path'] = data['poster_path']
+        # new_data['fields']['innermovie_id'] = data['id']
+        new_list.append(new_data)
+        print(new_data)
+
+with open('movies/fixtures/movies.json', 'a', encoding='UTF-8') as f:
+    json.dump(new_list, f, ensure_ascii=False, indent=2)
 ```
+   5. 데이터베이스에 저장하고 싶은데 방법을 찾는중
+   - 가져온 데이터에서 우리가 쓸 데이터만 뽑아서 새로운 json파일 생성까지는 성공 했으나, 그것을 데이터 베이스에 넣는 과정에서 애를 먹는 중
+   - 오류1
+  > app_label, model_name = app_label.split('.')
 
-## Integrate with your tools
+  > ValueError: not enough values to unpack (expected 2, got 1)
+    
+- 해결:  ` new_data = {'model' : 'movies.movie'}   `
+- 'movie'를 'movies.movie' 로 고침
+- 오류2
+> NULL constraint failed: movies_movie.release_date
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/ggnsall/final-pjt/-/settings/integrations)
+- 해결: ` new_data['fields']['release_date'] = data['release_date']`
+- :을 =로 고침
+- migrate를 잘하자
+- 오류3
+> 데이터 베이스에 id가 1번부터 순서대로 저장된다.
+- 해결: ` new_data['pk'] = data['id']`
 
-## Collaborate with your team
+4. serializer
+- 오류1
+> .accepted_renderer not set on Response
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+해결: 데코레이터를 달아준다 *@도 까먹지 않기*
 
-## Test and Deploy
+5. app삭제
+- 영화 상세정보에 리뷰를 달고 싶어서 커뮤니티 앱을 지우기로 했다. 리뷰를 커뮤니티 앱이 아닌, 무비 앱에서 모델을 생성 하려고 앱 지우는 방법을 구글링 했다.
+> 1. 단계-필요한 코드 및 파일을 안전한 위치로 이동
+> 2. 단계-모든 가져 오기 및 파일 경로 수정
+> 3. 단계-models.py를 비우고 마이그레이션하기
+> 4. 단계-settings.py파일 수정
+> 5. 단계-앱 폴더 삭제
 
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+6. view.py
