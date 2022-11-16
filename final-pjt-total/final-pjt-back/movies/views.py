@@ -1,7 +1,9 @@
 from django.shortcuts import render
 
-from rest_framework.response import Response
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework import status
 
 from .serializers import MovieDetailerializer, MovieListSerializer, GenreListSerializer, GenreDetailSerializer,ReviewListSerializer,CommentSerializer
@@ -47,6 +49,7 @@ def reviewList(request, movie_pk):
         serializer = ReviewListSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(movie = movie)
+            serializer.save(user = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -78,6 +81,7 @@ def comment_list(request, review_pk):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(review=review)
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

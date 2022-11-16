@@ -15,6 +15,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
+        read_only_fields = ('user','movie','like_review_users',)
 
 # 특정 영화 정보
 class MovieDetailerializer(serializers.ModelSerializer):
@@ -30,7 +31,7 @@ class GenreListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = '__all__'
-        read_only_field = ('movie',)
+        read_only_fields = ('movie',)
 
 # 특정 장르
 class GenreDetailSerializer(serializers.ModelSerializer):
@@ -46,3 +47,4 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+        read_only_fields = ('review',)
