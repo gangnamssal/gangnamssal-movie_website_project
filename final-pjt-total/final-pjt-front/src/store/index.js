@@ -17,6 +17,7 @@ export default new Vuex.Store({
     genrepopularMovie: null,
     topRatedMovie: [],
     upcommingMovie: null,
+    nowPlayingMovie: null,
   },
   getters: {
   },
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     },
     GET_UP_COMMING_MOVIE(state, movie) {
       state.upcommingMovie = movie
+    },
+    GET_NOW_PLAYING_MOVIE(state,movie) {
+      state.nowPlayingMovie = movie
     }
     
   },
@@ -107,6 +111,22 @@ export default new Vuex.Store({
           // console.log(context)
           const sortedData = _.sortBy(res.data.results,'release_date')
           context.commit('GET_UP_COMMING_MOVIE',sortedData)
+        })
+    },
+    getNowPlayingMovie(context) {
+      axios({
+        method: 'get',
+        url: 'https://api.themoviedb.org/3/movie/now_playing',
+        params: {
+          api_key: API_KEY,
+          language: LANGUAGE,
+          page: '1',
+          region: REGION
+        }
+      })
+        .then((res) => {
+          const sortedData = _.sortBy(res.data.results,'release_date').reverse()
+          context.commit('GET_NOW_PLAYING_MOVIE',sortedData)
         })
     }
   },
