@@ -4,6 +4,10 @@
     <img :src="`https://www.themoviedb.org/t/p/original${detailMovie.poster_path}`" alt=""><br>
     <p>영화 제목 : {{ detailMovie.title }}</p>
     <hr>
+    <ReviewForm
+        :movie-title="[detailMovie.title,$route.params.movie_id]"
+    />
+    <hr>
     <ReviewsList
         v-for="review in detailMovie.review_set" :key="review.id"
         :review="review"
@@ -14,12 +18,14 @@
 
 <script>
 import ReviewsList from '@/components/ReviewsList.vue';
+import ReviewForm from '../components/ReviewForm.vue';
 
 
 export default {
     name: "MovieDetail",
     components: { 
-        ReviewsList 
+        ReviewsList,
+        ReviewForm,
     },
     methods: {
         getDetailMovie() {

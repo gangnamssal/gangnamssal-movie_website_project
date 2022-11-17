@@ -252,6 +252,26 @@ export default new Vuex.Store({
           // console.log(context)
           context.commit('GET_DETAIL_MOVIE',res.data)
         })
+    },
+    addReview(context, payload) {
+      axios({
+        method: 'post',
+        url: `${DJANGO_URL}/movies/${payload.movie_id}/reviews/`,
+        data: {
+          title: payload.title,
+          content: payload.content,
+          movie_title: payload.movie_title,
+          rank: payload.rank
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          console.log(context)
+          
+        })
     }
   },
   modules: {
