@@ -15,7 +15,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ('username','movie','title','movie_title','rank','content','created_at','updated_at',)
+        fields = ('user','username','movie','title','movie_title','rank','content','created_at','updated_at',)
         read_only_fields = ('user','movie','like_review_users','username',)
 
 
@@ -29,9 +29,18 @@ class MovieDetailerializer(serializers.ModelSerializer):
         exclude = ('id',)
         
 
+# 리뷰에 대한 전체 댓글
+class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        read_only_fields = ('review',)
+
 # 리뷰 디테일
 class ReviewDetailSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
+    comment_set = CommentSerializer(many=True, read_only=True)
     class Meta:
         model = Review
         fields = '__all__'
@@ -53,14 +62,6 @@ class GenreDetailSerializer(serializers.ModelSerializer):
         model = Genre
         fields = '__all__'
 
-
-# 리뷰에 대한 전체 댓글
-class CommentSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(source='user.username', read_only=True)
-    class Meta:
-        model = Comment
-        fields = '__all__'
-        read_only_fields = ('review',)
 
 # 댓글 디테일
 class CommentDetailSerializer(serializers.ModelSerializer):

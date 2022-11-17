@@ -20,7 +20,7 @@ class Genre(models.Model):
 
 
 class Review(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     like_review_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_user_reviews")
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, default=0)
     title = models.CharField(max_length=150)
@@ -32,6 +32,6 @@ class Review(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     review = models.ForeignKey(Review, on_delete=models.CASCADE, default=0)
     content = models.TextField()
