@@ -143,3 +143,5 @@ getUpCommingMovie(context) {
 
 3. 인증 관련 기능 완성
 
+4. dj-auth-rest에서 제공한 유저 정보를 사용해 유저 프로필을 구성하였다.
+    라우터를 활용한 movie detail을 구현하였다.

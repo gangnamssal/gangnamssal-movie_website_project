@@ -25,16 +25,20 @@ export default {
       },
       getGenres() {
         this.$store.dispatch('getGenres')
+      },
+      getUserInfo() {
+        this.$store.dispatch('getUserInfo')
       }
     },
     computed:{
       popularMovie(){
         return this.$store.state.popularMovie
-      }
+      },
     },
     created() {
       this.getPopularMovie()
       this.getGenres()
+      this.getUserInfo()
     }
     
 }

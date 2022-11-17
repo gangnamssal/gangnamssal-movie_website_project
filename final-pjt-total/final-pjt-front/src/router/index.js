@@ -52,6 +52,18 @@ const routes = [
     name: 'changepassword',
     component: () => import('@/views/ChangePasswordView')
   },
+  {
+    // 프로필
+    path: '/movie/profile/',
+    name: 'profile',
+    component: () => import('@/views/ProfileView')
+  },
+  {
+    // 디테일
+    path: '/movie/detail/:movie_id',
+    name: 'detail',
+    component: () => import('@/views/MovieDetail')
+  },
 ]
 
 const router = new VueRouter({

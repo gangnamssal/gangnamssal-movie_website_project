@@ -24,6 +24,8 @@ export default new Vuex.Store({
     upcommingMovie: null,
     nowPlayingMovie: null,
     Token:null,
+    userInfo: null,
+    detailMovie: null,
   },
   getters: {
   },
@@ -51,6 +53,16 @@ export default new Vuex.Store({
     },
     LOGOUT(state){
       state.Token = null
+    },
+    GET_USER_INFO(state,userData) {
+      state.userInfo = userData
+    },
+    GET_DETAIL_MOVIE(state, movie_id) {
+      state.popularMovie.forEach((movie)=> {
+        if (movie.id === movie_id) {
+          state.detailMovie = movie
+        }
+      })
     }
     
   },
@@ -205,6 +217,19 @@ export default new Vuex.Store({
         context.commit('LOGOUT')
       })
     },
+    getUserInfo(context) {
+      axios({
+        method: 'get',
+        url: `${DJANGO_URL}/movies/auth/user/`,
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res)
+          context.commit('GET_USER_INFO',res.data)
+        })
+    }
   },
   modules: {
   }
