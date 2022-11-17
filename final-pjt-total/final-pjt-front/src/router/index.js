@@ -6,13 +6,13 @@ Vue.use(VueRouter)
 const routes = [
   {
     // Home
-    path: '/movie',
+    path: '/',
     name: 'movie',
     component: () => import('@/views/HomeView')
   },
   {
     // 인기 영화
-    path: '/movie/genre',
+    path: '/movie/genre/',
     name: 'genre',
     component: () => import('@/views/MovieGenre')
   },

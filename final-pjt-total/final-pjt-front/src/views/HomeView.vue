@@ -22,6 +22,9 @@ export default {
     methods: {
       getPopularMovie() {
         this.$store.dispatch('getPopularMovie')
+      },
+      getGenres() {
+        this.$store.dispatch('getGenres')
       }
     },
     computed:{
@@ -31,6 +34,7 @@ export default {
     },
     created() {
       this.getPopularMovie()
+      this.getGenres()
     }
     
 }

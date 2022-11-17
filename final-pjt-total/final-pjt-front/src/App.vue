@@ -4,28 +4,11 @@
   </div>
 </template>
 
-<script>
-
-export default {
-    name: 'App',
-    methods: {
-      getPopularMovie() {
-        this.$store.dispatch('getPopularMovie')
-      }
-    },
-    computed:{
-      popularMovie(){
-        return this.$store.state.popularMovie
-      }
-    },
-    created() {
-      this.getPopularMovie()
-    }
-    
-}
-</script>
-
 
 
 <style>
+img{
+    width: 300px;
+    height: 400px;
+}
 </style>
