@@ -1,7 +1,7 @@
 <template>
-  <div @click="getDetail(movie.id)">
+  <div @click="getDetail(movie?.id)">
     <img :src="posterUrl" alt=""><br>
-    <span>{{ movie.title }}</span>
+    <span>{{ movie?.title }}</span>
     <hr>
   </div>
 </template>

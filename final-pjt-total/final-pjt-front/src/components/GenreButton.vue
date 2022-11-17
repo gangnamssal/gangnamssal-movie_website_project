@@ -2,7 +2,7 @@
   <span>
     <button
         @click="getGenreMovie"
-    >{{ genre.name }}</button>
+    >{{ genre?.name }}</button>
   </span>
 </template>
 

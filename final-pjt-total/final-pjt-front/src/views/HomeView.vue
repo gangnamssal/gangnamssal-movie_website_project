@@ -23,6 +23,9 @@ export default {
       // getPopularMovie() {
       //   this.$store.dispatch('getPopularMovie')
       // }
+      getUserInfo() {
+        this.$store.dispatch('getUserInfo')
+      }
     },
     computed:{
       popularMovie(){
@@ -31,6 +34,7 @@ export default {
     },
     created(){
       // this.getPopularMovie()
+      this.getUserInfo()
     }
     
 }

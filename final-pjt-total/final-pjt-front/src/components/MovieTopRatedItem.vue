@@ -1,7 +1,7 @@
 <template>
   <div>
-    <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt=""><br>
-    <span>{{ movie.title }}</span>
+    <img :src="`https://www.themoviedb.org/t/p/original${movie?.poster_path}`" alt=""><br>
+    <span>{{ movie?.title }}</span>
   </div>
 </template>
 

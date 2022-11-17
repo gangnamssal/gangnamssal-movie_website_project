@@ -11,7 +11,7 @@
       <router-link :to="{ name : 'signup' }">회원가입</router-link><br>
     </span>
     <span v-else-if="token">
-      <span>Hello! {{ userInfo.username }}</span>
+      <span>Hello! {{ userInfo?.username }}</span>
       <br>
       <router-link :to="{ name : 'changepassword' }">비밀번호변경</router-link><br>
       <button @click="logOut">로그아웃</button><br>

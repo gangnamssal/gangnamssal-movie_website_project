@@ -16,7 +16,7 @@
 export default {
     name:'ReviewForm',
     props: {
-        movieTitle: Array
+        movieTitle: Array,
     },
     data(){
         return{
@@ -32,6 +32,8 @@ export default {
             const rank = this.rank
             const movie_title = this.movieTitle[0]
             const movie_id = this.movieTitle[1]
+            // console.log(movie_title)
+            // console.log(movie_id)
             const payload = {
                 title,
                 content,
@@ -40,6 +42,9 @@ export default {
                 movie_id
             }
             this.$store.dispatch('addReview',payload)
+            this.title = null
+            this.content = null
+            this.rank = null
         }
     }
 }

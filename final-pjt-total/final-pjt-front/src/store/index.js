@@ -54,6 +54,7 @@ export default new Vuex.Store({
     },
     SAVE_TOKEN(state,key){
       state.Token = key
+      router.push({ name: 'movie' })
     },
     LOGOUT(state){
       state.Token = null
@@ -63,8 +64,15 @@ export default new Vuex.Store({
     },
     GET_DETAIL_MOVIE(state, movie) {
       state.detailMovie = movie
+    },
+    ADD_REVIEW(state, review) {
+      state.detailMovie.review_set.push(review)
+    },
+    DELETE_REVIEW(state, id) {
+      state.detailMovie.review_set = state.detailMovie.review_set.filter((review) => {
+        return review.id !== id
+      })
     }
-    
   },
   actions: {
     // getTotalMovie(context) {
@@ -268,9 +276,22 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          console.log(res)
-          console.log(context)
-          
+          // console.log(res)
+          // console.log(context)
+          context.commit('ADD_REVIEW',res.data)
+        })
+    },
+    deleteReview(context, id) {
+      axios({
+        method: 'delete',
+        url: `${DJANGO_URL}/movies/reviews/${id}/`,
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then(() => {
+          // console.log('성공',res)
+          context.commit('DELETE_REVIEW',id)
         })
     }
   },

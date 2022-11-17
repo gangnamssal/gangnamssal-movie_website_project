@@ -1,15 +1,15 @@
 <template>
   <div>
     <h1>Detail</h1>
-    <img :src="`https://www.themoviedb.org/t/p/original${detailMovie.poster_path}`" alt=""><br>
-    <p>영화 제목 : {{ detailMovie.title }}</p>
+    <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" alt=""><br>
+    <p>영화 제목 : {{ detailMovie?.title }}</p>
     <hr>
     <ReviewForm
-        :movie-title="[detailMovie.title,$route.params.movie_id]"
+        :movie-title="[detailMovie?.title,$route.params.movie_id]"
     />
     <hr>
     <ReviewsList
-        v-for="review in detailMovie.review_set" :key="review.id"
+        v-for="review in detailMovie?.review_set" :key="review.id"
         :review="review"
     />
 
@@ -30,7 +30,7 @@ export default {
     methods: {
         getDetailMovie() {
             this.$store.dispatch("getDetailMovie", this.$route.params.movie_id);
-        }
+        },
     },
     created() {
         this.getDetailMovie();
