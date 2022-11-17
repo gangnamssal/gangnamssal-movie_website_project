@@ -77,3 +77,67 @@ with open('movies/fixtures/movies.json', 'a', encoding='UTF-8') as f:
 > 5. 단계-앱 폴더 삭제
 
 6. view.py
+
+7. user
+---
+## 2022/11/17
+
+1. 댓글 views.py , serializer 수정
+- 오류1 : 댓글 수정 된 결과는 나왔으나, 전체 조회하면 저장이 되지 않음
+- 해결 : comment = Review.objects.get(pk=comment_pk) 리뷰에서 가져오느라 코멘트에 리뷰 정보가 없었다. 리뷰가 아니라 코멘트에서 가져오는 걸로 수정.
+```
+@api_view(['GET','PUT','DELETE',])
+def comment_detail(request,comment_pk):
+# comment = Review.objects.get(pk=comment_pk) 리뷰에서 가져오느라 코멘트에 리뷰 정보가 없었다.
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.method == 'GET':
+        serializer = CommentDetailSerializer(comment)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = CommentDetailSerializer(instance=comment,data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    elif request.method == 'DELETE':
+        comment.delete()
+        return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
+```
+
+
+- 오류2 : 리뷰와 댓글 작성에 작성자가 안뜸
+- 해결: blank=True, null=True 를 넣으니 해결
+```
+user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+```
+
+2. vue 메인메뉴 작성
+- navbar 영화 리스트 : TMDB API 이용, 인기영화, 명작, 개봉예정, 상영중영화 리스트 뽑아오기
+  1. 홈화면: 인기영화 20개 보여줌
+  2. 장르별 영화 리스트 구현
+  3. 명작: 60개 영화
+  4. 개봉예정작 : 개봉일 빠른 순으로 정렬 
+   - lodash 설치, import
+```
+getUpCommingMovie(context) {
+      axios({
+        method: 'get',
+        url: 'https://api.themoviedb.org/3/movie/upcoming',
+        params: {
+          api_key: API_KEY,
+          language: LANGUAGE,
+          page: '1',
+          region: REGION
+        }
+      })
+        .then((res) => {
+          // console.log(res)
+          // console.log(context)
+          // 개봉일 기준으로 
+          const sortedData = _.sortBy(res.data.results,'release_date')
+          context.commit('GET_UP_COMMING_MOVIE',sortedData)
+        })
+    }
+```
+  5. 현재 상영작: 날짜 순으로 정렬
+
+
