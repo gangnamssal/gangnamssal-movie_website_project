@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from .serializers import MovieDetailerializer, MovieListSerializer, GenreListSerializer, GenreDetailSerializer,ReviewListSerializer,CommentSerializer
+from .serializers import MovieDetailerializer, MovieListSerializer, GenreListSerializer, GenreDetailSerializer,ReviewListSerializer,CommentSerializer,ReviewDetailSerializer,CommentDetailSerializer
 from .models import Movie, Genre, Review,Comment
 
 # Create your views here.
@@ -57,10 +57,10 @@ def reviewList(request, movie_pk):
 def review_detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     if request.method == 'GET':
-        serializer = ReviewListSerializer(review)
+        serializer = ReviewDetailSerializer(review)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = ReviewListSerializer(review,data=request.data)
+        serializer = ReviewDetailSerializer(review,data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
@@ -88,12 +88,12 @@ def comment_list(request, review_pk):
 
 @api_view(['GET','PUT','DELETE',])
 def comment_detail(request,comment_pk):
-    comment = Review.objects.get(pk=comment_pk)
+    comment = Comment.objects.get(pk=comment_pk)
     if request.method == 'GET':
-        serializer = CommentSerializer(comment)
+        serializer = CommentDetailSerializer(comment)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = CommentSerializer(comment,data=request.data)
+        serializer = CommentDetailSerializer(instance=comment,data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
