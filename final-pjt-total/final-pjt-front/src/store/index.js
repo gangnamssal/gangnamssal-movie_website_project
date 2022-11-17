@@ -17,6 +17,7 @@ export default new Vuex.Store({
     createPersistedState()
   ],
   state: {
+    // totalMovie: null,
     popularMovie: null,
     genres: null,
     genrepopularMovie: null,
@@ -30,6 +31,9 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
+    // GET_TOTAL_MOVIE(state, movie) {
+    //   state.totalMovie = movie
+    // },
     GET_POPULAR_MOVIE(state, movie) {
       state.popularMovie = movie
     },
@@ -57,27 +61,35 @@ export default new Vuex.Store({
     GET_USER_INFO(state,userData) {
       state.userInfo = userData
     },
-    GET_DETAIL_MOVIE(state, movie_id) {
-      state.popularMovie.forEach((movie)=> {
-        if (movie.id === movie_id) {
-          state.detailMovie = movie
-        }
-      })
+    GET_DETAIL_MOVIE(state, movie) {
+      state.detailMovie = movie
     }
     
   },
   actions: {
+    // getTotalMovie(context) {
+    //   axios({
+    //     method: 'get',
+    //     url: `${DJANGO_URL}/movies/`,
+    //   })
+    //     .then((res) => {
+    //       console.log(res.data)
+    //       context.commit('GET_TOTAL_MOVIE',res.data)
+    //     })
+    // },
     getPopularMovie(context) {
       axios({
         method: 'get',
         url: 'https://api.themoviedb.org/3/movie/popular',
         params: {
           api_key: API_KEY,
-          language: LANGUAGE
+          language: LANGUAGE,
+          page: '1',
+          region: REGION,
         }
       })
         .then((res) => {
-          // console.log(res.data.results)
+          console.log(res.data.results)
           context.commit('GET_POPULAR_MOVIE',res.data.results)
         })
     },
@@ -228,6 +240,17 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res)
           context.commit('GET_USER_INFO',res.data)
+        })
+    },
+    getDetailMovie(context, movie_id) {
+      axios({
+        method: 'get',
+        url: `${DJANGO_URL}/movies/${movie_id}/`
+      })
+        .then((res) => {
+          // console.log(res)
+          // console.log(context)
+          context.commit('GET_DETAIL_MOVIE',res.data)
         })
     }
   },

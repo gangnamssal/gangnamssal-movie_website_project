@@ -20,25 +20,17 @@ export default {
         HomeItem
     },
     methods: {
-      getPopularMovie() {
-        this.$store.dispatch('getPopularMovie')
-      },
-      getGenres() {
-        this.$store.dispatch('getGenres')
-      },
-      getUserInfo() {
-        this.$store.dispatch('getUserInfo')
-      }
+      // getPopularMovie() {
+      //   this.$store.dispatch('getPopularMovie')
+      // }
     },
     computed:{
       popularMovie(){
         return this.$store.state.popularMovie
       },
     },
-    created() {
-      this.getPopularMovie()
-      this.getGenres()
-      this.getUserInfo()
+    created(){
+      // this.getPopularMovie()
     }
     
 }
