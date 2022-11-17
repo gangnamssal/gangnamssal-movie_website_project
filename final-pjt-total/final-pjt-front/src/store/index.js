@@ -72,6 +72,14 @@ export default new Vuex.Store({
       state.detailMovie.review_set = state.detailMovie.review_set.filter((review) => {
         return review.id !== id
       })
+    },
+    SAVE_UPDATE_REVIEW(state, review) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((item) => {
+        if (item.id === review.id) {
+          item = review
+        }
+        return item
+      })
     }
   },
   actions: {
@@ -292,6 +300,25 @@ export default new Vuex.Store({
         .then(() => {
           // console.log('성공',res)
           context.commit('DELETE_REVIEW',id)
+        })
+    },
+    saveUpdateReview(context, payload) {
+      axios({
+        method: 'put',
+        url: `${DJANGO_URL}/movies/reviews/${payload.review_id}/`,
+        data: {
+          title: payload.title,
+          content: payload.content,
+          rank: payload.rank,
+          movie_title : payload.movie_title
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res)
+          context.commit('SAVE_UPDATE_REVIEW',res.data)
         })
     }
   },
