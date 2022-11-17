@@ -49,7 +49,7 @@ with open('movies/fixtures/movies.json', 'a', encoding='UTF-8') as f:
   > app_label, model_name = app_label.split('.')
 
   > ValueError: not enough values to unpack (expected 2, got 1)
-    
+
 - 해결:  ` new_data = {'model' : 'movies.movie'}   `
 - 'movie'를 'movies.movie' 로 고침
 - 오류2
@@ -151,3 +151,8 @@ getUpCommingMovie(context) {
 6. 영화 상세 정보에서 영화에 달린 리뷰와 리뷰에 달린 댓글 불러옴
 
 7. 리뷰 작성 폼만들고 저장
+
+8. 리뷰 삭제 및 수정
+    - 삭제 : 리뷰의 id를 받아 Django 서버의 주소로 axios 요청을 보낸 후 데이터베이스에서 삭제하였다.
+    - 수정 : 삭제와 같이 리뷰의 id를 받아 Django 서버 주소로 axios 요청을 보낸 뒤 변경된 내용을 데이터베이스에 저장하였다.
+    - 두 개를 구현하는 과정에서 원래 데이터가 실시간으로 변하지 않았는데 이것을 vuex의 state 값을 바꿔주면서 실시간으로 변하도록 하였다.
