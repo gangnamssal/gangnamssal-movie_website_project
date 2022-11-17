@@ -112,11 +112,12 @@ user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, bla
 
 2. vue 메인메뉴 작성
 - navbar 영화 리스트 : TMDB API 이용, 인기영화, 명작, 개봉예정, 상영중영화 리스트 뽑아오기
-  1. 홈화면: 인기영화 20개 보여줌
-  2. 장르별 영화 리스트 구현
-  3. 명작: 60개 영화
-  4. 개봉예정작 : 개봉일 빠른 순으로 정렬 
-   - lodash 설치, import
+  - 홈화면: 인기영화 20개 보여줌
+  - 장르별 영화 리스트 구현
+  - 명작: 60개 영화
+  - 현재 상영작: 날짜 순으로 정렬
+  - 개봉예정작 : 개봉일 빠른 순으로 정렬 
+  - lodash 설치, import
 ```
 getUpCommingMovie(context) {
       axios({
@@ -138,6 +139,7 @@ getUpCommingMovie(context) {
         })
     }
 ```
-  5. 현재 상영작: 날짜 순으로 정렬
 
+
+3. 인증 관련 기능 완성
 

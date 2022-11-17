@@ -2,15 +2,20 @@ import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import _ from 'lodash'
+import createPersistedState  from 'vuex-persistedstate'
+import router from '../router'
 
 Vue.use(Vuex)
 
-const API_URL = 'http://127.0.0.1:8000'
+const DJANGO_URL = 'http://127.0.0.1:8000'
 const API_KEY = '42584510a0a43e09681fec8c6f36f050'
 const LANGUAGE = 'ko-kr'
 const REGION = 'KR'
 
 export default new Vuex.Store({
+  plugins:[
+    createPersistedState()
+  ],
   state: {
     popularMovie: null,
     genres: null,
@@ -18,6 +23,7 @@ export default new Vuex.Store({
     topRatedMovie: [],
     upcommingMovie: null,
     nowPlayingMovie: null,
+    Token:null,
   },
   getters: {
   },
@@ -39,6 +45,12 @@ export default new Vuex.Store({
     },
     GET_NOW_PLAYING_MOVIE(state,movie) {
       state.nowPlayingMovie = movie
+    },
+    SAVE_TOKEN(state,key){
+      state.Token = key
+    },
+    LOGOUT(state){
+      state.Token = null
     }
     
   },
@@ -60,7 +72,7 @@ export default new Vuex.Store({
     getGenres(context) {
       axios({
         method: 'get',
-        url: `${API_URL}/movies/genres/`,
+        url: `${DJANGO_URL}/movies/genres/`,
       })
         .then((res) => {
           // console.log(res.data)
@@ -128,7 +140,71 @@ export default new Vuex.Store({
           const sortedData = _.sortBy(res.data.results,'release_date').reverse()
           context.commit('GET_NOW_PLAYING_MOVIE',sortedData)
         })
-    }
+    },
+    addSignUp(context,payload){
+      axios({
+        method : 'post',
+        url: `${DJANGO_URL}/movies/signup/`,
+        data: {
+          username: payload.username,
+          password1 : payload.password1,
+          password2 : payload.password2,
+        }
+      })
+      .then((res)=>{
+        // console.log(context)
+        // console.log(res.data.key)
+        console.log('가입 성공')
+        context.commit('SAVE_TOKEN',res.data.key)
+      })
+
+    },
+    getLogIn(context,payload){
+      axios({
+        method: 'post',
+        url:`${DJANGO_URL}/movies/auth/login/`,
+        data: {
+          username: payload.username,
+          password: payload.password
+        }
+      })
+      .then((res)=>{
+        // console.log('성공',context,res)
+        console.log('로그인 성공')
+        context.commit('SAVE_TOKEN',res.data.key)
+        router.push({ name: 'movie' })
+      })
+    },
+    changePassword(context,payload){
+      axios({
+        method: 'post',
+        url:`${DJANGO_URL}/movies/auth/password/change/`,
+        data: {
+          new_password1: payload.new_password1,
+          new_password2: payload.new_password2,
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+      .then(()=>{
+        console.log('변경 성공')
+        router.push({ name: 'movie' })
+      })
+    },
+    logOut(context){
+      axios({
+        method:'post',
+        url:`${DJANGO_URL}/movies/auth/logout/`,
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+      .then(()=>{
+        console.log('로그아웃 성공')
+        context.commit('LOGOUT')
+      })
+    },
   },
   modules: {
   }

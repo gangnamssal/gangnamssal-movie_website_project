@@ -34,6 +34,24 @@ const routes = [
     name: 'nowplaying',
     component: () => import('@/views/MovieNowPlaying')
   },
+  {
+    // 로그인
+    path: '/movie/login',
+    name: 'login',
+    component: () => import('@/views/LogInView')
+  },
+  {
+    // 회원가입
+    path: '/movie/signup',
+    name: 'signup',
+    component: () => import('@/views/SignUpView')
+  },
+  {
+    // 비밀번호변경
+    path: '/movie/change/password',
+    name: 'changepassword',
+    component: () => import('@/views/ChangePasswordView')
+  },
 ]
 
 const router = new VueRouter({
