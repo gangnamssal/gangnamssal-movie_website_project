@@ -1,13 +1,24 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div>
+    <NavBar/>
+    <hr>
+    <HomeItem
+      v-for="movie in popularMovie" :key="movie.id"
+      :movie="movie"
+    />
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar'
+import HomeItem from '@/components/HomeItem'
 
 export default {
-    name: 'App',
+    name: 'HomeView',
+    components: {
+        NavBar,
+        HomeItem
+    },
     methods: {
       getPopularMovie() {
         this.$store.dispatch('getPopularMovie')
@@ -25,7 +36,6 @@ export default {
 }
 </script>
 
-
-
 <style>
+
 </style>
