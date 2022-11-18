@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div @click="getDetail(movie?.id)"> 
     <img :src="`https://www.themoviedb.org/t/p/original${movie?.poster_path}`" alt=""><br>
     <span>{{ movie?.title }} - </span>
     <span>{{ movie?.release_date }}</span>
@@ -11,6 +11,11 @@ export default {
     name: 'NowPlayingMovieItem',
     props: {
         movie: Object
+    },
+    methods: {
+      getDetail(movie_id) {
+        this.$router.push({ name: 'detail', params: { movie_id } })
+      }
     }
 }
 </script>

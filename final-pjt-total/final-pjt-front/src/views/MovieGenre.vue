@@ -8,7 +8,7 @@
     />
     <br>
     <br>
-    <span v-for="movie in genrepopularMovie" :key="movie.id">
+    <span v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
       <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt=""><br>
       {{ movie?.title }}
       <br>
@@ -24,6 +24,11 @@ export default {
   name: 'MovieGenre',
   components: {
      GenreButton 
+  },
+  methods: {
+    getDetail(movie_id) {
+        this.$router.push({ name: 'detail', params: { movie_id } })
+      }
   },
   computed: {
     genres() {
