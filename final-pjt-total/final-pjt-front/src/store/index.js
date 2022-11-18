@@ -111,6 +111,14 @@ export default new Vuex.Store({
         }
         return review
       })
+    },
+    LIKE_MOVIE(state, likeMovie) {
+      state.detailMovie.movielike_set.push(likeMovie)
+    },
+    LIKE_MOVIE_DELETE(state, userId) {
+      state.detailMovie.movielike_set = state.detailMovie.movielike_set.filter((like) => {
+        return !(like.user === userId) 
+      })
     }
   },
   actions: {
@@ -395,6 +403,30 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res)
           context.commit('ADD_UPDATE_COMMENT', res.data)
+        })
+    },
+    likeMovie(context, id) {
+      axios({
+        method: 'post',
+        url: `${DJANGO_URL}/movies/${id}/movielike/`,
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res)
+          context.commit('LIKE_MOVIE', res.data)
+        })
+    },
+    likeMovieDelete(context, payload) {
+      axios({
+        method: 'delete',
+        url: `${DJANGO_URL}/movies/movielike/${payload[1]}/`
+      })
+        .then(() => {
+          // console.log('성공',context)
+          context.commit('LIKE_MOVIE_DELETE', payload[0])
+          // console.log(payload[0])
         })
     }
   },

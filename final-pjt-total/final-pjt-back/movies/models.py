@@ -3,7 +3,7 @@ from django.conf import settings
 
 # Create your models here.
 class Movie(models.Model):
-    like_movie_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_user_movies", blank=True, null=True)
+    # like_movie_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_user_movies", blank=True, null=True)
     title = models.CharField(max_length=150)
     release_date = models.DateField()
     adult = models.BooleanField()
@@ -35,3 +35,8 @@ class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     review = models.ForeignKey(Review, on_delete=models.CASCADE, default=0)
     content = models.TextField()
+
+class MovieLike(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    movieLike = models.ForeignKey(Movie, on_delete=models.CASCADE, default=0)
+
