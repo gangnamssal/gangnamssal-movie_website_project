@@ -98,6 +98,19 @@ export default new Vuex.Store({
         }
         return review
       })
+    },
+    ADD_UPDATE_COMMENT(state, payload) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if (review.id === payload.review) {
+          review.comment_set = review.comment_set.map((comment) => {
+            if(comment.id === payload.id) {
+              comment = payload
+            }
+            return comment
+          })
+        }
+        return review
+      })
     }
   },
   actions: {
@@ -366,6 +379,22 @@ export default new Vuex.Store({
         .then(() => {
           // console.log(res)
           context.commit('DELETE_COMMENT',payload)
+        })
+    },
+    addUpdateComment(context, payload) {
+      axios({
+        method: 'put',
+        url: `${DJANGO_URL}/movies/comments/${payload[1]}/`,
+        data: {
+          content: payload[2]
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res)
+          context.commit('ADD_UPDATE_COMMENT', res.data)
         })
     }
   },

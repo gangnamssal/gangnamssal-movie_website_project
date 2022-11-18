@@ -7,7 +7,7 @@
     <p>작성 시간 : {{ review?.created_at }}</p>
     <p>수정 시간 : {{ review?.updated_at }}</p>
     <button @click="deleteReview" v-if="review.user === userInfo.pk">리뷰 삭제</button>
-    <button @click="updateReview" v-if="review.user === userInfo.pk">리뷰 수정</button>
+    <button @click="updateReview" v-if="review.user === userInfo.pk">리뷰 수정</button><br><br>
 
     <div v-show="isUpdate">
         <label for="title">제목: </label>
