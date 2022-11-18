@@ -39,3 +39,7 @@ class Comment(models.Model):
 class MovieLike(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     movieLike = models.ForeignKey(Movie, on_delete=models.CASCADE, default=0)
+
+class ReviewLike(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    reviewLike = models.ForeignKey(Review, on_delete=models.CASCADE, default=0)

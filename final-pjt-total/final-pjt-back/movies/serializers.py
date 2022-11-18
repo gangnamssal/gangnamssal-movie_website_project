@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Review, Comment, MovieLike
+from .models import Movie, Genre, Review, Comment, MovieLike, ReviewLike
 
 
 # 전체 영화 리스트
@@ -17,13 +17,26 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('review',)
 
+
+# 리뷰 좋아요
+class ReviewLikeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ReviewLike
+        fields = '__all__'
+
+
+
+
 # 전체 리뷰
 class ReviewListSerializer(serializers.ModelSerializer):
+    reviewlike_set = ReviewLikeSerializer(many=True, read_only=True)
+
     username = serializers.CharField(source='user.username', read_only=True)
     comment_set = CommentSerializer(many=True, read_only=True)
     class Meta:
         model = Review
-        fields = ('id','user','username','movie','title','movie_title','rank','content','created_at','updated_at','comment_set',)
+        fields = ('id','user','username','movie','title','movie_title','rank','content','created_at','updated_at','comment_set','reviewlike_set',)
         read_only_fields = ('user','movie','like_review_users','username',)
 
 # 영화 좋아요
@@ -34,9 +47,11 @@ class MovieLikeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+
 # 특정 영화 정보
 class MovieDetailerializer(serializers.ModelSerializer):
-
+    # reviewlike_set = ReviewLikeSerializer(many=True, read_only=True)
     review_set = ReviewListSerializer(many=True, read_only=True)
     movielike_set = MovieLikeSerializer(many=True, read_only=True)
     class Meta:
@@ -47,6 +62,7 @@ class MovieDetailerializer(serializers.ModelSerializer):
 
 # 리뷰 디테일
 class ReviewDetailSerializer(serializers.ModelSerializer):
+    reviewlike_set = ReviewLikeSerializer(many=True, read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
     comment_set = CommentSerializer(many=True, read_only=True)
     class Meta:

@@ -119,7 +119,31 @@ export default new Vuex.Store({
       state.detailMovie.movielike_set = state.detailMovie.movielike_set.filter((like) => {
         return !(like.user === userId) 
       })
+    },
+
+
+// 리뷰 좋아요, 취소
+    LIKE_REVIEW(state, likeReview) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review)=>{
+        if (review.id === likeReview.reviewLike){
+          review.reviewlike_set.push(likeReview)
+        }
+        return review
+      })
+      
+    },
+    LIKE_REVIEW_DELETE(state, payload) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review)=>{
+        if (review.id === payload[2]) {
+          review.reviewlike_set = review.reviewlike_set.filter((like)=>{
+            return !(like.user === payload[0]) 
+          })
+        }
+        return review
+      })
     }
+
+
   },
   actions: {
     // getTotalMovie(context) {
@@ -428,7 +452,35 @@ export default new Vuex.Store({
           context.commit('LIKE_MOVIE_DELETE', payload[0])
           // console.log(payload[0])
         })
-    }
+    },
+
+
+    //리뷰 좋아요, 취소
+    likeReview(context, id) {
+      axios({
+        method: 'post',
+        url: `${DJANGO_URL}/movies/${id}/reviewlike/`,
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          context.commit('LIKE_REVIEW', res.data)
+        })
+    },
+    likeReviewDelete(context, payload) {
+      axios({
+        method: 'delete',
+        url: `${DJANGO_URL}/movies/reviewlike/${payload[1]}/`
+      })
+        .then(() => {
+          // console.log('성공',context)
+          context.commit('LIKE_REVIEW_DELETE', payload)
+          // console.log(payload[0])
+        })
+    },
+
   },
   modules: {
   }

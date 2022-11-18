@@ -9,6 +9,11 @@
     <button @click="deleteReview" v-if="review.user === userInfo.pk">리뷰 삭제</button>
     <button @click="updateReview" v-if="review.user === userInfo.pk">리뷰 수정</button><br><br>
 
+
+    <button @click="likeReview" v-if="IsLiked===false">리뷰좋아요!</button>
+    <button @click="likeReviewDelete" v-else-if="IsLiked===true">리뷰좋아취소!</button>
+
+
     <div v-show="isUpdate">
         <label for="title">제목: </label>
         <input type="text" id="title" v-model="title">
@@ -48,7 +53,8 @@ export default {
             title: this.review.title,
             content: this.review.content,
             rank: this.review.rank,
-            comment: null
+            comment: null,
+
         }
     },
     components: { 
@@ -84,15 +90,49 @@ export default {
             const payload = [this.review.id, this.comment]
             this.$store.dispatch('addComment',payload)
             this.comment = null
-        }
+        },
+
+
+
+        likeReview() {
+            this.$store.dispatch('likeReview', this.review.id)
+            console.log(this.IsLiked)
+        },
+        likeReviewDelete() {
+            const reviewLikeId = this.review.reviewlike_set.filter((review) => {
+                return review.user === this.$store.state.userInfo.pk
+            })
+            // console.log(movieLikeId)
+            const payload = [this.$store.state.userInfo.pk, reviewLikeId[0].id, reviewLikeId[0].reviewLike]
+            this.$store.dispatch('likeReviewDelete',payload)
+  
+            console.log(this.IsLiked)
+
+        },
+
+
+
+
+
     },
     computed: {
-      userInfo() {
-        return this.$store.state.userInfo
-      }
+        userInfo() {
+            return this.$store.state.userInfo
+        },
+        IsLiked(){
+            let isLiked = null
+            this.$store.state.detailMovie.review_set.forEach((review)=>{
+                if (review.id === this.review.id) {
+                    isLiked = review.reviewlike_set.some((like)=>{
+                        return like.user === this.$store.state.userInfo.pk
+                    })
+                }
+            })
+            return isLiked
+        }
+    },
     }
 
-}
 </script>
 
 <style>

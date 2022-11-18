@@ -18,4 +18,9 @@ urlpatterns = [
     path('<int:movie_pk>/movielike/', views.movieLike),
     # 영화 좋아요 취소
     path('movielike/<int:movielike_pk>/', views.movieLikeDelete),
+    # 리뷰 좋아요
+    path('<int:review_pk>/reviewlike/', views.reviewLike),
+    # 리뷰 좋아요 취소
+    path('reviewlike/<int:reviewlike_pk>/', views.reviewLikeDelete),
+    
 ]

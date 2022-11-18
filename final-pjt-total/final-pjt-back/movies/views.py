@@ -9,8 +9,8 @@ from rest_framework import status
 
 from .serializers import (MovieDetailerializer, MovieListSerializer, GenreListSerializer, 
                             GenreDetailSerializer,ReviewListSerializer,CommentSerializer,
-                            ReviewDetailSerializer,CommentDetailSerializer,MovieLikeSerializer)
-from .models import Movie, Genre, Review,Comment, MovieLike
+                            ReviewDetailSerializer,CommentDetailSerializer,MovieLikeSerializer,ReviewLikeSerializer)
+from .models import Movie, Genre, Review,Comment, MovieLike,ReviewLike
 
 # Create your views here.
 @api_view(['GET'])
@@ -128,4 +128,24 @@ def movieLikeDelete(request, movielike_pk):
     movielike = get_object_or_404(MovieLike, pk=movielike_pk)
     if request.method == 'DELETE':
         movielike.delete()
+        return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
+
+
+#리뷰 좋아요
+@api_view(['POST'])
+def reviewLike(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'POST':
+        serializer = ReviewLikeSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(reviewLike = review)
+            serializer.save(user = request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['DELETE'])
+def reviewLikeDelete(request, reviewlike_pk):
+    # review = Review.objects.get(pk=review_pk)
+    reviewlike = get_object_or_404(ReviewLike, pk=reviewlike_pk)
+    if request.method == 'DELETE':
+        reviewlike.delete()
         return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
