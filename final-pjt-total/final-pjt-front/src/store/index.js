@@ -80,6 +80,24 @@ export default new Vuex.Store({
         }
         return item
       })
+    },
+    ADD_COMMENT(state, comment) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if(review.id === comment.review) {
+          review.comment_set.push(comment)
+        }
+        return review
+      })
+    },
+    DELETE_COMMENT(state, payload) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if (review.id === payload[0]) {
+          review.comment_set = review.comment_set.filter((comment) => {
+            return !(comment.id === payload[1])
+          })
+        }
+        return review
+      })
     }
   },
   actions: {
@@ -319,6 +337,35 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res)
           context.commit('SAVE_UPDATE_REVIEW',res.data)
+        })
+    },
+    addComment(context, payload) {
+      axios({
+        method: 'post',
+        url: `${DJANGO_URL}/movies/reviews/${payload[0]}/comments/`,
+        data: {
+          content:payload[1]
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res.data)
+          context.commit('ADD_COMMENT', res.data)
+        })
+    },
+    deleteComment(context, payload) {
+      axios({
+        method: 'delete',
+        url: `${DJANGO_URL}/movies/comments/${payload[1]}/`,
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then(() => {
+          // console.log(res)
+          context.commit('DELETE_COMMENT',payload)
         })
     }
   },

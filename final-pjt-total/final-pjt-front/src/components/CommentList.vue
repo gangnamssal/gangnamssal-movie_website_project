@@ -1,6 +1,7 @@
 <template>
   <div>
-    <p>{{ comment?.username }} - {{comment?.content}}</p>
+    <span>{{ comment?.username }} - {{comment?.content}} &nbsp;</span>
+    <button @click="deleteComment">삭제</button>
   </div>
 </template>
 
@@ -9,6 +10,12 @@ export default {
     name: 'CommentList',
     props: {
         comment: Object
+    },
+    methods: {
+      deleteComment() {
+        const payload = [this.comment.review, this.comment.id]
+        this.$store.dispatch('deleteComment',payload)
+      }
     }
 }
 </script>

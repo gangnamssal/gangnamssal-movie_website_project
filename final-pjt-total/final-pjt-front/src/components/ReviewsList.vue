@@ -22,11 +22,18 @@
     </div>
 
 
-    <p>|댓글|</p>
+    <label for="comment">댓글 작성 : </label>
+    <textarea id="comment" cols="40" rows="2" 
+        v-model="comment"
+        @keyup.enter="addComment"
+        ></textarea>
+    <button @click="addComment">작성</button>
+
     <CommentList
         v-for="comment in review.comment_set" :key="comment.id"
         :comment="comment"
     />
+
     <hr>
  </div>
 </template>
@@ -40,7 +47,8 @@ export default {
             isUpdate: false,
             title: this.review.title,
             content: this.review.content,
-            rank: this.review.rank
+            rank: this.review.rank,
+            comment: null
         }
     },
     components: { 
@@ -71,6 +79,11 @@ export default {
             }
             this.$store.dispatch('saveUpdateReview',payload)
             this.isUpdate = !this.isUpdate
+        },
+        addComment() {
+            const payload = [this.review.id, this.comment]
+            this.$store.dispatch('addComment',payload)
+            this.comment = null
         }
     },
     computed: {
