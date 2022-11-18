@@ -156,3 +156,41 @@ getUpCommingMovie(context) {
     - 삭제 : 리뷰의 id를 받아 Django 서버의 주소로 axios 요청을 보낸 후 데이터베이스에서 삭제하였다.
     - 수정 : 삭제와 같이 리뷰의 id를 받아 Django 서버 주소로 axios 요청을 보낸 뒤 변경된 내용을 데이터베이스에 저장하였다.
     - 두 개를 구현하는 과정에서 원래 데이터가 실시간으로 변하지 않았는데 이것을 vuex의 state 값을 바꿔주면서 실시간으로 변하도록 하였다.
+
+---
+## 2022/11/18
+
+1. 댓글 작성, 삭제
+- 댓글을 작성하고 삭제하는 요청을 axios로 보낸다.
+- 새로고침을 하지 않아도 작성, 삭제가 되도록 mutations에서 작성해줌
+```
+  // 댓글 작성
+    ADD_COMMENT(state, comment) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if(review.id === comment.review) {
+          review.comment_set.push(comment)
+        }
+        return review
+      })
+    },
+
+  // 댓글 삭제
+    DELETE_COMMENT(state, payload) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if (review.id === payload[0]) {
+          review.comment_set = review.comment_set.filter((comment) => {
+            return !(comment.id === payload[1])
+          })
+        }
+        return review
+      })
+    }
+```
+- 댓글 작성자만 댓글을 삭제 할 수 있도록 한다.
+2. 댓글 수정
+
+3. 각 영화마다 디테일을 보면 상세정보와 리뷰, 댓글 기능이 보이도록 구현
+
+4. 영화 좋아요 기능 구현
+
+5. 리뷰 좋아요 기능 구현
