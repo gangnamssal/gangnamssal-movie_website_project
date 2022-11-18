@@ -122,7 +122,7 @@ def movieLike(request, movie_pk):
             serializer.save(user = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['DELETE',])
+@api_view(['DELETE'])
 def movieLikeDelete(request, movielike_pk):
     # review = Review.objects.get(pk=review_pk)
     movielike = get_object_or_404(MovieLike, pk=movielike_pk)
