@@ -27,6 +27,7 @@ export default new Vuex.Store({
     Token:null,
     userInfo: null,
     detailMovie: null,
+    searchingMovie: null,
   },
   getters: {
   },
@@ -142,9 +143,22 @@ export default new Vuex.Store({
         }
         return review
       })
-    }
-
-
+    },
+    SEARCH_ING(state, titleName) {
+      const arr = []
+      for (let movie of state.popularMovie) {
+        for (let word of movie.title) {
+          if (word === titleName || titleName===movie.title || movie.title.includes(titleName)) {
+            arr.push(movie)
+            break
+          }
+        }
+      }
+      state.searchingMovie = arr
+    },
+    CLOSE_SEARCHING(state) {
+      state.searchingMovie = null
+    } 
   },
   actions: {
     // getTotalMovie(context) {

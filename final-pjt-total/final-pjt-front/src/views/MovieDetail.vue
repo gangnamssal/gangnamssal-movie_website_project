@@ -4,7 +4,7 @@
     <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" alt=""><br>
     <p>영화 제목 : {{ detailMovie?.title }}</p>
     {{ detailMovie.movielike_set.length }}
-    {{ detailMovie }}
+
     <br>
     <button @click="likeMovie" v-if="userIsLiked===false">🤍</button>
     <button @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
@@ -54,7 +54,11 @@ export default {
         }
     },
     created() {
-        this.getDetailMovie();
+        window.scrollTo(0,0)
+        this.getDetailMovie()
+    },
+    destroyed() {
+        window.scrollTo(0,0)
     },
     computed: {
         detailMovie() {
