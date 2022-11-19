@@ -209,3 +209,24 @@ getUpCommingMovie(context) {
      ```
 
    - 좋아요를 누르고 새로고침을 통해 다시 리뷰 페이즈로 오면 좋아요 순으로 정렬되어 보여준다.
+
+2. 검색 기능 추가
+
+   - 네비게이션바에 검색 기능을 추가하여 제목을 입력할 때마다 영화가 보이도록 하였다.
+
+   - ```
+     SEARCH_ING(state, titleName) {
+           const arr = []
+           for (let movie of state.popularMovie) {
+             for (let word of movie.title) {
+               if (word === titleName || titleName===movie.title || movie.title.includes(titleName)) {
+                 arr.push(movie)
+                 break
+               }
+             }
+           }
+           state.searchingMovie = arr
+     ```
+
+     - 조건문을 활용하여 검색을 실시하였다.
+
