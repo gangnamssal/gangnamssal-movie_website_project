@@ -64,6 +64,8 @@ export default new Vuex.Store({
     },
     GET_DETAIL_MOVIE(state, movie) {
       state.detailMovie = movie
+      let a = _.chain(state.detailMovie.review_set).sortBy('reviewlike_count').reverse()
+      state.detailMovie.review_set = [...a]
     },
     ADD_REVIEW(state, review) {
       state.detailMovie.review_set.push(review)
@@ -130,7 +132,6 @@ export default new Vuex.Store({
         }
         return review
       })
-      
     },
     LIKE_REVIEW_DELETE(state, payload) {
       state.detailMovie.review_set = state.detailMovie.review_set.map((review)=>{

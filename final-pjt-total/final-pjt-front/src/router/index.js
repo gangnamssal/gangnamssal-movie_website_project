@@ -64,6 +64,15 @@ const routes = [
     name: 'detail',
     component: () => import('@/views/MovieDetail')
   },
+  {
+    path: '/404',
+    name: '404NotFound',
+    component: () => import('@/views/404NotFound')
+  },
+  {
+    path: '*',
+    redirect: { name : '404NotFound'}
+  }
 ]
 
 const router = new VueRouter({

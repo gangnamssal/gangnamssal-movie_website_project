@@ -7,12 +7,12 @@
     <p>작성 시간 : {{ review?.created_at }}</p>
     <p>수정 시간 : {{ review?.updated_at }}</p>
     <button @click="deleteReview" v-if="review.user === userInfo.pk">리뷰 삭제</button>
-    <button @click="updateReview" v-if="review.user === userInfo.pk">리뷰 수정</button><br><br>
-
-
-    <button @click="likeReview" v-if="IsLiked===false">리뷰좋아요!</button>
-    <button @click="likeReviewDelete" v-else-if="IsLiked===true">리뷰좋아취소!</button>
-
+    <button @click="updateReview" v-if="review.user === userInfo.pk">리뷰 수정</button>
+    <button @click="likeReview" v-if="IsLiked===false">🤍</button>
+    <button @click="likeReviewDelete" v-else-if="IsLiked===true">❤️</button>
+    {{ likedCount }}
+    <br>
+    <br>
 
     <div v-show="isUpdate">
         <label for="title">제목: </label>
@@ -110,10 +110,6 @@ export default {
 
         },
 
-
-
-
-
     },
     computed: {
         userInfo() {
@@ -129,6 +125,15 @@ export default {
                 }
             })
             return isLiked
+        },
+        likedCount() {
+            let count = null
+            this.$store.state.detailMovie.review_set.forEach((review) => {
+                if (review.id === this.review.id) {
+                    count = review.reviewlike_set.length 
+                }
+            })
+            return count
         }
     },
     }
