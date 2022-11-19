@@ -194,3 +194,18 @@ getUpCommingMovie(context) {
 4. 영화 좋아요 기능 구현
 
 5. 리뷰 좋아요 기능 구현
+
+---
+
+## 2022/11/18
+
+1. 리뷰 좋아요 순으로 정렬해서 보여주기
+
+   - 리뷰들의 리스트를 좋아요를 많이 받은 순으로 위쪽에 보일 수 있게 구현했습니다.
+
+   - ```
+     let a = _.chain(state.detailMovie.review_set).sortBy('reviewlike_count').reverse()
+           state.detailMovie.review_set = [...a]
+     ```
+
+   - 좋아요를 누르고 새로고침을 통해 다시 리뷰 페이즈로 오면 좋아요 순으로 정렬되어 보여준다.
