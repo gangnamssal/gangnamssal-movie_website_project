@@ -25,7 +25,7 @@ export default {
       // }
       getUserInfo() {
         this.$store.dispatch('getUserInfo')
-      }
+      },
     },
     computed:{
       APIpopularMovie(){

@@ -8,7 +8,7 @@
     <input type="password" id="password1" v-model="password1"><br>
 
     <label for="password2">비밀번호 확인 : </label>
-    <input type="password" id="password2" v-model="password2">
+    <input type="password" id="password2" v-model="password2" @keyup.enter="addSignUp">
     <button @click="addSignUp">회원가입</button>
   </div>
 </template>

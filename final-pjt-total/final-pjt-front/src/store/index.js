@@ -69,8 +69,8 @@ export default new Vuex.Store({
     },
     GET_DETAIL_MOVIE(state, movie) {
       state.detailMovie = movie
-      let a = _.chain(state.detailMovie.review_set).sortBy('reviewlike_count').reverse()
-      state.detailMovie.review_set = [...a]
+      let sortedMovie = _.chain(state.detailMovie.review_set).sortBy('reviewlike_count').reverse()
+      state.detailMovie.review_set = [...sortedMovie]
     },
     ADD_REVIEW(state, review) {
       state.detailMovie.review_set.push(review)
@@ -162,7 +162,19 @@ export default new Vuex.Store({
     },
     CLOSE_SEARCHING(state) {
       state.searchingMovie = null
-    } 
+    },
+    NAME_SORT(state) {
+      let sortedMovie = _.chain(state.genrepopularMovie).sortBy('title')
+      state.genrepopularMovie = [...sortedMovie]
+    },
+    POPULARITY_SORT(state) {
+      let sortedMovie = _.chain(state.genrepopularMovie).sortBy('popularity').reverse()
+      state.genrepopularMovie = [...sortedMovie]
+    },
+    RELEASED_SORT(state) {
+      let sortedMovie = _.chain(state.genrepopularMovie).sortBy('release_date').reverse()
+      state.genrepopularMovie = [...sortedMovie]
+    }
   },
   actions: {
     // getTotalMovie(context) {

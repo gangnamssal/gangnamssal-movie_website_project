@@ -9,7 +9,7 @@ class Movie(models.Model):
     adult = models.BooleanField()
     overview = models.TextField()
     popularity = models.FloatField()
-    poster_path = models.CharField(max_length=150)
+    poster_path = models.CharField(max_length=150, blank=True, null=True)
     genre_ids = models.CharField(max_length=150)
 
 class Genre(models.Model):

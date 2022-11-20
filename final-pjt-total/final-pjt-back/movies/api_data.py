@@ -1,11 +1,20 @@
 import requests
 import json
 
-# # # popularMovie - url
 API_KEY = '42584510a0a43e09681fec8c6f36f050'
 language = 'ko-kr'
 page = '1'
-url = 'https://api.themoviedb.org/3/movie/popular'
+# # # popularMovie - url
+# url = 'https://api.themoviedb.org/3/movie/popular'
+
+# # # TopRated - url
+# url = 'https://api.themoviedb.org/3/movie/top_rated'
+
+# # # upComming - url
+# url = 'https://api.themoviedb.org/3/movie/upcoming'
+
+# # # nowPlaying - url
+# url = 'https://api.themoviedb.org/3/movie/now_playing'
 
 def get_data(url, PAGE):
     API_URL = f'{url}?api_key={API_KEY}&language={language}&page={PAGE}'
@@ -13,7 +22,7 @@ def get_data(url, PAGE):
 
 
 new_list = []
-for i in range(5,30):
+for i in range(1,15):
     get_data(url, i)
     response = requests.get(get_data(url,i)).json()
 
@@ -60,7 +69,8 @@ with open('movies/fixtures/movies.json', 'a', encoding='UTF-8') as f:
 # with open('movies/fixtures/genre.json', 'w', encoding='UTF-8') as f:
 # 	json.dump(new_list, f, ensure_ascii=False, indent=2)
 
-# genre & popular
+
+
 
 
 
