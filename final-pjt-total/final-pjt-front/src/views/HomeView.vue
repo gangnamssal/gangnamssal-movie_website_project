@@ -1,8 +1,5 @@
 <template>
   <div>
-    <NavBar/>
-    <hr>
-
     <HomeItem
       v-for="movie in APIpopularMovie" :key="movie.id"
       :movie="movie"
@@ -12,13 +9,11 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar'
 import HomeItem from '@/components/HomeItem'
 
 export default {
     name: 'HomeView',
     components: {
-        NavBar,
         HomeItem
     },
     methods: {

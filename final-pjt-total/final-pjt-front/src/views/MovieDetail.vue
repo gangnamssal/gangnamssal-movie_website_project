@@ -5,9 +5,8 @@
     <p>영화 제목 : {{ detailMovie?.title }}</p>
     {{ detailMovie.movielike_set.length }}
 
-    <br>
-    <button @click="likeMovie" v-if="userIsLiked===false">🤍</button>
-    <button @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
+    <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>
+    <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
     <hr>
     <ReviewForm
         :movie-title="[detailMovie?.title,$route.params.movie_id]"

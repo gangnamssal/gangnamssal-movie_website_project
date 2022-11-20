@@ -6,10 +6,10 @@
     <p>평점 : {{ review?.rank }}</p>
     <p>작성 시간 : {{ review?.created_at }}</p>
     <p>수정 시간 : {{ review?.updated_at }}</p>
-    <button @click="deleteReview" v-if="review.user === userInfo.pk">리뷰 삭제</button>
-    <button @click="updateReview" v-if="review.user === userInfo.pk">리뷰 수정</button>
-    <button @click="likeReview" v-if="IsLiked===false">🤍</button>
-    <button @click="likeReviewDelete" v-else-if="IsLiked===true">❤️</button>
+    <button type="button" class="btn btn-light" @click="deleteReview" v-if="review.user === userInfo.pk">리뷰 삭제</button>
+    <button type="button" class="btn btn-light" @click="updateReview" v-if="review.user === userInfo.pk">리뷰 수정</button>
+    <button class="like" @click="likeReview" v-if="IsLiked===false">🤍</button>
+    <button class="like" @click="likeReviewDelete" v-else-if="IsLiked===true">❤️</button>
     {{ likedCount }}
     <br>
     <br>
@@ -23,7 +23,7 @@
         <br>
         <label for="rank">평점: </label>
         <input type="number" id="rank" min="0" max="10" step="0.5" v-model="rank">
-        <button @click="saveUpdateReview">저장</button>
+        <button  @click="saveUpdateReview">저장</button>
     </div>
 
 
@@ -32,7 +32,7 @@
         v-model="comment"
         @keyup.enter="addComment"
         ></textarea>
-    <button @click="addComment">작성</button>
+    <button type="button" class="btn btn-light" @click="addComment">작성</button>
 
     <CommentList
         v-for="comment in review.comment_set" :key="comment.id"

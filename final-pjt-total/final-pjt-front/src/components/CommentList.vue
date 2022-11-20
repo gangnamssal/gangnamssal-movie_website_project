@@ -1,8 +1,8 @@
 <template>
   <div>
     <span>{{ comment?.username }} - {{comment?.content}} &nbsp;</span>
-    <button @click="deleteComment" v-if="comment.user === userInfo.pk">삭제</button>
-    <button @click="updateComment" v-if="comment.user === userInfo.pk">수정</button>
+    <button type="button" class="btn btn-light" @click="deleteComment" v-if="comment.user === userInfo.pk">삭제</button>
+    <button type="button" class="btn btn-light" @click="updateComment" v-if="comment.user === userInfo.pk">수정</button>
     
     <div v-show="isUpdateComment">
       <label for="comment">댓글 작성 : </label>

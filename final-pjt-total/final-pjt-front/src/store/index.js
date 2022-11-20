@@ -373,6 +373,7 @@ export default new Vuex.Store({
       })
       .then(()=>{
         console.log('로그아웃 성공')
+        router.push({ name: 'movie' })
         context.commit('LOGOUT')
       })
     },

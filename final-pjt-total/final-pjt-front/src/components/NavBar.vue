@@ -1,6 +1,71 @@
 <template>
   <div>
-    <h1>네브바</h1>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <router-link :to="{ name : 'movie' }" class="navbar-brand">Home</router-link><br>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Movie
+          </a>
+          <ul class="dropdown-menu">
+            <li><router-link :to="{ name : 'genre'}" class="dropdown-item" >Genre</router-link></li>
+            <li><router-link :to="{ name : 'toprated'}" class="dropdown-item" >Top Rated</router-link></li>
+            <li><router-link :to="{ name : 'upcomming'}" class="dropdown-item" >Now Playing</router-link></li>
+            <li><router-link :to="{ name : 'nowplaying'}" class="dropdown-item" >Upcomming</router-link></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Recomandation
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">MBTI</a></li>
+            <li><a class="dropdown-item" href="#">Taste</a></li>
+            <li><a class="dropdown-item" href="#">Another Algo</a></li>
+            <li><a class="dropdown-item" href="#">Another Algo</a></li>
+          </ul>
+        </li>
+
+
+        <li class="nav-item dropdown" v-if="!token">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hello! Strager
+          </a>
+          <ul class="dropdown-menu" >
+            <li><router-link :to="{ name : 'signup' }" class="dropdown-item">Signup</router-link></li>
+            <li><router-link :to="{ name : 'login' }" class="dropdown-item">Login</router-link></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown"  v-else-if="token">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hello! {{ userInfo?.username }}
+          </a>
+          <ul class="dropdown-menu" >
+            <li><router-link :to="{ name : 'profile' }" class="dropdown-item">Profile</router-link></li>
+            <li><a class="dropdown-item" @click="logOut" href="#">Logout</a></li>
+            <li><router-link :to="{ name : 'changepassword' }" class="dropdown-item">Changepassword</router-link></li>
+            <li><a class="dropdown-item" href="#">Signout</a></li>
+          </ul>
+        </li>
+
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      </form>
+    </div>
+
+    </div>
+  </nav>
+    <!-- <h1>네브바</h1>
 
     <span v-if="!token">
       <router-link :to="{ name : 'login' }">로그인</router-link><br>
@@ -14,33 +79,27 @@
       <button @click="logOut">로그아웃</button><br>
     </span>
     <br>
+    
+    <router-link :to="{ name : 'genre'}">장르별 영화</router-link><br>
+    <router-link :to="{ name : 'toprated' }">명작</router-link><br>
+    <router-link :to="{ name : 'upcomming' }">개봉 예정</router-link><br>
+    <router-link :to="{ name : 'nowplaying' }">현재 상영중</router-link><br>
+   -->
 
-    <!-- 영화 카테고리 링크 -->
-    <div>
-      <router-link :to="{ name : 'genre'}">장르별 영화</router-link><br>
-      <router-link :to="{ name : 'toprated' }">명작</router-link><br>
-      <router-link :to="{ name : 'upcomming' }">개봉 예정</router-link><br>
-      <router-link :to="{ name : 'nowplaying' }">현재 상영중</router-link><br>
-    </div>
-    <br>
-    <router-link :to="{ name : 'preference' }">선호하는 장르 선택하기</router-link>
-
-
-
-  <nav class="navbar">
+  <!-- <nav class="navbar">
       <div class="container-fluid">
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#searchModal">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#exampleModal">
         </form>
       </div>
-  </nav>
+  </nav> -->
 
 <!-- Modal -->
-<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true" @click="closeSearching">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" @click="closeSearching">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="searchModalLabel">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
           <input 
             class="form-control me-5" 
             type="search" 
@@ -119,3 +178,7 @@ export default {
 <style>
 
 </style>
+
+
+
+

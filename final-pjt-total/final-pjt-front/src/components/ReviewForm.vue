@@ -8,7 +8,7 @@
     <br>
     <label for="rank">평점: </label>
     <input type="number" id="rank" min="0" max="10" step="0.5" v-model="rank">
-    <button @click="addReview">저장</button>
+    <button  type="button" class="btn btn-light" @click="addReview">저장</button>
   </div>
 </template>
 

@@ -1,8 +1,6 @@
 <template>
   <div>
     <h1>장르</h1>
-    <router-link :to="{ name : 'movie'}">홈으로</router-link>
-
 
   <div class="btn-group" role="group">
       <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="sortButton">
@@ -27,7 +25,7 @@
 
     <br>
     <br>
-    <span v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
+    <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
       <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt=""><br>
       {{ movie?.title }}
       <br>
@@ -81,4 +79,11 @@ export default {
 
 <style>
 
+.genre-movie{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
 </style>

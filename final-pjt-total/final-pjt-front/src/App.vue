@@ -1,13 +1,17 @@
 <template>
   <div id="app">
+
+    <nav-bar/>
     <router-view/>
   </div>
 </template>
 
 <script>
+import NavBar from './components/NavBar.vue'
 
 
 export default {
+  components: { NavBar },
     // name: 'HomeView',
     methods: {
       // getTotalMovie() {
@@ -46,5 +50,10 @@ export default {
 img{
     width: 300px;
     height: 400px;
+}
+
+.like{
+  border: none;
+  background: none;
 }
 </style>
