@@ -14,30 +14,33 @@
       <button @click="logOut">로그아웃</button><br>
     </span>
     <br>
-    
-    <router-link :to="{ name : 'genre'}">장르별 영화</router-link><br>
-    <router-link :to="{ name : 'toprated' }">명작</router-link><br>
-    <router-link :to="{ name : 'upcomming' }">개봉 예정</router-link><br>
-    <router-link :to="{ name : 'nowplaying' }">현재 상영중</router-link><br>
-  
 
+    <!-- 영화 카테고리 링크 -->
+    <div>
+      <router-link :to="{ name : 'genre'}">장르별 영화</router-link><br>
+      <router-link :to="{ name : 'toprated' }">명작</router-link><br>
+      <router-link :to="{ name : 'upcomming' }">개봉 예정</router-link><br>
+      <router-link :to="{ name : 'nowplaying' }">현재 상영중</router-link><br>
+    </div>
+    <br>
+    <router-link :to="{ name : 'preference' }">선호하는 장르 선택하기</router-link>
 
 
 
   <nav class="navbar">
       <div class="container-fluid">
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#searchModal">
         </form>
       </div>
   </nav>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" @click="closeSearching">
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true" @click="closeSearching">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
+        <h1 class="modal-title fs-5" id="searchModalLabel">
           <input 
             class="form-control me-5" 
             type="search" 

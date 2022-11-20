@@ -1,0 +1,53 @@
+<template>
+  <div>
+    <h1>선택</h1>
+    <hr>
+    <span>
+      <SelectedPreference
+        v-for="genre in selectedPreference" :key="genre.id"
+        :genre="genre"
+      />
+    </span>
+    <br>
+    <hr>
+
+    <PreferenceButton
+      v-for="genre in preferenceGenre" :key="genre.id"
+      :genre="genre"
+    />
+
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <button>저장하기</button>
+  </div>
+</template>
+
+<script>
+import PreferenceButton from '@/components/PreferenceButton'
+import SelectedPreference from '@/components/SelectedPreference'
+
+export default {
+    name: 'SignUpPreferenceView',
+    components: {
+      PreferenceButton,
+      SelectedPreference
+    },
+    methods: {
+    },
+    computed: {
+      preferenceGenre() {
+        return this.$store.state.preferenceGenre
+      },
+      selectedPreference() {
+        return this.$store.state.selectedPreference
+      }
+    }
+}
+</script>
+
+<style>
+
+</style>

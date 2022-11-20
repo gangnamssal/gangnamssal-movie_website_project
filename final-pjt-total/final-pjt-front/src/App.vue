@@ -24,6 +24,9 @@ export default {
       },
       getUserInfo() {
         this.$store.dispatch('getUserInfo')
+      },
+      getPreferenceGenre() {
+        this.$store.commit('GET_PREFERENCE_GENRE')
       }
     },
     created() {
@@ -32,6 +35,7 @@ export default {
       this.getGenres()
       this.getUserInfo()
       this.APIPopularMovie()
+      this.getPreferenceGenre()
     }
     
 }

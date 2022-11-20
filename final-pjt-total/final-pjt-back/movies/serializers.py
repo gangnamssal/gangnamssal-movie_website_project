@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Movie, Genre, Review, Comment, MovieLike, ReviewLike
-
+from accounts.models import User
 
 # 전체 영화 리스트
 class MovieListSerializer(serializers.ModelSerializer):
@@ -24,7 +24,6 @@ class ReviewLikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReviewLike
         fields = '__all__'
-
 
 
 
@@ -95,3 +94,9 @@ class CommentDetailSerializer(serializers.ModelSerializer):
         model = Comment
         fields = '__all__'
         # read_only_fields = ('review',)
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = "__all__"

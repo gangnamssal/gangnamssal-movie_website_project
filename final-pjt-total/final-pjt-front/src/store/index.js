@@ -21,6 +21,8 @@ export default new Vuex.Store({
     APIpopularMovie: null,
     popularMovie: null,
     genres: null,
+    preferenceGenre: null,
+    selectedPreference: [],
     genrepopularMovie: null,
     topRatedMovie: [],
     upcommingMovie: null,
@@ -174,6 +176,31 @@ export default new Vuex.Store({
     RELEASED_SORT(state) {
       let sortedMovie = _.chain(state.genrepopularMovie).sortBy('release_date').reverse()
       state.genrepopularMovie = [...sortedMovie]
+    },
+    GET_PREFERENCE_GENRE(state) {
+      if (state.preferenceGenre === null) {
+        state.preferenceGenre = state.genres
+      }
+    },
+    SELECTED_PREFERENCE_GENRE(state, seletedGenre) {
+      state.preferenceGenre = state.preferenceGenre.filter((genre) => {
+        return !(genre.id === seletedGenre.id)
+      })
+      const data = {
+        id: seletedGenre.id,
+        name: seletedGenre.name
+      }
+      state.selectedPreference.push(data) 
+    },
+    DELETE_SELECTED_GENRE(state, seletedGenre) {
+      state.selectedPreference = state.selectedPreference.filter((genre) => {
+        return !(genre.id === seletedGenre.id)
+      })
+      const data = {
+        id: seletedGenre.id,
+        name: seletedGenre.name
+      }
+      state.preferenceGenre.push(data) 
     }
   },
   actions: {

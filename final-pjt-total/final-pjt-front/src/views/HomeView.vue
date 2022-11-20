@@ -2,10 +2,12 @@
   <div>
     <NavBar/>
     <hr>
+
     <HomeItem
       v-for="movie in APIpopularMovie" :key="movie.id"
       :movie="movie"
     />
+
   </div>
 </template>
 

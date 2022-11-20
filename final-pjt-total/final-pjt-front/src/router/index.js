@@ -65,6 +65,12 @@ const routes = [
     component: () => import('@/views/MovieDetail')
   },
   {
+    path: '/preference',
+    name: 'preference',
+    component: () => import('@/views/SignUpPreferenceView')
+  },
+  {
+    // 404 page
     path: '/404',
     name: '404NotFound',
     component: () => import('@/views/404NotFound')
