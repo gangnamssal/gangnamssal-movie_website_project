@@ -18,6 +18,7 @@ export default new Vuex.Store({
   ],
   state: {
     // totalMovie: null,
+    APIpopularMovie: null,
     popularMovie: null,
     genres: null,
     genrepopularMovie: null,
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     // },
     GET_POPULAR_MOVIE(state, movie) {
       state.popularMovie = movie
+    },
+    API_POPULAR_MOVIE(state, movie) {
+      state.APIpopularMovie = movie
     },
     GET_GENRES(state, genres){
       state.genres = genres
@@ -174,6 +178,16 @@ export default new Vuex.Store({
     getPopularMovie(context) {
       axios({
         method: 'get',
+        url: `${DJANGO_URL}/movies/`,
+      })
+        .then((res) => {
+          // console.log(res.data.results)
+          context.commit('GET_POPULAR_MOVIE',res.data)
+        })
+    },
+    APIPopularMovie(context) {
+      axios({
+        method: 'get',
         url: 'https://api.themoviedb.org/3/movie/popular',
         params: {
           api_key: API_KEY,
@@ -183,8 +197,8 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          console.log(res.data.results)
-          context.commit('GET_POPULAR_MOVIE',res.data.results)
+          // console.log(res.data.results)
+          context.commit('API_POPULAR_MOVIE',res.data.results)
         })
     },
     getGenres(context) {

@@ -10,8 +10,7 @@ class Movie(models.Model):
     overview = models.TextField()
     popularity = models.FloatField()
     poster_path = models.CharField(max_length=150)
-
-
+    genre_ids = models.CharField(max_length=150)
 
 class Genre(models.Model):
     movies = models.ManyToManyField(Movie)

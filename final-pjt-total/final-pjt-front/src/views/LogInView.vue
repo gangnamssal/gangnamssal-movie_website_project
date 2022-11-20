@@ -5,7 +5,7 @@
     <input type="text" id="username" v-model="username"><br>
 
     <label for="password">비밀번호 : </label>
-    <input type="password" id="password" v-model="password"><br>
+    <input type="password" id="password" v-model="password" @keyup.enter="getLogIn"><br>
     
     <button @click="getLogIn">로그인</button>
   </div>

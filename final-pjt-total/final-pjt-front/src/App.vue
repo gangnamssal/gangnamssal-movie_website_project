@@ -16,6 +16,9 @@ export default {
       getPopularMovie() {
         this.$store.dispatch('getPopularMovie')
       },
+      APIPopularMovie() {
+        this.$store.dispatch('APIPopularMovie')
+      },
       getGenres() {
         this.$store.dispatch('getGenres')
       },
@@ -28,6 +31,7 @@ export default {
       this.getPopularMovie()
       this.getGenres()
       this.getUserInfo()
+      this.APIPopularMovie()
     }
     
 }

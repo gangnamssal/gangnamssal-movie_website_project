@@ -27,6 +27,7 @@ for i in range(5,30):
         new_data['fields']['overview'] = data['overview']
         new_data['fields']['popularity'] = data['popularity']
         new_data['fields']['poster_path'] = data['poster_path']
+        new_data['fields']['genre_ids'] = data['genre_ids']
         # new_data['fields']['innermovie_id'] = data['id']
         new_list.append(new_data)
         print(new_data)

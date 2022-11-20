@@ -3,7 +3,7 @@
     <NavBar/>
     <hr>
     <HomeItem
-      v-for="movie in popularMovie" :key="movie.id"
+      v-for="movie in APIpopularMovie" :key="movie.id"
       :movie="movie"
     />
   </div>
@@ -28,8 +28,8 @@ export default {
       }
     },
     computed:{
-      popularMovie(){
-        return this.$store.state.popularMovie
+      APIpopularMovie(){
+        return this.$store.state.APIpopularMovie
       },
     },
     created(){
