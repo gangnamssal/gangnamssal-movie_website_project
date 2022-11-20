@@ -15,6 +15,7 @@ export default {
     methods: {
         getGenreMovie() {
             this.$store.dispatch('getGenreMovie', this.genre.id)
+            this.$emit('genreButtonClick')
         }
     },
     computed: {

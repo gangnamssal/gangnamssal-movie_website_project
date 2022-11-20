@@ -14,6 +14,7 @@
       <button @click="logOut">로그아웃</button><br>
     </span>
     <br>
+    
     <router-link :to="{ name : 'genre'}">장르별 영화</router-link><br>
     <router-link :to="{ name : 'toprated' }">명작</router-link><br>
     <router-link :to="{ name : 'upcomming' }">개봉 예정</router-link><br>
@@ -48,14 +49,12 @@
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeSearching"></button>
       </div>
-
       <span class="modal-body">
         <SearchMovieItem
           v-for="movie in searchingMovie" :key="movie.id"
           :movie="movie"
         />
       </span>
-      
       <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeSearching">Close</button>
       </div> -->

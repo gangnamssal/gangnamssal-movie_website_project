@@ -21,6 +21,7 @@
     <GenreButton
       v-for="genre in genres" :key="genre.id"
       :genre="genre"
+      @genreButtonClick="genreButtonClick"
     />
 
 
@@ -61,6 +62,10 @@ export default {
         const buttonTag = document.querySelector('#sortButton')
         this.$store.commit('RELEASED_SORT')
         buttonTag.innerText = '최신 개봉일순으로'
+      },
+      genreButtonClick() {
+        const buttonTag = document.querySelector('#sortButton')
+        buttonTag.innerText = null
       }
   },
   computed: {
