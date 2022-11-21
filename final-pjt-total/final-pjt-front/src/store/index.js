@@ -552,7 +552,7 @@ export default new Vuex.Store({
         data: {
           nickname: payload.nickname,
           mbti: payload.mbti,
-          prefer_genre: context.state.selectedPreference
+          prefer_genre: payload.perfer_genre
         },
         headers: {
           Authorization: `Token ${context.state.Token}`

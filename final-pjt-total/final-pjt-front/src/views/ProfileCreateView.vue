@@ -79,10 +79,22 @@ export default {
         saveProfile() {
             const nickname = this.nickname
             const mbti = this.mbti
+            const prefer_genre = this.$store.state.selectedPreference
+            const perferGenre = {}
+            // console.log(prefer_genre)
+            for (let i=1; i<prefer_genre.length;i++) {
+                perferGenre[i] = {
+                    id: prefer_genre[i].id,
+                    name: prefer_genre[i].name
+                }
+            }
             const payload = {
                 nickname,
-                mbti
+                mbti,
+                perfer_genre:perferGenre,
+
             }
+            console.log(perferGenre)
             this.$store.dispatch('saveProfile',payload)
         }
     },
@@ -96,7 +108,7 @@ export default {
         },
         selectedPreference() {
             return this.$store.state.selectedPreference
-        }
+        },
     }
 }
 </script>
