@@ -28,7 +28,11 @@ export default {
       getDetail(movie_id) {
         this.$router.push({ name: 'detail', params: { movie_id } })
       }
-    }
+    },
+    beforerouteupdate(to, from, next) {
+        this.movie_id = to.params.movie_id
+        next()
+    } 
 }
 </script>
 

@@ -29,7 +29,8 @@ export default {
     name: "MovieDetail",
     data() {
         return {
-            isLiked: false
+            isLiked: false,
+            movie_id : this.$route.params.movie_id
         }
     },
     components: { 
@@ -37,8 +38,8 @@ export default {
         ReviewForm,
     },
     methods: {
-        getDetailMovie() {
-            this.$store.dispatch("getDetailMovie", this.$route.params.movie_id);
+        getDetailMovie(movie_id) {
+            this.$store.dispatch("getDetailMovie", movie_id);
         },
         likeMovie() {
             this.$store.dispatch('likeMovie', this.detailMovie.id)
@@ -54,7 +55,7 @@ export default {
     },
     created() {
         window.scrollTo(0,0)
-        this.getDetailMovie()
+        this.getDetailMovie(this.movie_id)
     },
     destroyed() {
         window.scrollTo(0,0)
@@ -69,6 +70,17 @@ export default {
             })
         },
     },
+    watch: {
+        $route(to, from) {
+            if (to.params !== from.params) {
+                this.getDetailMovie(to.params.movie_id)
+            }
+        }
+    },
+    beforerouteupdate(to, from, next) {
+        this.movie_id = to.params.movie_id
+        next()
+    } 
 }
 </script>
 
