@@ -31,6 +31,9 @@ export default {
       },
       getPreferenceGenre() {
         this.$store.commit('GET_PREFERENCE_GENRE')
+      },
+      getProfile() {
+        this.$store.dispatch('getProfile')
       }
     },
     created() {
@@ -40,6 +43,7 @@ export default {
       this.getUserInfo()
       this.APIPopularMovie()
       this.getPreferenceGenre()
+      this.getProfile()
     }
     
 }
@@ -50,6 +54,12 @@ export default {
 img{
     width: 300px;
     height: 400px;
+}
+
+img:hover{
+  z-index: 99 !important;
+  scale: 1.3 !important;
+  transition: all 0.5ms ease-in-out;
 }
 
 .like{

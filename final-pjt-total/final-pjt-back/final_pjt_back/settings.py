@@ -75,7 +75,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 REST_AUTH_SERIALIZERS = {
-    # 'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
+    # 'USER_DETAILS_SERIALIZER': 'movies.serializers.ProfileDetailSerializer',
     # 'PASSWORD_RESET_SERIALIZER': 'accounts.serializers.CustomPasswordResetSerializer',
 }
 

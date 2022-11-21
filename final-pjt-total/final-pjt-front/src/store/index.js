@@ -17,7 +17,6 @@ export default new Vuex.Store({
     createPersistedState()
   ],
   state: {
-    // totalMovie: null,
     APIpopularMovie: null,
     popularMovie: null,
     genres: null,
@@ -31,14 +30,17 @@ export default new Vuex.Store({
     userInfo: null,
     detailMovie: null,
     searchingMovie: null,
-    HoTMovie:null
+    HoTMovie:null,
+    totalUserProfile: null,
   },
   getters: {
+    getProfile(state) {
+      return state.totalUserProfile.filter((user) => {
+        return user.user === state.userInfo.pk
+      })
+    }
   },
   mutations: {
-    // GET_TOTAL_MOVIE(state, movie) {
-    //   state.totalMovie = movie
-    // },
     GET_POPULAR_MOVIE(state, movie) {
       state.popularMovie = movie
     },
@@ -216,27 +218,22 @@ export default new Vuex.Store({
         }
       }
       state.HoTMovie = arr
-      // console.log(HoTMovie)
+    },
+    GET_PROFILE(state, userData) {
+      state.totalUserProfile = userData
+    },
+    SELECT_GENRE_EXIT(state) {
+      state.selectedPreference = []
+      state.preferenceGenre = state.genres
     }
   },
   actions: {
-    // getTotalMovie(context) {
-    //   axios({
-    //     method: 'get',
-    //     url: `${DJANGO_URL}/movies/`,
-    //   })
-    //     .then((res) => {
-    //       console.log(res.data)
-    //       context.commit('GET_TOTAL_MOVIE',res.data)
-    //     })
-    // },
     getPopularMovie(context) {
       axios({
         method: 'get',
         url: `${DJANGO_URL}/movies/`,
       })
         .then((res) => {
-          // console.log(res.data.results)
           context.commit('GET_POPULAR_MOVIE',res.data)
         })
     },
@@ -252,7 +249,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res.data.results)
           context.commit('API_POPULAR_MOVIE',res.data.results)
         })
     },
@@ -262,17 +258,13 @@ export default new Vuex.Store({
         url: `${DJANGO_URL}/movies/genres/`,
       })
         .then((res) => {
-          // console.log(res.data)
-          // console.log(context)
           context.commit('GET_GENRES', res.data)
         })
     },
     getGenreMovie(context, payload) {
-      // console.log(payload)
       const newMovies = context.state.popularMovie.filter((movie) => {
         return movie.genre_ids.includes(payload)
       })
-      // console.log(newMovies)
       context.commit('GET_GENRE_MOVIE',newMovies)
     },
     getTopRatedMovie(context) {
@@ -288,8 +280,6 @@ export default new Vuex.Store({
           }
         })
           .then((res) => {
-            // console.log(res.data.results)
-            // console.log(context)
             context.commit('GET_TOP_RATED_MOVIE', res.data.results)
           })
       }
@@ -306,8 +296,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
-          // console.log(context)
           const sortedData = _.sortBy(res.data.results,'release_date')
           context.commit('GET_UP_COMMING_MOVIE',sortedData)
         })
@@ -339,8 +327,6 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        // console.log(context)
-        // console.log(res.data.key)
         console.log('가입 성공')
         context.commit('SAVE_TOKEN',res.data.key)
       })
@@ -356,7 +342,6 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        // console.log('성공',context,res)
         console.log('로그인 성공')
         context.commit('SAVE_TOKEN',res.data.key)
         router.push({ name: 'movie' })
@@ -402,7 +387,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
           context.commit('GET_USER_INFO',res.data)
         })
     },
@@ -412,8 +396,6 @@ export default new Vuex.Store({
         url: `${DJANGO_URL}/movies/${movie_id}/`
       })
         .then((res) => {
-          // console.log(res)
-          // console.log(context)
           context.commit('GET_DETAIL_MOVIE',res.data)
         })
     },
@@ -432,8 +414,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
-          // console.log(context)
           context.commit('ADD_REVIEW',res.data)
         })
     },
@@ -446,7 +426,6 @@ export default new Vuex.Store({
         }
       })
         .then(() => {
-          // console.log('성공',res)
           context.commit('DELETE_REVIEW',id)
         })
     },
@@ -465,7 +444,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
           context.commit('SAVE_UPDATE_REVIEW',res.data)
         })
     },
@@ -481,7 +459,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res.data)
           context.commit('ADD_COMMENT', res.data)
         })
     },
@@ -494,7 +471,6 @@ export default new Vuex.Store({
         }
       })
         .then(() => {
-          // console.log(res)
           context.commit('DELETE_COMMENT',payload)
         })
     },
@@ -510,7 +486,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
           context.commit('ADD_UPDATE_COMMENT', res.data)
         })
     },
@@ -523,7 +498,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
           context.commit('LIKE_MOVIE', res.data)
         })
     },
@@ -533,12 +507,9 @@ export default new Vuex.Store({
         url: `${DJANGO_URL}/movies/movielike/${payload[1]}/`
       })
         .then(() => {
-          // console.log('성공',context)
           context.commit('LIKE_MOVIE_DELETE', payload[0])
-          // console.log(payload[0])
         })
     },
-
 
     //리뷰 좋아요, 취소
     likeReview(context, id) {
@@ -565,6 +536,36 @@ export default new Vuex.Store({
           // console.log(payload[0])
         })
     },
+    getProfile(context) {
+      axios({
+        method: 'get',
+        url: `${DJANGO_URL}/movies/profile/`,
+      })
+        .then((res) => {
+          context.commit('GET_PROFILE', res.data)
+        })
+    },
+    saveProfile(context, payload) {
+      axios({
+        method: 'post',
+        url: `${DJANGO_URL}/movies/profile/`,
+        data: {
+          nickname: payload.nickname,
+          mbti: payload.mbti,
+          prefer_genre: context.state.selectedPreference
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((error) => {
+          console.log(error)
+          console.log(context.state.selectedPreference)
+        })
+    }
   },
   modules: {
   }

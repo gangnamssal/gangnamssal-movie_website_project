@@ -177,3 +177,4 @@ def userProfileInfo(request, user_id):
     elif request.method == 'GET':
         serializer = ProfileDetailSerializer(profile)
         return Response(serializer.data)
+    
