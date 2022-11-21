@@ -1,11 +1,16 @@
 <template>
-  <span>
-    <button
-        class="genre-btn"
-        @click="getGenreMovie"
-    >{{ genre?.name }}
-    </button>
-  </span>
+  <div class="col">
+    <div class="h-100">
+      <span>
+        <button
+            class="genre-btn"
+            @click="getGenreMovie"
+        >{{ genre?.name }}
+        </button>
+      </span>
+    </div>
+  </div>
+
 </template>
 
 <script>

@@ -1,10 +1,12 @@
 <template>
   <div>
     <h1>업커밍</h1>
-    <UpcommingMovieItem
-      v-for="movie in upcommingMovie" :key="movie.id"
-      :movie="movie"
-    />
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+      <UpcommingMovieItem
+        v-for="movie in upcommingMovie" :key="movie.id"
+        :movie="movie"
+      />
+    </div>
   </div>
 </template>
 

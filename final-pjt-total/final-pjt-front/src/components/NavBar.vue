@@ -17,8 +17,8 @@
           <ul class="dropdown-menu">
             <li><router-link :to="{ name : 'genre'}" class="dropdown-item" >Genre</router-link></li>
             <li><router-link :to="{ name : 'toprated'}" class="dropdown-item" >Top Rated</router-link></li>
-            <li><router-link :to="{ name : 'upcomming'}" class="dropdown-item" >Now Playing</router-link></li>
-            <li><router-link :to="{ name : 'nowplaying'}" class="dropdown-item" >Upcomming</router-link></li>
+            <li><router-link :to="{ name : 'nowplaying'}" class="dropdown-item" >Now Playing</router-link></li>
+            <li><router-link :to="{ name : 'upcomming'}" class="dropdown-item" >Upcomming</router-link></li>
           </ul>
         </li>
 
@@ -37,7 +37,7 @@
 
         <li class="nav-item dropdown" v-if="!token">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Hello! Strager
+            Hello! Stranger
           </a>
           <ul class="dropdown-menu" >
             <li><router-link :to="{ name : 'signup' }" class="dropdown-item">Signup</router-link></li>

@@ -1,11 +1,14 @@
 <template>
   <div>
     <h1>나우플레잉</h1>
-    <NowPlayingMovieItem
-      v-for="movie in nowPlayingMovie" :key="movie.id"
-      :movie="movie"
-    />
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+      <NowPlayingMovieItem
+        v-for="movie in nowPlayingMovie" :key="movie.id"
+        :movie="movie"
+      />
+    </div>
   </div>
+
 </template>
 
 <script>

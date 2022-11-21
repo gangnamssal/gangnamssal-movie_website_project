@@ -2,35 +2,34 @@
   <div>
     <h1>장르</h1>
 
-  <div class="btn-group" role="group">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="sortButton">
-        
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" @click="nameSort">이름순으로</a></li>
-        <li><a class="dropdown-item" @click="popularitySort">인기순으로</a></li>
-        <li><a class="dropdown-item" @click="releasedSort">개봉일순으로</a></li>
-      </ul>
-  </div>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="sortButton">
+          
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" @click="nameSort">이름순으로</a></li>
+          <li><a class="dropdown-item" @click="popularitySort">인기순으로</a></li>
+          <li><a class="dropdown-item" @click="releasedSort">개봉일순으로</a></li>
+        </ul>
+    </div>
 
-
-
-    <br>
-    <GenreButton
+    <div class="row">
+      <GenreButton
       v-for="genre in genres" :key="genre.id"
       :genre="genre"
       @genreButtonClick="genreButtonClick"
-    />
+      />
+    </div>
 
-
-    <br>
-    <br>
-    <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
-      <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt=""><br>
-      {{ movie?.title }}
-      <br>
-    </span>
+    
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+      <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
+        <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt=""><br>
+        {{ movie?.title }}
+      </span>
+    </div>
   </div>
+
 </template>
 
 <script>

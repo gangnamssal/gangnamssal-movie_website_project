@@ -1,7 +1,12 @@
 <template>
+
   <div @click="getDetail(movie?.id)">
-    <img :src="`https://www.themoviedb.org/t/p/original${movie?.poster_path}`" alt=""><br>
-    <span>{{ movie?.title }}</span>
+    <div class="col">
+      <div class="h-100">
+        <img :src="`https://www.themoviedb.org/t/p/original${movie?.poster_path}`" alt=""><br>
+        <span>{{ movie?.title }}</span>
+      </div>
+    </div>        
   </div>
 </template>
 
