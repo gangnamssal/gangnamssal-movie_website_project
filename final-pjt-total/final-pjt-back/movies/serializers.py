@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Review, Comment, MovieLike, ReviewLike
-from accounts.models import User
+from .models import Movie, Genre, Review, Comment, MovieLike, ReviewLike,Profile
 
 
 # 리뷰에 대한 전체 댓글
@@ -98,8 +97,9 @@ class CommentDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # read_only_fields = ('review',)
 
-class UserSerializer(serializers.ModelSerializer):
+# 유저 프로필
+class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = User
-        fields = "__all__"
+        model = Profile
+        fields = '__all__'

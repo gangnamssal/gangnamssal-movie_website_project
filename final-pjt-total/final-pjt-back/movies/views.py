@@ -10,8 +10,8 @@ from rest_framework import status
 from .serializers import (MovieDetailerializer, MovieListSerializer, GenreListSerializer, 
                             GenreDetailSerializer,ReviewListSerializer,CommentSerializer,
                             ReviewDetailSerializer,CommentDetailSerializer,MovieLikeSerializer,
-                            ReviewLikeSerializer,UserSerializer)
-from .models import Movie, Genre, Review,Comment, MovieLike,ReviewLike
+                            ReviewLikeSerializer, ProfileSerializer)
+from .models import Movie, Genre, Review,Comment, MovieLike,ReviewLike, Profile
 
 from django.contrib.auth import get_user_model
 from accounts.models import User
@@ -154,11 +154,14 @@ def reviewLikeDelete(request, reviewlike_pk):
         reviewlike.delete()
         return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
 
-@api_view(['PUT'])
-def preferenceGenre(request, user_pk):
-    if request.method == 'PUT':
-        user = User.objects.get(pk=user_pk)
-        serializer = UserSerializer(user,data=request.data)
+@api_view(['GET', 'POST'])
+def allUserProfileInfo(request):
+    if request.method == 'GET':
+        profile = Profile.objects.all()
+        serializer = ProfileSerializer(profile, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ProfileSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
+            serializer.save(user = request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)

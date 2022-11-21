@@ -75,12 +75,12 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
+    # 'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
     # 'PASSWORD_RESET_SERIALIZER': 'accounts.serializers.CustomPasswordResetSerializer',
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+    # 'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
 }
 
 REST_FRAMEWORK = {
@@ -167,5 +167,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 AUTH_USER_MODEL = 'accounts.User'

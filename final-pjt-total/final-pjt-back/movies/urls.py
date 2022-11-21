@@ -22,6 +22,6 @@ urlpatterns = [
     path('<int:review_pk>/reviewlike/', views.reviewLike),
     # 리뷰 좋아요 취소
     path('reviewlike/<int:reviewlike_pk>/', views.reviewLikeDelete),
-    
-    path('<int:user_pk>/preference/genre/',views.preferenceGenre),
+    # 유저 프로필 전체 조회
+    path('profile/', views.allUserProfileInfo),
 ]
