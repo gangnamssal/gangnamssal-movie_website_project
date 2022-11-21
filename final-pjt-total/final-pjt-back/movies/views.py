@@ -10,7 +10,7 @@ from rest_framework import status
 from .serializers import (MovieDetailerializer, MovieListSerializer, GenreListSerializer, 
                             GenreDetailSerializer,ReviewListSerializer,CommentSerializer,
                             ReviewDetailSerializer,CommentDetailSerializer,MovieLikeSerializer,
-                            ReviewLikeSerializer, ProfileSerializer)
+                            ReviewLikeSerializer, ProfileSerializer,ProfileDetailSerializer)
 from .models import Movie, Genre, Review,Comment, MovieLike,ReviewLike, Profile
 
 from django.contrib.auth import get_user_model
@@ -165,3 +165,15 @@ def allUserProfileInfo(request):
         if serializer.is_valid(raise_exception=True):
             serializer.save(user = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['PUT', 'GET'])
+def userProfileInfo(request, user_id):
+    profile = Profile.objects.get(pk = user_id)
+    if request.method == 'PUT':
+        serializer = ProfileDetailSerializer(profile, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    elif request.method == 'GET':
+        serializer = ProfileDetailSerializer(profile)
+        return Response(serializer.data)

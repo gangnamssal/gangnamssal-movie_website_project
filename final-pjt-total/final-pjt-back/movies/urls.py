@@ -24,4 +24,6 @@ urlpatterns = [
     path('reviewlike/<int:reviewlike_pk>/', views.reviewLikeDelete),
     # 유저 프로필 전체 조회
     path('profile/', views.allUserProfileInfo),
+    # 유저 디테일 프로필 조회
+    path('<int:user_id>/profile/', views.userProfileInfo),
 ]
