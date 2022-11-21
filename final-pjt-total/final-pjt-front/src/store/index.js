@@ -31,6 +31,7 @@ export default new Vuex.Store({
     userInfo: null,
     detailMovie: null,
     searchingMovie: null,
+    HoTMovie:null
   },
   getters: {
   },
@@ -201,6 +202,21 @@ export default new Vuex.Store({
         name: seletedGenre.name
       }
       state.preferenceGenre.push(data) 
+    },
+    GETHOTMOVIE(state){
+      let sortedMovie = _.chain(state.popularMovie).sortBy('movielike_count').reverse()
+      let cnt = 0
+      const arr = []
+      for (let movie of sortedMovie) {
+        if (cnt >=20) {
+          break
+        } else {
+          arr.push(movie)
+          cnt++
+        }
+      }
+      state.HoTMovie = arr
+      // console.log(HoTMovie)
     }
   },
   actions: {
@@ -549,7 +565,6 @@ export default new Vuex.Store({
           // console.log(payload[0])
         })
     },
-
   },
   modules: {
   }

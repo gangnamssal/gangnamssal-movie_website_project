@@ -2,12 +2,6 @@ from rest_framework import serializers
 from .models import Movie, Genre, Review, Comment, MovieLike, ReviewLike
 from accounts.models import User
 
-# 전체 영화 리스트
-class MovieListSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Movie
-        fields = '__all__'
 
 # 리뷰에 대한 전체 댓글
 class CommentSerializer(serializers.ModelSerializer):
@@ -43,6 +37,15 @@ class MovieLikeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MovieLike
+        fields = '__all__'
+
+# 전체 영화 리스트
+class MovieListSerializer(serializers.ModelSerializer):
+    movielike_set = MovieLikeSerializer(many=True, read_only=True)
+    movielike_count = serializers.IntegerField(source='movielike_set.count', read_only=True)
+
+    class Meta:
+        model = Movie
         fields = '__all__'
 
 

@@ -29,7 +29,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">MBTI</a></li>
             <li><a class="dropdown-item" href="#">Taste</a></li>
-            <li><a class="dropdown-item" href="#">Another Algo</a></li>
+            <li><router-link :to="{ name : 'hotmovie' }" class="dropdown-item">Hot</router-link></li>
             <li><a class="dropdown-item" href="#">Another Algo</a></li>
           </ul>
         </li>
