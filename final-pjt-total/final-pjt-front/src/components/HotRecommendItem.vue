@@ -1,6 +1,4 @@
 <template>
-  <div>
-    HotRecommendItem
 
     <div @click="getDetail(movie?.id)">
       <div class="col">
@@ -10,7 +8,6 @@
       </div>
     </div>
 
-  </div>
 </template>
 
 <script>

@@ -56,4 +56,9 @@ img{
   border: none;
   background: none;
 }
+
+body{
+  background-color: black;
+  color: aliceblue;
+}
 </style>

@@ -13,21 +13,36 @@
         </ul>
     </div>
 
-    <div class="row">
-      <GenreButton
-      v-for="genre in genres" :key="genre.id"
-      :genre="genre"
-      @genreButtonClick="genreButtonClick"
-      />
-    </div>
 
+
+
+
+    <div class="container">
+      <div class="row row-cols-2">
+
+        <div class="col">
+          <GenreButton
+          v-for="genre in genres" :key="genre.id"
+          :genre="genre"
+          @genreButtonClick="genreButtonClick"
+          />
+        </div>
     
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-      <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
-        <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt=""><br>
-        {{ movie?.title }}
-      </span>
-    </div>
+        
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4" id="genremm">
+          <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
+            <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt="" class="perspectiveRight"><br>
+            {{ movie?.title }}
+          </span>
+        </div>
+      </div>
+      </div>
+
+
+
+
+
+
   </div>
 
 </template>
@@ -81,8 +96,14 @@ export default {
 .genre-movie{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-
+  text-align: center;
 }
+img:hover{
+  z-index: 99 !important;
+  scale: 1.3 !important;
+  transition: all 0.5ms ease-in-out;
+}
+
 </style>
