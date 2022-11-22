@@ -126,5 +126,12 @@ body{
     visibility: hidden;
   }
 }
-
+color{
+  color: #000000;
+  color: #412728;
+  color: #7F4D3E;
+  color: #B87C4C;
+  color: #E2B659;
+  color: #F9F871;
+}
 </style>

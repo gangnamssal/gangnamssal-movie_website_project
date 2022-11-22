@@ -1,5 +1,5 @@
 <template>
-  <div class="changePassword-bg">
+  <div class="auth-bg">
     <div class="changePassword">
         <h1>ChangePassword</h1>
 
@@ -39,22 +39,5 @@ export default {
 </script>
 
 <style>
-.changePassword-bg{
-    height: 100vh;
-    background-color: #FF3CAC;
-    /* background-image: linear-gradient(180deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); */
-    background: linear-gradient(to top, #c31432, #240b36); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.changePassword{
-    background-color: #141314;
-    color: antiquewhite;
-    font-family: Helvetica, sans-serif;
-    width: 500px;
-    display: flex;
-    flex-direction: column ;
-    position: absolute;
-}
+
 </style>

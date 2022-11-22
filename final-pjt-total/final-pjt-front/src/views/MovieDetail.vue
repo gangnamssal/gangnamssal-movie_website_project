@@ -1,30 +1,34 @@
 <template>
 
-    <div>
-        
-        <div  >
-            <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="movie?.title"><br>
-           
-            {{ detailMovie.movielike_set.length }}
-            <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>
-            <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
-            
-            <p>영화 제목 : {{ detailMovie?.title }}</p>
-            <p>영화 제목 : {{ detailMovie?.overview }}</p>
-        
-        </div>
-
-        <div>
-            <ReviewForm
-            :movie-title="[detailMovie?.title,$route.params.movie_id]"
-            />
-        </div>
-        
-        <div>
-            <ReviewsList
-                v-for="review in detailMovie?.review_set" :key="review.id"
-                :review="review"
-            />
+    <div class="container">
+        <div class="row row-cols-2">
+            <div class="col">
+                <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="movie?.title" style="width:300px;"><br>
+                
+                {{ detailMovie.movielike_set.length }}
+                <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>
+                <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
+                
+                <p>영화 제목 : {{ detailMovie?.title }}</p>
+                <p>영화 제목 : {{ detailMovie?.overview }}</p>
+            </div>
+    
+    
+            <div class="col"> 
+                <div>
+                    <ReviewForm
+                    :movie-title="[detailMovie?.title,$route.params.movie_id]"
+                    />
+                </div>
+                
+    
+                <div>
+                    <ReviewsList
+                        v-for="review in detailMovie?.review_set" :key="review.id"
+                        :review="review"
+                    />
+                </div>
+            </div>
         </div>
 
     </div>
@@ -95,10 +99,10 @@ export default {
 </script>
 
 <style>
-/* .container {
-	grid-template-columns: 400px 1fr;
-} */
-/* #detail-movie{
-    width: 400px;
-} */
+.container{
+    /* display: grid; */
+    grid-template-columns: 400px 1fr;
+    /* display: inline-grid; */
+    grid-gap: 80px;
+}
 </style>

@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <h1>회원가입</h1>
-    <label for="username">ID : </label>
-    <input type="text" id="username" v-model="username"><br>
-
-    <label for="password1">비밀번호 : </label>
-    <input type="password" id="password1" v-model="password1"><br>
-
-    <label for="password2">비밀번호 확인 : </label>
-    <input type="password" id="password2" v-model="password2" @keyup.enter="addSignUp">
-    <button @click="addSignUp">회원가입</button>
+  <div class="auth-bg">
+    <div class="auth">
+        <h1>회원가입</h1>
+        <label for="username">ID : </label>
+        <input type="text" id="username" v-model="username"><br>
+    
+        <label for="password1">비밀번호 : </label>
+        <input type="password" id="password1" v-model="password1"><br>
+    
+        <label for="password2">비밀번호 확인 : </label>
+        <input type="password" id="password2" v-model="password2" @keyup.enter="addSignUp">
+        <button @click="addSignUp">회원가입</button>
+    </div>
   </div>
 </template>
 
