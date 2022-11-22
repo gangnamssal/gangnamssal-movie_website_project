@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container">
+    <div class="detail-container">
             <div class="item">
                 <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="movie?.title" style="max-width:100%;"><br>
                 
@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style>
-.container{
+.detail-container{
     display: grid;
     grid-template-columns: minmax(400px, 1fr) 1fr;
     grid-gap: 80px;
