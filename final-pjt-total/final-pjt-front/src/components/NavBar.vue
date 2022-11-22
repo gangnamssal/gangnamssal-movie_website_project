@@ -59,7 +59,7 @@
         </li>
 
       </ul>
-      <form class="d-flex" role="search">
+      <form class="d-flex" role="search" >
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#exampleModal">
       </form>
     </div>
@@ -97,7 +97,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" @click="closeSearching">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -108,15 +108,19 @@
             aria-label="Search" 
             id="titleName"
             @keyup="searchIng"
+            style="width:400px;"
           >
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeSearching"></button>
       </div>
       <span class="modal-body">
+        <div class="row row-cols-2 row-cols-lg-4 row-cols-xl-5 g-4">
+        
         <SearchMovieItem
           v-for="movie in searchingMovie" :key="movie.id"
           :movie="movie"
         />
+        </div>
       </span>
       <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeSearching">Close</button>

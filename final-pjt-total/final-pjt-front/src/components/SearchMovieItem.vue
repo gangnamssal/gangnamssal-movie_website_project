@@ -1,11 +1,16 @@
 <template>
-  <span @click="getDetail(movie?.id)" data-bs-dismiss="modal">
-    <img 
-        :src="`https://www.themoviedb.org/t/p/original${movie?.poster_path}`" 
-        :alt="movie?.title"
-        style="height:250px;"
-    ><br>
-  </span>
+    <div class="col">
+        <div class="h-100">
+            <div @click="getDetail(movie?.id)" data-bs-dismiss="modal">
+                <img 
+                    :src="`https://www.themoviedb.org/t/p/original${movie?.poster_path}`" 
+                    :alt="movie?.title"
+                    style="height:250px;"
+                ><br>
+            </div>
+        </div>
+    </div> 
+
 </template>
 
 <script>

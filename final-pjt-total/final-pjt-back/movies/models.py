@@ -48,5 +48,5 @@ class Profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     nickname = models.CharField(max_length=15, blank=True, null=True)
     mbti = models.CharField(max_length=4, blank=True, null=True)
-    prefer_genre = models.CharField(max_length=150,blank=True, null=True)
+    prefer_genre = models.TextField(blank=True, null=True)
     

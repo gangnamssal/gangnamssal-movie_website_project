@@ -195,6 +195,7 @@ export default {
                 }
             }
             const data = JSON.stringify(perferGenre)
+            console.log(data)
             const payload = {
                 nickname,
                 mbti,

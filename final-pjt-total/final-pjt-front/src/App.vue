@@ -104,7 +104,7 @@ body{
   position: fixed;
   width: 100%;
   height: 100%;
-  animation-duration: 3s;
+  animation-duration: 5s;
   animation-name: slidein;
   animation-fill-mode: forwards;
 }

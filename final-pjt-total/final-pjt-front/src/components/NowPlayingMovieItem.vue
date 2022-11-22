@@ -3,7 +3,7 @@
   <div @click="getDetail(movie?.id)"> 
     <div class="col">
       <div class="h-100">
-      <img :src="posterUrl" class="card-img-top" alt="...">
+      <img :src="posterUrl" class="card-img-top" :alt="movie?.title">
       <span>{{ movie?.title }} - </span>
       <span>{{ movie?.release_date }}</span>
      </div>

@@ -3,7 +3,7 @@
     <div>
         
         <div  >
-            <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" alt=""><br>
+            <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="movie?.title"><br>
            
             {{ detailMovie.movielike_set.length }}
             <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>

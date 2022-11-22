@@ -17,32 +17,31 @@
 
 
 
-    <div class="container">
-      <div class="row row-cols-2">
+    <div class="container row mx-auto" style="border:solid 1px">
 
-        <div class="col">
+        <div class="col" style="border:dashed 1px">
           <GenreButton
           v-for="genre in genres" :key="genre.id"
           :genre="genre"
           @genreButtonClick="genreButtonClick"
           />
         </div>
-    
-        
-        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4" id="genremm">
-          <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
-            <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt="" class="perspectiveRight"><br>
-            {{ movie?.title }}
-          </span>
+
+        <div class="col">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="genremm">
+            <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
+              <!-- <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt="" class="perspectiveRight"><br> -->
+              <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" class="card-img-top" alt="...">
+              {{ movie?.title }}
+            </span>
+          </div>
         </div>
+
       </div>
-      </div>
 
 
 
-
-
-
+      
   </div>
 
 </template>
@@ -87,7 +86,12 @@ export default {
     genrepopularMovie() {
         return this.$store.state.genrepopularMovie
     },
-  }
+    // posterUrl() {
+    //     const url = 'https://www.themoviedb.org/t/p/original' + this.movie.poster_path
+    //     return url
+    // }
+},
+  
 }
 </script>
 
@@ -101,4 +105,7 @@ export default {
   text-align: center;
 }
 
+.container {
+	grid-template-columns: 200px 1fr;
+}
 </style>
