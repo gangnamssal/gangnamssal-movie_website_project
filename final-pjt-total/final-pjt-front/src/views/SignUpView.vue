@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-bg">
+  <!-- <div class="auth-bg">
     <div class="auth">
         <h1>회원가입</h1>
         <label for="username">ID : </label>
@@ -12,7 +12,26 @@
         <input type="password" id="password2" v-model="password2" @keyup.enter="addSignUp">
         <button @click="addSignUp">회원가입</button>
     </div>
-  </div>
+  </div> -->
+
+<div class="auth">
+    <form class="authForm" @submit.prevent="addSignUp">
+        <h2><span class="entypo-login"><i class="fa fa-sign-in"></i></span> Signup</h2>
+        <button class="submit signupBtn" @click="addSignUp"><span class="entypo-lock"><i class="fa fa-lock"></i></span></button>
+        <span class="entypo-user inputUserIcon">
+            <i class="fa fa-user"></i>
+        </span>
+        <input type="text" class="user authInput" placeholder="ursername" v-model="username"/>
+        <span class="entypo-key inputPassIcon">
+            <i class="fa fa-key"></i>
+        </span>
+        <input type="password" class="pass authInput" placeholder="password" v-model="password1"/>
+        <span class="entypo-key inputPassIcon">
+            <i class="fa fa-key"></i>
+        </span>
+        <input type="password" class="pass authInput" placeholder="password check" v-model="password2"/>
+    </form>
+</div>
 </template>
 
 <script>
@@ -39,11 +58,22 @@ export default {
             this.$store.dispatch('addSignUp',payload)
         }
     }
-
-
 }
 </script>
 
 <style>
+
+.signupBtn {
+  float:right;
+  height: 193px;
+  width: 50px;
+  border: 0px;
+  background: #e74c3c;
+  border-radius:7px;
+  padding: 10px;
+  margin-top: 6px;
+  color:white;
+  font-size:22px;
+}
 
 </style>

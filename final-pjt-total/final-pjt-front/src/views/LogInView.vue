@@ -1,6 +1,19 @@
 <template>
-  
-  <div class="text-center auth-bg">
+  <div class="auth">
+    <form class="authForm" @submit.prevent="getLogIn">
+      <h2><span class="entypo-login"><i class="fa fa-sign-in"></i></span> Login</h2>
+      <button class="submit authBtn" @click="getLogIn"><span class="entypo-lock"><i class="fa fa-lock"></i></span></button>
+      <span class="entypo-user inputUserIcon">
+          <i class="fa fa-user"></i>
+      </span>
+      <input type="text" class="user authInput" placeholder="ursername" v-model="username"/>
+      <span class="entypo-key inputPassIcon">
+          <i class="fa fa-key"></i>
+      </span>
+      <input type="password" class="pass authInput" placeholder="password" v-model="password"/>
+    </form>
+  </div>
+  <!-- <div class="text-center auth-bg">
     <div class="auth">
 
       <h1>로그인</h1>
@@ -14,7 +27,7 @@
         <button class="btn btn-lg btn-primary" @click="getLogIn">로그인</button>
 
     </div>
-  </div>
+  </div> -->
 
 <!-- 이거  -->
   <!-- <div class="container">
@@ -70,22 +83,5 @@ export default {
 </script>
 
 <style>
-.auth-bg{
-    height: 100vh;
-    background-color: #FF3CAC;
-    /* background-image: linear-gradient(180deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); */
-    background: linear-gradient(to top, #7F4D3E, #E2B659); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.auth{
-    /* background-color: #bd8408; */
-    color: antiquewhite;
-    font-family: Helvetica, sans-serif;
-    width: 500px;
-    display: flex;
-    flex-direction: column ;
-    position: absolute;
-}
+
 </style>
