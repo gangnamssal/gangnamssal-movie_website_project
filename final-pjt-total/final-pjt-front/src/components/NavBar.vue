@@ -2,7 +2,7 @@
   <div>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <router-link :to="{ name : 'movie' }" class="navbar-brand">Home</router-link><br>
+      <router-link :to="{ name : 'movie' }" class="navbar-brand">극장</router-link><br>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,49 +12,49 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Movie
+            영화
           </a>
           <ul class="dropdown-menu">
-            <li><router-link :to="{ name : 'genre'}" class="dropdown-item" >Genre</router-link></li>
-            <li><router-link :to="{ name : 'toprated'}" class="dropdown-item" >Top Rated</router-link></li>
-            <li><router-link :to="{ name : 'nowplaying'}" class="dropdown-item" >Now Playing</router-link></li>
-            <li><router-link :to="{ name : 'upcomming'}" class="dropdown-item" >Upcomming</router-link></li>
+            <li><router-link :to="{ name : 'genre'}" class="dropdown-item" >장르</router-link></li>
+            <li><router-link :to="{ name : 'toprated'}" class="dropdown-item" >명작</router-link></li>
+            <li><router-link :to="{ name : 'nowplaying'}" class="dropdown-item" >현재 상영</router-link></li>
+            <li><router-link :to="{ name : 'upcomming'}" class="dropdown-item" >다가오는 상영</router-link></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Recomandation
+            추천
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">MBTI</a></li>
-            <li><a class="dropdown-item" href="#">Taste</a></li>
-            <li><router-link :to="{ name : 'hotmovie' }" class="dropdown-item">Hot</router-link></li>
-            <li><a class="dropdown-item" href="#">Another Algo</a></li>
+            <li><a class="dropdown-item" href="#">엠비티아이</a></li>
+            <li><a class="dropdown-item" href="#">취향</a></li>
+            <li><router-link :to="{ name : 'hotmovie' }" class="dropdown-item">뜨거워</router-link></li>
+            <!-- <li><a class="dropdown-item" href="#">Another Algo</a></li> -->
           </ul>
         </li>
 
 
         <li class="nav-item dropdown" v-if="!token">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Hello! Stranger
+            안녕하시오 나그네!
           </a>
           <ul class="dropdown-menu" >
-            <li><router-link :to="{ name : 'signup' }" class="dropdown-item">Signup</router-link></li>
-            <li><router-link :to="{ name : 'login' }" class="dropdown-item">Login</router-link></li>
+            <li><router-link :to="{ name : 'signup' }" class="dropdown-item">장부 등록(회원가입)</router-link></li>
+            <li><router-link :to="{ name : 'login' }" class="dropdown-item">로그인</router-link></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown"  v-else-if="token">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Hello! {{ userInfo?.username }}
+            안녕하시오 {{ userInfo?.username }}!
           </a>
           <ul class="dropdown-menu" >
             <!-- <li><router-link :to="{ name : 'profile' }" class="dropdown-item">Profile</router-link></li> -->
-            <li><a class="dropdown-item" @click.prevent="goToProfile" href="#">Profile</a></li>
-            <li><a class="dropdown-item" @click="logOut" href="#">Logout</a></li>
-            <li><router-link :to="{ name : 'changepassword' }" class="dropdown-item">Changepassword</router-link></li>
-            <li><a class="dropdown-item" href="#">Signout</a></li>
+            <li><a class="dropdown-item" @click.prevent="goToProfile" href="#">내 장부</a></li>
+            <li><a class="dropdown-item" @click="logOut" href="#">로그 아웃</a></li>
+            <li><router-link :to="{ name : 'changepassword' }" class="dropdown-item">비밀번호 변경</router-link></li>
+            <!-- <li><a class="dropdown-item" href="#">Signout</a></li> -->
           </ul>
         </li>
 

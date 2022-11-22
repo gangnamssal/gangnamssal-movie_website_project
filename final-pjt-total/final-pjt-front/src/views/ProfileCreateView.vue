@@ -12,7 +12,7 @@
         <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
         <span>
             <form class="d-flex justify-content-center" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:200px;">
+                <input class="form-control me-2" type="search" :placeholder="firstMbti + secondMbti + thirdMbti + forthMbti" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:200px;">
             </form>
     
                 <!-- Modal -->
