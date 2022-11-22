@@ -134,4 +134,23 @@ color{
   color: #E2B659;
   color: #F9F871;
 }
+
+.auth-bg{
+    height: 100vh;
+    background-color: #FF3CAC;
+    /* background-image: linear-gradient(180deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); */
+    background: linear-gradient(to top, #7F4D3E, #E2B659); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.auth{
+    /* background-color: #bd8408; */
+    color: antiquewhite;
+    font-family: Helvetica, sans-serif;
+    width: 500px;
+    display: flex;
+    flex-direction: column ;
+    position: absolute;
+}
 </style>

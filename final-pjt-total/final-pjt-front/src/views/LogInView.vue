@@ -1,7 +1,7 @@
 <template>
   
-  <div class="text-center auth-bg">
-    <div class="auth">
+  <div class="text-center">
+    <div class="form-signin w-100 m-auto">
 
       <h1>로그인</h1>
 
@@ -44,22 +44,5 @@ export default {
 </script>
 
 <style>
-.auth-bg{
-    height: 100vh;
-    background-color: #FF3CAC;
-    /* background-image: linear-gradient(180deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); */
-    background: linear-gradient(to top, #7F4D3E, #E2B659); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.auth{
-    /* background-color: #bd8408; */
-    color: antiquewhite;
-    font-family: Helvetica, sans-serif;
-    width: 500px;
-    display: flex;
-    flex-direction: column ;
-    position: absolute;
-}
+
 </style>

@@ -1,9 +1,8 @@
 <template>
 
     <div class="container">
-        <div class="row row-cols-2">
-            <div class="col">
-                <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="movie?.title" style="width:300px;"><br>
+            <div class="item">
+                <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="movie?.title" style="max-width:100%;"><br>
                 
                 {{ detailMovie.movielike_set.length }}
                 <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>
@@ -14,7 +13,7 @@
             </div>
     
     
-            <div class="col"> 
+            <div class="item">
                 <div>
                     <ReviewForm
                     :movie-title="[detailMovie?.title,$route.params.movie_id]"
@@ -29,7 +28,7 @@
                     />
                 </div>
             </div>
-        </div>
+
 
     </div>
         
@@ -100,9 +99,9 @@ export default {
 
 <style>
 .container{
-    /* display: grid; */
-    grid-template-columns: 400px 1fr;
-    /* display: inline-grid; */
+    display: grid;
+    grid-template-columns: minmax(400px, 1fr) 1fr;
     grid-gap: 80px;
+    margin-top: 5rem ;
 }
 </style>
