@@ -54,7 +54,7 @@ const routes = [
   },
   {
     // 프로필
-    path: '/movie/profile',
+    path: '/movie/:user_id/profile',
     name: 'profile',
     component: () => import('@/views/ProfileView')
   },
