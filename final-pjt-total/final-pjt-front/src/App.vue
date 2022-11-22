@@ -34,6 +34,9 @@ export default {
       },
       getProfile() {
         this.$store.dispatch('getProfile')
+      },
+      getProfileDetail() {
+        this.$store.dispatch('getProfileDetail')
       }
     },
     created() {
@@ -44,6 +47,7 @@ export default {
       this.APIPopularMovie()
       this.getPreferenceGenre()
       this.getProfile()
+      this.getProfileDetail()
     }
     
 }
