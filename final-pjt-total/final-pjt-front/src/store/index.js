@@ -32,6 +32,7 @@ export default new Vuex.Store({
     searchingMovie: null,
     HoTMovie:null,
     totalUserProfile: null,
+    userProfile: null,
   },
   getters: {
     getProfile(state) {
@@ -68,6 +69,7 @@ export default new Vuex.Store({
     },
     LOGOUT(state){
       state.Token = null
+      state.userProfile = null
     },
     GET_USER_INFO(state,userData) {
       state.userInfo = userData
@@ -225,7 +227,15 @@ export default new Vuex.Store({
     SELECT_GENRE_EXIT(state) {
       state.selectedPreference = []
       state.preferenceGenre = state.genres
-    }
+    },
+    SAVE_PROFILE(state, payload) {
+      state.userProfile = payload
+      state.selectedPreference = []
+      state.preferenceGenre = state.genres
+    },
+    GET_PROFILE_DETAIL(state,payload) {
+      state.userProfile = payload
+    } 
   },
   actions: {
     getPopularMovie(context) {
@@ -559,11 +569,23 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
+          // console.log('성공')
+          context.commit('SAVE_PROFILE',res.data)
         })
         .catch((error) => {
           console.log(error)
-          console.log(context.state.selectedPreference)
+          // console.log(context.state.selectedPreference)
+        })
+    },
+    getProfileDetail(context) {
+      axios({
+        method: 'get',
+        url: `${DJANGO_URL}/movies/${context.state.userInfo.pk}/profile/`
+      })
+        .then((res) => {
+          // console.log(res)
+          context.commit('GET_PROFILE_DETAIL', res.data)
         })
     }
   },

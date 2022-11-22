@@ -50,7 +50,8 @@
             Hello! {{ userInfo?.username }}
           </a>
           <ul class="dropdown-menu" >
-            <li><router-link :to="{ name : 'profile' }" class="dropdown-item">Profile</router-link></li>
+            <!-- <li><router-link :to="{ name : 'profile' }" class="dropdown-item">Profile</router-link></li> -->
+            <li><a class="dropdown-item" @click.prevent="goToProfile" href="#">Profile</a></li>
             <li><a class="dropdown-item" @click="logOut" href="#">Logout</a></li>
             <li><router-link :to="{ name : 'changepassword' }" class="dropdown-item">Changepassword</router-link></li>
             <li><a class="dropdown-item" href="#">Signout</a></li>
@@ -158,7 +159,14 @@ export default {
         this.$store.commit('CLOSE_SEARCHING')
         this.titleName = null
         inputTag.value = null
-
+      },
+      goToProfile() {
+        if (this.$store.state.userProfile === null) {
+          alert('프로필을 생성해야합니다.!')
+          this.$router.push({ name : 'ProfileCreateView' })
+        } else {
+          this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.pk }})
+        }
       }
     },
     computed: {

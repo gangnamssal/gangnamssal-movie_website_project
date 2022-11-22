@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>프로필</h1>
-    <button @click="goToWrite">작성하러 가기</button>
+    <!-- <button @click="goToWrite">작성하러 가기</button> -->
     <button>수정하러 가기</button>
-    <p>닉네임 : {{ getProfile[0].nickname }}</p>
-    <p>mbti : {{ getProfile[0].mbti }}</p>
-    <p>선호 장르 : {{ getProfile[0].prefer_genre }}</p>
+    <p>닉네임 : {{ profile?.nickname }}</p>
+    <p>mbti : {{ profile?.mbti }}</p>
+    <p>선호 장르 : {{ profile?.prefer_genre }}</p>
   </div>
 </template>
 
@@ -15,14 +15,17 @@ export default {
     methods: {
       goToWrite() {
         this.$router.push({ name : 'ProfileCreateView' })
+      },
+      getProfile() {
+        this.$store.dispatch('getProfileDetail')
       }
     },
     computed: {
-      getProfile() {
-        return this.$store.getters.getProfile
+      profile() {
+        return this.$store.state.userProfile
       }
     },
-    created() {
+    created() { 
       this.getProfile()
     }
 }

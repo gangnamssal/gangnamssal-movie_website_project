@@ -12,7 +12,7 @@ const routes = [
   },
   {
     // 인기 영화
-    path: '/movie/genre/',
+    path: '/movie/genre',
     name: 'genre',
     component: () => import('@/views/MovieGenre')
   },
@@ -54,7 +54,7 @@ const routes = [
   },
   {
     // 프로필
-    path: '/movie/profile/',
+    path: '/movie/:user_id/profile',
     name: 'profile',
     component: () => import('@/views/ProfileView')
   },
