@@ -102,6 +102,6 @@ export default {
     display: grid;
     grid-template-columns: minmax(400px, 1fr) 1fr;
     grid-gap: 80px;
-    margin-top: 5rem ;
+    margin: 3rem 10rem ;
 }
 </style>

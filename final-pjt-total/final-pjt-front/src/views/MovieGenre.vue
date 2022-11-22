@@ -2,7 +2,16 @@
   <div>
     <h1>장르</h1>
 
-    <div class="btn-group" role="group">
+
+
+
+
+
+
+    <div class="genre-container">
+
+      <div class="item">
+            <div class="btn-group" role="group">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="sortButton">
           
         </button>
@@ -11,23 +20,16 @@
           <li><a class="dropdown-item" @click="popularitySort">인기순으로</a></li>
           <li><a class="dropdown-item" @click="releasedSort">개봉일순으로</a></li>
         </ul>
-    </div>
+      </div>
 
+        <GenreButton
+        v-for="genre in genres" :key="genre.id"
+        :genre="genre"
+        @genreButtonClick="genreButtonClick"
+        />
+      </div>
 
-
-
-
-    <div class="container row mx-auto" style="border:solid 1px">
-
-        <div class="col" style="border:dashed 1px">
-          <GenreButton
-          v-for="genre in genres" :key="genre.id"
-          :genre="genre"
-          @genreButtonClick="genreButtonClick"
-          />
-        </div>
-
-        <div class="col">
+      <div class="item">
           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="genremm">
             <span class="genre-movie" v-for="movie in genrepopularMovie" :key="movie.id" @click="getDetail(movie?.id)">
               <!-- <img :src="`https://www.themoviedb.org/t/p/original${movie.poster_path}`" alt="" class="perspectiveRight"><br> -->
@@ -35,13 +37,10 @@
               {{ movie?.title }}
             </span>
           </div>
-        </div>
-
       </div>
 
+    </div>
 
-
-      
   </div>
 
 </template>
@@ -53,7 +52,7 @@ export default {
   
   name: 'MovieGenre',
   components: {
-     GenreButton 
+      GenreButton 
   },
   methods: {
     getDetail(movie_id) {
@@ -105,7 +104,10 @@ export default {
   text-align: center;
 }
 
-.container {
-	grid-template-columns: 200px 1fr;
+.genre-container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 80px;
+    margin: 3rem 10rem ;
 }
 </style>
