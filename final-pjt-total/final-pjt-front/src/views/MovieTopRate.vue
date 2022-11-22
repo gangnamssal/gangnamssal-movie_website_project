@@ -26,7 +26,7 @@ export default {
     computed: {
       topRatedMovie() {
         return this.$store.state.topRatedMovie
-      }
+      },
     },
     created() {
       this.getTopRatedMovie()

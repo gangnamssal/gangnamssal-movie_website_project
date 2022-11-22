@@ -51,15 +51,16 @@ export default {
 
 
 <style>
-img{
+/* img{
     width: 300px;
     height: 400px;
-}
+} */
 
 img:hover{
-  z-index: 99 !important;
-  scale: 1.3 !important;
-  transition: all 0.5ms ease-in-out;
+  display: inline-block;
+  z-index: 1 ;
+  scale: 1.1 ;
+  transition: all 1s ease-in-out;
 }
 
 .like{

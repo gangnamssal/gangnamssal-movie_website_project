@@ -100,10 +100,5 @@ export default {
   align-items: center;
   text-align: center;
 }
-img:hover{
-  z-index: 99 !important;
-  scale: 1.3 !important;
-  transition: all 0.5ms ease-in-out;
-}
 
 </style>

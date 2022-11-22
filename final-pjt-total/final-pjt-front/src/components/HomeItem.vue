@@ -1,8 +1,6 @@
 <template>
 
   <div @click="getDetail(movie?.id)">
-    <!-- <img :src="posterUrl" alt=""><br>
-    <span>{{ movie?.title }}</span> -->
       <div class="col">
         <div class="h-100">
           <img :src="posterUrl" class="card-img-top" alt="...">

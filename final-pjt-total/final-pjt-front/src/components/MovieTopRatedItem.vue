@@ -3,8 +3,7 @@
   <div @click="getDetail(movie?.id)">
     <div class="col">
       <div class="h-100">
-        <img :src="`https://www.themoviedb.org/t/p/original${movie?.poster_path}`" alt=""><br>
-        <span>{{ movie?.title }}</span>
+        <img :src="posterUrl" class="card-img-top" alt="...">
       </div>
     </div>        
   </div>
@@ -20,7 +19,13 @@ export default {
       getDetail(movie_id) {
         this.$router.push({ name: 'detail', params: { movie_id } })
       }
-    }
+    },
+    computed: {
+        posterUrl() {
+            const url = 'https://www.themoviedb.org/t/p/original' + this.movie.poster_path
+            return url
+        }
+    },
 }
 </script>
 

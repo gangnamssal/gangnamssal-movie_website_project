@@ -1,23 +1,34 @@
 <template>
-  <div>
-    <h1>Detail</h1>
-    <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" alt=""><br>
-    <p>영화 제목 : {{ detailMovie?.title }}</p>
-    {{ detailMovie.movielike_set.length }}
 
-    <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>
-    <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
-    <hr>
-    <ReviewForm
-        :movie-title="[detailMovie?.title,$route.params.movie_id]"
-    />
-    <hr>
-    <ReviewsList
-        v-for="review in detailMovie?.review_set" :key="review.id"
-        :review="review"
-    />
+    <div>
+        
+        <div  >
+            <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" alt=""><br>
+           
+            {{ detailMovie.movielike_set.length }}
+            <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>
+            <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
+            
+            <p>영화 제목 : {{ detailMovie?.title }}</p>
+            <p>영화 제목 : {{ detailMovie?.overview }}</p>
+        
+        </div>
 
-  </div>
+        <div>
+            <ReviewForm
+            :movie-title="[detailMovie?.title,$route.params.movie_id]"
+            />
+        </div>
+        
+        <div>
+            <ReviewsList
+                v-for="review in detailMovie?.review_set" :key="review.id"
+                :review="review"
+            />
+        </div>
+
+    </div>
+        
 </template>
 
 <script>
@@ -48,7 +59,6 @@ export default {
             const movieLikeId = this.detailMovie.movielike_set.filter((like) => {
                 return like.user === this.$store.state.userInfo.pk
             })
-            // console.log(movieLikeId)
             const payload = [this.$store.state.userInfo.pk, movieLikeId[0].id]
             this.$store.dispatch('likeMovieDelete',payload)
         }
@@ -85,5 +95,10 @@ export default {
 </script>
 
 <style>
-
+/* .container {
+	grid-template-columns: 400px 1fr;
+} */
+/* #detail-movie{
+    width: 400px;
+} */
 </style>
