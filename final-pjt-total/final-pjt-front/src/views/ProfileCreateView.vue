@@ -12,7 +12,7 @@
         <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
         <span>
             <form class="d-flex justify-content-center" role="search">
-                <input class="form-control me-2" type="search" :placeholder="firstMbti + secondMbti + thirdMbti + forthMbti" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:200px;">
+                <input class="form-control me-2" type="search" :placeholder="firstMbti + secondMbti + thirdMbti + forthMbti" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:1000px;">
             </form>
     
                 <!-- Modal -->
@@ -106,7 +106,7 @@
         <label for="mbti">선호하는 장르 : </label>
         <span>
             <form class="d-flex justify-content-center" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-bs-toggle="modal" data-bs-target="#genreModal" style="width:200px;">
+                <input class="form-control me-2" type="search" :placeholder="selectedGenreName" aria-label="Search" data-bs-toggle="modal" data-bs-target="#genreModal" style="width:1000px;">
             </form>
     
                 <!-- Modal -->
@@ -296,6 +296,13 @@ export default {
         selectedPreference() {
             return this.$store.state.selectedPreference
         },
+        selectedGenreName() {
+          const data = []
+          this.selectedPreference.forEach((genre) => {
+            data.push(genre.name)
+          })
+          return data
+        }
     },
     created() {
         this.getPreferenceGenre()
