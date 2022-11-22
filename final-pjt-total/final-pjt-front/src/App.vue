@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <img id="first" src="https://images.unsplash.com/photo-1660221669321-b29fbfbb0b05?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="">
-    <div id="intro-back"></div>
+    <!-- <img id="first" src="https://images.unsplash.com/photo-1660221669321-b29fbfbb0b05?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt=""> -->
     <nav-bar/>
     <router-view/>
   </div>
@@ -84,21 +83,6 @@ body{
   font-family: 'ChosunCentennial';
 }
 
-/* #intro-back{
-  background-image: url('./assets/intro-back.jpg');
-  background-size:cover;
-  height: 100vh;
-  display: inline-block;
-  animation: zoomIn; 
-  animation: fadeOut;
-  animation-duration: 2s;
-} */
-/* #dd{
-  display: inline-block;
-  animation: zoomIn; 
-  /* animate__zoomIn */
-  /* animation-duration: 2s;
-} */ 
 
 #first {
   position: fixed;
@@ -109,7 +93,7 @@ body{
   animation-fill-mode: forwards;
 }
 
-@keyframes slidein {
+/* @keyframes slidein {
   from {
   }
   25% {
@@ -125,7 +109,7 @@ body{
     opacity: 0;
     visibility: hidden;
   }
-}
+} */
 color{
   color: #000000;
   color: #412728;
