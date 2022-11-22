@@ -8,7 +8,10 @@
           <button>수정하러 가기</button>
           <p>닉네임 : {{ profile?.nickname }}</p>
           <p>mbti : {{ profile?.mbti }}</p>
-          <p>선호 장르 : {{ profile?.prefer_genre }}</p>
+          <p>선호 장르 : {{ profile?.prefer_genre[0] }}</p>
+          <p v-for="genre in profile?.prefer_genre" :key="genre.id">
+            {{ genre }}
+          </p>
         </div>
     
         <div id="profiledata" class="col">

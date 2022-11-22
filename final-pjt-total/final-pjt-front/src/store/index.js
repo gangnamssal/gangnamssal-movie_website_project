@@ -562,7 +562,6 @@ export default new Vuex.Store({
         data: {
           nickname: payload.nickname,
           mbti: payload.mbti,
-          prefer_genre: payload.perfer_genre
         },
         headers: {
           Authorization: `Token ${context.state.Token}`
@@ -570,7 +569,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // console.log(res)
-          // console.log('성공')
+          console.log('성공')
           context.commit('SAVE_PROFILE',res.data)
         })
         .catch((error) => {
@@ -587,6 +586,22 @@ export default new Vuex.Store({
           // console.log(res)
           context.commit('GET_PROFILE_DETAIL', res.data)
         })
+    },
+    savePreferenceGenre(context, payload) {
+      for (let genre of payload) {
+        axios({
+          method: 'put',
+          url: `${DJANGO_URL}/movies/genres/${genre.id}/`,
+          data: {
+            user: context.state.userInfo.pk
+          },headers: {
+            Authorization: `Token ${context.state.Token}`
+          }
+        })
+          .then((res) => {
+            console.log(res)
+          })
+      }
     }
   },
   modules: {
