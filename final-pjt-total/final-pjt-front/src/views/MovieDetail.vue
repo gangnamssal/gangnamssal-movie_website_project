@@ -26,21 +26,22 @@
                 <p>{{ detailMovie?.overview }}</p>
             </div>
     
-    
-            <div class="item ">
-                <!-- 리뷰 -->
+            <div class="item" >
+                <!-- 리뷰폼 -->
                 <div class="review-form">
                     <ReviewForm
                     :movie-title="[detailMovie?.title,$route.params.movie_id]"
                     />
                 </div>
                 
-                <!-- 댓글 -->
-                <div>
-                    <ReviewsList
-                        v-for="review in detailMovie?.review_set" :key="review.id"
-                        :review="review"
-                    />
+                <!-- 리뷰리스트 -->
+                
+                <h4 class="mx-2">Reviews</h4>    
+                <div class="reviews">
+                <ReviewsList v-for="review in detailMovie?.review_set" :key="review.id"
+                    :review="review"
+                    
+                />
                 </div>
             </div>
 
@@ -115,16 +116,30 @@ export default {
 <style>
 .detail-container{
     display: grid;
-    grid-template-columns: minmax(400px, 1fr) 1fr;
+    grid-template-columns: minmax(400px, 1fr) 2fr;
     grid-gap: 80px;
     margin: 3rem 10rem ;
+    font-family:  'IBMPlexSansKR-Regular';
 }
 .review-form{
     /* background: linear-gradient(to bottom, #200122, #6f0000); */
     /* background: linear-gradient(to bottom, #000000, #434343);  */
-    background: linear-gradient(to bottom, #1e130c, #0f0f0e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background: linear-gradient(to bottom, #0a0a0a, #aaaaa9);  */
 
     padding: 20px;
     margin-bottom: 50px;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.reviews{
+    border: solid white 2px;
+    margin: 10px;
+    padding: 10px;
 }
 </style>

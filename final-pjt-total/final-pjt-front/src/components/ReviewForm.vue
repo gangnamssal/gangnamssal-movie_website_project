@@ -13,7 +13,7 @@
             <input type="number" id="rank" min="0" max="10" step="0.5" v-model="rank">
         </div>
         <!-- 리뷰 작성 버튼 -->
-        <button  type="button" class="btn btn-light form-button" @click="addReview">
+        <button  type="button" class="btn btn-light form-button" @click="addReview" style="color:white">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
             </svg>
@@ -62,20 +62,27 @@ export default {
 <style>
 #title{
     width: 100%;
-    border-radius: 30px;
+    border-radius: 10px;
+    border: 0;
     opacity: 0.5;
+    padding: 5px;
 }
 
 #content{
     width: 100%;
-    border-radius: 30px;
+    border-radius: 10px;
+    border: 0;
     opacity: 0.5;
+    padding: 10px;
 }
 
 #rank{
     width: 100px;
-    border-radius: 30px;
+    border-radius: 10px;
+    border: 0;
     opacity: 0.5;
+    padding: 5px;
+    margin: 3px;
 }
 
 .rank{
