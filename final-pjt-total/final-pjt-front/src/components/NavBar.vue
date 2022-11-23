@@ -28,7 +28,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">엠비티아이</a></li>
-            <li><a class="dropdown-item" href="#">취향</a></li>
+            <li><router-link :to="{ name : 'RecommandGenreView' }" class="dropdown-item">취향</router-link></li>
             <li><router-link :to="{ name : 'hotmovie' }" class="dropdown-item">뜨거워</router-link></li>
             <!-- <li><a class="dropdown-item" href="#">Another Algo</a></li> -->
           </ul>

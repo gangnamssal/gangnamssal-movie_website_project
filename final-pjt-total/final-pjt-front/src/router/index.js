@@ -70,14 +70,21 @@ const routes = [
     component: () => import('@/views/SignUpPreferenceView')
   },
   {
+    // 좋아요 많이 받은 영화
     path: '/hotmovie',
     name: 'hotmovie',
     component: () => import('@/views/HotRecommendation')
   },
   {
+    // 프로필 생성 페이지
     path: '/ProfileCreate',
     name: 'ProfileCreateView',
     component: () => import('@/views/ProfileCreateView')
+  },
+  {
+    path: '/RecommandGenre',
+    name: 'RecommandGenreView',
+    component: () => import('@/views/RecommandGenreView')
   },
   {
     // 404 page

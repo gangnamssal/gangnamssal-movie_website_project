@@ -35,6 +35,7 @@ export default new Vuex.Store({
     userProfile: null,
     totalUserPreferGenre: null,
     userPreferGenre: null,
+    recommandGenreMovie: null,
   },
   getters: {
     getProfile(state) {
@@ -262,6 +263,21 @@ export default new Vuex.Store({
         }
       }
       state.userPreferGenre = genre
+    },
+    GET_RECOMMAND_GENRE_MOVIE(state) {
+      const myGenreId = state.genres.filter((genre) => {
+        return state.userPreferGenre.includes(genre.name)
+      })
+      const recommand = []
+      state.popularMovie.forEach((movie) => {
+        for (let genre of myGenreId) {
+          if (movie.genre_ids.includes(genre.id)) {
+            recommand.push(movie)
+          }
+        }
+      })
+      // console.log(recommand)
+      state.recommandGenreMovie = _.sampleSize(recommand,50)
     }
   },
   actions: {
