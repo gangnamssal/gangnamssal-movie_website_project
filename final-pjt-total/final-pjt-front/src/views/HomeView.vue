@@ -1,4 +1,5 @@
 <template>
+<!-- 환영 페이지 -->
 <div>
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -49,7 +50,8 @@
     </button>
   </div>
 
-  <div>
+<!-- 인기 영화 리스트 -->
+  <div class="mt-5 pt-5">
     <carousel-3d :height="900" :width="700" >
         <slide v-for="(movie, i) in APIpopularMovie" :index="i" :key="movie.id">
             <HomeItem :movie="movie"/>
@@ -58,13 +60,6 @@
   </div>
 
 </div>
-
-  <!-- <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 mt-3">
-    <HomeItem
-      v-for="movie in APIpopularMovie" :key="movie.id"
-      :movie="movie"
-    />
-  </div> -->
 
 </template>
 
@@ -80,9 +75,6 @@ export default {
     HomeItem
     },
     methods: {
-      // getPopularMovie() {
-      //   this.$store.dispatch('getPopularMovie')
-      // }
       getUserInfo() {
         this.$store.dispatch('getUserInfo')
       },
@@ -93,7 +85,6 @@ export default {
       },
     },
     created(){
-      // this.getPopularMovie()
       this.getUserInfo()
     }
     

@@ -2,25 +2,40 @@
 
     <div class="detail-container">
             <div class="item">
-                <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="movie?.title" style="max-width:100%;"><br>
+                <!-- 영화 포스터 -->
+                <img :src="`https://www.themoviedb.org/t/p/original${detailMovie?.poster_path}`" :alt="detailMovie?.title" style="max-width:100%;"><br>
                 
                 {{ detailMovie.movielike_set.length }}
-                <button class="like" @click="likeMovie" v-if="userIsLiked===false">🤍</button>
-                <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true">❤️</button>
+
+                <!-- 영화 좋아요 버튼 -->
+                <button class="like" @click="likeMovie" v-if="userIsLiked===false" style="color:white;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                </button>
+
+                <!-- 영화 좋아요 취소 버튼 -->
+                <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true" style="color:red;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                </button>
                 
-                <p>영화 제목 : {{ detailMovie?.title }}</p>
-                <p>영화 제목 : {{ detailMovie?.overview }}</p>
+                <!-- 영화 제목, 줄거리 -->
+                <p style="font-weight: bold; font-size:x-large;">{{ detailMovie?.title }}</p>
+                <p>{{ detailMovie?.overview }}</p>
             </div>
     
     
-            <div class="item">
-                <div>
+            <div class="item ">
+                <!-- 리뷰 -->
+                <div class="review-form">
                     <ReviewForm
                     :movie-title="[detailMovie?.title,$route.params.movie_id]"
                     />
                 </div>
                 
-    
+                <!-- 댓글 -->
                 <div>
                     <ReviewsList
                         v-for="review in detailMovie?.review_set" :key="review.id"
@@ -103,5 +118,13 @@ export default {
     grid-template-columns: minmax(400px, 1fr) 1fr;
     grid-gap: 80px;
     margin: 3rem 10rem ;
+}
+.review-form{
+    /* background: linear-gradient(to bottom, #200122, #6f0000); */
+    /* background: linear-gradient(to bottom, #000000, #434343);  */
+    background: linear-gradient(to bottom, #1e130c, #0f0f0e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    padding: 20px;
+    margin-bottom: 50px;
 }
 </style>
