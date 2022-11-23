@@ -40,7 +40,6 @@
                 <div class="reviews">
                 <ReviewsList v-for="review in detailMovie?.review_set" :key="review.id"
                     :review="review"
-                    
                 />
                 </div>
             </div>
@@ -80,7 +79,7 @@ export default {
             })
             const payload = [this.$store.state.userInfo.id, movieLikeId[0].id]
             this.$store.dispatch('likeMovieDelete',payload)
-        }
+        },
     },
     created() {
         window.scrollTo(0,0)

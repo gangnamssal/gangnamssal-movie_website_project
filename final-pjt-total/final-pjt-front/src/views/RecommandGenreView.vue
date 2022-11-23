@@ -15,10 +15,14 @@ export default {
     methods:{
         getRecommandGenreMovie(){
             this.$store.commit('GET_RECOMMAND_GENRE_MOVIE')
-        }
+        },
+        getPreferenceGenre() {
+            this.$store.commit('GET_PREFERENCE_GENRE')
+        },
     },
     created(){
         this.getRecommandGenreMovie()
+        this.getPreferenceGenre()
     },
     computed:{
         recommandGenreMovie(){

@@ -246,9 +246,6 @@ export default {
             this.$store.dispatch('addComment',payload)
             this.comment = null
         },
-
-
-
         likeReview() {
             this.$store.dispatch('likeReview', this.review.id)
             console.log(this.IsLiked)
