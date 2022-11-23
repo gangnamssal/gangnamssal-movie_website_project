@@ -86,6 +86,9 @@ export default {
       getUserInfo() {
         this.$store.dispatch('getUserInfo')
       },
+      getPreferGenre() {
+        this.$store.commit('GET_PREFER_GENRE')
+      }
     },
     computed:{
       APIpopularMovie(){
@@ -95,6 +98,7 @@ export default {
     created(){
       // this.getPopularMovie()
       this.getUserInfo()
+      this.getPreferGenre()
     }
     
 }

@@ -9,7 +9,7 @@
           <p>닉네임 : {{ profile?.nickname }}</p>
           <p>mbti : {{ profile?.mbti }}</p>
           <p>선호 장르 : </p>
-          <p v-for="genre in getPreferGenre" :key="genre.id">
+          <p v-for="genre in userPreferGenre" :key="genre.id">
             {{ genre }}
           </p>
         </div>
@@ -34,21 +34,23 @@ export default {
       getProfile() {
         this.$store.dispatch('getProfileDetail')
       },
-      goToUpdateProfile() {
-        this.$router.push({ name : 'ProfileUpdateView' })
+      getPreferGenre() {
+        this.$store.commit('GET_PREFER_GENRE')
       }
     },
     computed: {
       profile() {
         return this.$store.state.userProfile
       },
-      getPreferGenre() {
-        return this.$store.getters.getPreferGenre
+      userPreferGenre() {
+        return this.$store.state.userPreferGenre
       }
+      
     },
     created() { 
       this.getProfile()
-    }
+      this.getPreferGenre()
+    },
 }
 </script>
 

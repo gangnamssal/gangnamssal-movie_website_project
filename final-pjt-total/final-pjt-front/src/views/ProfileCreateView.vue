@@ -196,7 +196,7 @@ export default {
             this.isSelectedE = this.isSelectedI = this.isSelectedS = this.isSelectedN = this.isSelectedT = this.isSelectedF = this.isSelectedJ = this.isSelectedP = false
             this.firstMbti = this.secondMbti = this.thirdMbti = this.forthMbti = null
 
-            this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.pk }})
+            this.$router.push({ name : 'movie' })
         },
         saveMBTI() {
           this.MBTI = this.firstMbti + this.secondMbti + this.thirdMbti + this.forthMbti
@@ -282,7 +282,7 @@ export default {
         },
         getPreferenceGenre() {
             this.$store.commit('GET_PREFERENCE_GENRE')
-        }
+        },
     },
     components: {
       PreferenceButton,

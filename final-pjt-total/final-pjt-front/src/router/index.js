@@ -80,11 +80,6 @@ const routes = [
     component: () => import('@/views/ProfileCreateView')
   },
   {
-    path: '/ProfileUpdate',
-    name: 'ProfileUpdateView',
-    component: () => import('@/views/ProfileUpdateView')
-  },
-  {
     // 404 page
     path: '/404',
     name: '404NotFound',

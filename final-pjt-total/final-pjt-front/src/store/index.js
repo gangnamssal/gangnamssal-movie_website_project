@@ -34,6 +34,7 @@ export default new Vuex.Store({
     totalUserProfile: null,
     userProfile: null,
     totalUserPreferGenre: null,
+    userPreferGenre: null,
   },
   getters: {
     getProfile(state) {
@@ -41,20 +42,6 @@ export default new Vuex.Store({
         return user.user === state.userInfo.pk
       })
     },
-    getPreferGenre(state) {
-      const preferGenre = state.totalUserPreferGenre.filter((genre) => {
-        return genre.user === state.userInfo.pk
-      })
-      const genre = []
-      for (let i of preferGenre) {
-        for (let j of state.genres) {
-          if (i.prefer_genre === j.id) {
-            genre.push(j.name)
-          }
-        }
-      }
-      return genre
-    }
   },
   mutations: {
     GET_POPULAR_MOVIE(state, movie) {
@@ -261,6 +248,20 @@ export default new Vuex.Store({
     },
     GET_USER_PREFER_GENRE(state, payload) {
       state.totalUserPreferGenre = payload
+    },
+    GET_PREFER_GENRE(state) {
+      const preferGenre = state.totalUserPreferGenre.filter((genre) => {
+        return genre.user === state.userInfo.pk
+      })
+      const genre = []
+      for (let i of preferGenre) {
+        for (let j of state.genres) {
+          if (i.prefer_genre === j.id) {
+            genre.push(j.name)
+          }
+        }
+      }
+      state.userPreferGenre = genre
     }
   },
   actions: {
