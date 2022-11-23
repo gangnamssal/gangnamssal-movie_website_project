@@ -26,4 +26,10 @@ urlpatterns = [
     path('profile/', views.allUserProfileInfo),
     # 유저 디테일 프로필 조회
     path('<int:user_id>/profile/', views.userProfileInfo),
+    # 전체 유저 선호 장르
+    path('userprefergenre/', views.totalUserPreferGenre),
+    # 유저 선호 장르
+    path('<int:genre_id>/userprefergenre/',views.userprefergenre),
+    # 유저 선호 장르 취소
+    path('userprefergenre/<int:userprefergenre_pk>/', views.userprefergenreDelete)
 ]

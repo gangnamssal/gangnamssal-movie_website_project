@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Review, Comment, MovieLike, ReviewLike,Profile
+from .models import Movie, Genre, Review, Comment, MovieLike, ReviewLike,Profile,UserPreferGenre
 # from django.contrib.auth import get_user_model
 
 # 리뷰에 대한 전체 댓글
@@ -72,18 +72,24 @@ class ReviewDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # read_only_fields = ('user','movie','like_review_users',)
 
+# 유저 장르 리스트
+class UserPreferGenreSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = UserPreferGenre
+        fields = '__all__'
 
 # 전체 장르 리스트
 class GenreListSerializer(serializers.ModelSerializer):
-
+    userprefergenre_set = UserPreferGenreSerializer(many=True, read_only=True)
     class Meta:
         model = Genre
         fields = '__all__'
-        read_only_fields = ('movie',)
+
 
 # 특정 장르
 class GenreDetailSerializer(serializers.ModelSerializer):
-
+    userprefergenre_set = UserPreferGenreSerializer(many=True, read_only=True)
     class Meta:
         model = Genre
         fields = '__all__'
@@ -116,3 +122,4 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
+

@@ -5,11 +5,11 @@
         <div id="profileText" class="col">
           <h1>프로필</h1>
           <!-- <button @click="goToWrite">작성하러 가기</button> -->
-          <button>수정하러 가기</button>
+          <button @click="goToUpdateProfile">수정하러 가기</button>
           <p>닉네임 : {{ profile?.nickname }}</p>
           <p>mbti : {{ profile?.mbti }}</p>
-          <p>선호 장르 : {{ profile?.prefer_genre[0] }}</p>
-          <p v-for="genre in profile?.prefer_genre" :key="genre.id">
+          <p>선호 장르 : </p>
+          <p v-for="genre in getPreferGenre" :key="genre.id">
             {{ genre }}
           </p>
         </div>
@@ -33,11 +33,17 @@ export default {
       },
       getProfile() {
         this.$store.dispatch('getProfileDetail')
+      },
+      goToUpdateProfile() {
+        this.$router.push({ name : 'ProfileUpdateView' })
       }
     },
     computed: {
       profile() {
         return this.$store.state.userProfile
+      },
+      getPreferGenre() {
+        return this.$store.getters.getPreferGenre
       }
     },
     created() { 

@@ -75,9 +75,14 @@ const routes = [
     component: () => import('@/views/HotRecommendation')
   },
   {
-    path: '/ProfileCreateView',
+    path: '/ProfileCreate',
     name: 'ProfileCreateView',
     component: () => import('@/views/ProfileCreateView')
+  },
+  {
+    path: '/ProfileUpdate',
+    name: 'ProfileUpdateView',
+    component: () => import('@/views/ProfileUpdateView')
   },
   {
     // 404 page

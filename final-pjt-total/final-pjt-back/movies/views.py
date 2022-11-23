@@ -10,8 +10,9 @@ from rest_framework import status
 from .serializers import (MovieDetailerializer, MovieListSerializer, GenreListSerializer, 
                             GenreDetailSerializer,ReviewListSerializer,CommentSerializer,
                             ReviewDetailSerializer,CommentDetailSerializer,MovieLikeSerializer,
-                            ReviewLikeSerializer, ProfileSerializer,ProfileDetailSerializer)
-from .models import Movie, Genre, Review,Comment, MovieLike,ReviewLike, Profile
+                            ReviewLikeSerializer, ProfileSerializer,ProfileDetailSerializer
+                            ,UserPreferGenreSerializer)
+from .models import Movie, Genre, Review,Comment, MovieLike,ReviewLike, Profile,UserPreferGenre
 
 from django.contrib.auth import get_user_model
 from accounts.models import User
@@ -40,7 +41,7 @@ def genreList(request):
         # genre = Genre.objects.all()
         genre = get_list_or_404(Genre)
         serializer = GenreListSerializer(genre, many=True)
-        return Response(serializer.data) 
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def genreDetail(request,genre_pk):
@@ -178,4 +179,30 @@ def userProfileInfo(request, user_id):
     elif request.method == 'GET':
         serializer = ProfileDetailSerializer(profile)
         return Response(serializer.data)
+
+# 유저 장르 선호
+@api_view(['GET'])
+def totalUserPreferGenre(request):
+    if request.method == 'GET':
+        userprefergenre = UserPreferGenre.objects.all()
+        serializer = UserPreferGenreSerializer(userprefergenre, many=True)
+        return Response(serializer.data)
+
+@api_view(['POST'])
+def userprefergenre(request, genre_id):
+    genre = get_object_or_404(Genre, pk=genre_id)
+    if request.method == 'POST':
+        serializer = UserPreferGenreSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(prefer_genre = genre)
+            serializer.save(user = request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['DELETE'])
+def userprefergenreDelete(request, userprefergenre_pk):
+    # review = Review.objects.get(pk=review_pk)
+    prefer_genre = get_object_or_404(ReviewLike, pk=userprefergenre_pk)
+    if request.method == 'DELETE':
+        prefer_genre.delete()
+        return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
     

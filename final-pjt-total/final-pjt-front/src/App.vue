@@ -49,6 +49,9 @@ export default {
       },
       getProfileDetail() {
         this.$store.dispatch('getProfileDetail')
+      },
+      getUserPreferGenre() {
+        this.$store.dispatch('getUserPreferGenre')
       }
     },
     created() {
@@ -59,6 +62,7 @@ export default {
       this.getPreferenceGenre()
       this.getProfile()
       this.getProfileDetail()
+      this.getUserPreferGenre()
     }
     
 }

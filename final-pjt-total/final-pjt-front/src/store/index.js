@@ -33,12 +33,27 @@ export default new Vuex.Store({
     HoTMovie:null,
     totalUserProfile: null,
     userProfile: null,
+    totalUserPreferGenre: null,
   },
   getters: {
     getProfile(state) {
       return state.totalUserProfile.filter((user) => {
         return user.user === state.userInfo.pk
       })
+    },
+    getPreferGenre(state) {
+      const preferGenre = state.totalUserPreferGenre.filter((genre) => {
+        return genre.user === state.userInfo.pk
+      })
+      const genre = []
+      for (let i of preferGenre) {
+        for (let j of state.genres) {
+          if (i.prefer_genre === j.id) {
+            genre.push(j.name)
+          }
+        }
+      }
+      return genre
     }
   },
   mutations: {
@@ -235,7 +250,18 @@ export default new Vuex.Store({
     },
     GET_PROFILE_DETAIL(state,payload) {
       state.userProfile = payload
-    } 
+    },
+    SAVE_USER_PREFER_GENRE(state, payload) {
+      state.genres = state.genres.map((genre)=>{
+        if (genre.id === payload.prefer_genre){
+          genre.userprefergenre_set.push(payload)
+        }
+        return genre
+      })
+    },
+    GET_USER_PREFER_GENRE(state, payload) {
+      state.totalUserPreferGenre = payload
+    }
   },
   actions: {
     getPopularMovie(context) {
@@ -556,30 +582,28 @@ export default new Vuex.Store({
         })
     },
     saveProfile(context, payload) {
-      for (let genre in payload) {
-        console.log(genre)
-        axios({
-          method: 'post',
-          url: `${DJANGO_URL}/movies/profile/`,
-          data: {
-            nickname: payload.nickname,
-            mbti: payload.mbti,
-            prefer_genre: genre.id
-          },
-          headers: {
-            Authorization: `Token ${context.state.Token}`
-          }
+      axios({
+        method: 'post',
+        url: `${DJANGO_URL}/movies/profile/`,
+        data: {
+          nickname: payload.nickname,
+          mbti: payload.mbti,
+          prefer_genre: payload.prefer_genre
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res)
+          // console.log('성공')
+          context.commit('SAVE_PROFILE',res.data)
         })
-          .then((res) => {
-            // console.log(res)
-            console.log('성공')
-            context.commit('SAVE_PROFILE',res.data)
-          })
-          .catch((error) => {
-            console.log(error)
-            // console.log(context.state.selectedPreference)
-          })
-      }
+        .catch((error) => {
+          console.log(error)
+          // console.log(context.state.selectedPreference)
+        })
+
     },
     getProfileDetail(context) {
       axios({
@@ -591,6 +615,31 @@ export default new Vuex.Store({
           context.commit('GET_PROFILE_DETAIL', res.data)
         })
     },
+    getUserPreferGenre(context) {
+      axios({
+        method: 'get',
+        url: `${DJANGO_URL}/movies/userprefergenre/`,
+      })
+        .then((res) => {
+          context.commit('GET_USER_PREFER_GENRE',res.data)
+        })
+    },
+    saveUserPreferGenre(context, genres) {
+      for (let genre in genres) {
+        axios({
+          method: 'post',
+          url: `${DJANGO_URL}/movies/${genres[genre].id}/userprefergenre/`,
+          headers: {
+            Authorization: `Token ${context.state.Token}`
+          },
+        })
+          .then((res) => {
+            // console.log('성공')
+            // console.log(res.data)
+            context.commit('SAVE_USER_PREFER_GENRE',res.data)
+          })
+      }
+    }
   },
   modules: {
   }
