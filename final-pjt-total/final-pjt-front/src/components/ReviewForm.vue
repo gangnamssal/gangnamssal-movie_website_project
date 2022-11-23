@@ -50,10 +50,14 @@ export default {
                 rank,
                 movie_id
             }
-            this.$store.dispatch('addReview',payload)
-            this.title = null
-            this.content = null
-            this.rank = null
+            if (title === null || content === null || rank === null) {
+                alert('내용을 전부 작성해주세요!')
+            } else {
+                this.$store.dispatch('addReview',payload)
+                this.title = null
+                this.content = null
+                this.rank = null
+            }
         }
     }
 }
