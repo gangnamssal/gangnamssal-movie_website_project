@@ -52,7 +52,7 @@
           <ul class="dropdown-menu" >
             <!-- <li><router-link :to="{ name : 'profile' }" class="dropdown-item">Profile</router-link></li> -->
             <li><a class="dropdown-item" @click.prevent="goToProfile" href="#">내 장부</a></li>
-            <li><a class="dropdown-item" @click="logOut" href="#">로그 아웃</a></li>
+            <li><a class="dropdown-item" @click="logOut" href="#">내 흔적 지우기</a></li>
             <li><router-link :to="{ name : 'changepassword' }" class="dropdown-item">비밀번호 변경</router-link></li>
             <!-- <li><a class="dropdown-item" href="#">Signout</a></li> -->
           </ul>
