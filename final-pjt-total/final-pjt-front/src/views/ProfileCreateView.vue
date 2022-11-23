@@ -117,7 +117,7 @@
                         <h1 class="modal-title fs-5" id="genreModalLabel" style="color: black;">
                             선택된 장르
                         </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="selectGenreExit"></button>
                     </div>
                     <div class="modal-body">
                         <span>
