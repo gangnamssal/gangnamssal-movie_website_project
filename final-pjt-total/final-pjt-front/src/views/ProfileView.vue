@@ -60,6 +60,13 @@ export default {
       },
       goToUpdateProfile() {
         this.$router.push({ name : 'ProfileUpdateView'})
+      },
+      refreshAll() {
+        if (self.name != 'reload') {
+         self.name = 'reload';
+         self.location.reload(true);
+          }
+          else self.name = ''; 
       }
     },
     computed: {
@@ -72,6 +79,7 @@ export default {
       
     },
     created() { 
+      this.refreshAll()
       this.getProfile()
       this.getPreferGenre()
       this.myFavoriteMovie()
