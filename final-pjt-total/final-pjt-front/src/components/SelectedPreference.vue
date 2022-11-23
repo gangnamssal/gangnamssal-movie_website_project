@@ -1,11 +1,9 @@
 <template>
-  <div>
     <span>
-    <button
+    <button style="width:100px; height: 30px; border-radius: 10px; margin: 2px; background-color: yellowgreen; color: green;" 
         @click="deleteSelectedGenre"
     >{{ genre?.name }}</button>
   </span>
-  </div>
 </template>
 
 <script>

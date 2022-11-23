@@ -2,9 +2,18 @@
   <div >
 
     <!-- Button trigger modal -->
-    <p data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="modal.show()">
-        {{ review?.title }}
-    </p>
+    <div data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="modal.show()">
+        <div class="d-flex justify-content-between px-3">
+            {{ review?.title }}|
+            
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" style="color:red" >
+                  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+                {{likedCount}}
+            </div>
+        </div>
+    </div>
 
     <!-- Modal -->
     <div  class="modal fade" ref="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

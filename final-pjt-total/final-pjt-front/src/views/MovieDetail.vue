@@ -23,6 +23,9 @@
                 
                 <!-- 영화 제목, 줄거리 -->
                 <p style="font-weight: bold; font-size:x-large;">{{ detailMovie?.title }}</p>
+                <span style="font-weight: bold;"> 장르 : </span>
+                <span v-for="genre in genres" :key="genre.id">{{ genre }} / </span>
+                <p></p>
                 <p>{{ detailMovie?.overview }}</p>
             </div>
     
@@ -40,8 +43,8 @@
                 <div class="reviews">
                 <ReviewsList v-for="review in detailMovie?.review_set" :key="review.id"
                     :review="review"
-                    
                 />
+
                 </div>
             </div>
 
@@ -60,7 +63,8 @@ export default {
     data() {
         return {
             isLiked: false,
-            movie_id : this.$route.params.movie_id
+            movie_id : this.$route.params.movie_id,
+            genres: null
         }
     },
     components: { 
@@ -80,11 +84,27 @@ export default {
             })
             const payload = [this.$store.state.userInfo.id, movieLikeId[0].id]
             this.$store.dispatch('likeMovieDelete',payload)
+        },
+        getMovieGenre() {
+            let genreList = []
+            const genre_ids = JSON.parse(this.detailMovie.genre_ids)
+            for (let genre of genre_ids) {
+                // console.log(this.$store.state.genres)
+                for (let genres of this.$store.state.genres) {
+                    if (genre === genres.id) {
+                        genreList.push(genres.name)
+                        // console.log(genres,this.$store.genres[genres].id)
+
+                    }
+                }
+            }
+            this.genres = genreList
         }
     },
     created() {
         window.scrollTo(0,0)
         this.getDetailMovie(this.movie_id)
+        this.getMovieGenre()
     },
     destroyed() {
         window.scrollTo(0,0)

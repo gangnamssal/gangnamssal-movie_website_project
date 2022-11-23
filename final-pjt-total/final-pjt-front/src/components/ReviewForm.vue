@@ -64,15 +64,15 @@ export default {
     width: 100%;
     border-radius: 10px;
     border: 0;
-    opacity: 0.5;
     padding: 5px;
+    background-color: rgb(107, 105, 105);
 }
 
 #content{
     width: 100%;
     border-radius: 10px;
     border: 0;
-    opacity: 0.5;
+    background-color: rgb(107, 105, 105);
     padding: 10px;
 }
 
@@ -80,7 +80,7 @@ export default {
     width: 100px;
     border-radius: 10px;
     border: 0;
-    opacity: 0.5;
+    background-color: rgb(107, 105, 105);
     padding: 5px;
     margin: 3px;
 }

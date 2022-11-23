@@ -53,7 +53,8 @@
 <!-- 인기 영화 리스트 -->
   <div class="mt-5 pt-5">
     <carousel-3d :height="900" :width="700" >
-        <slide v-for="(movie, i) in APIpopularMovie" :index="i" :key="movie.id">
+        <slide v-for="(movie, i) in APIpopularMovie" :index="i" :key="movie.id" style="background:black; text-align:center">
+            <h1>{{ i+1 }}</h1>
             <HomeItem :movie="movie"/>
         </slide>
     </carousel-3d>

@@ -1,6 +1,6 @@
 <template>
   <span @click="selectedPreferenceGenre">
-    <button
+    <button style="width:100px; height: 30px; border-radius: 10px; margin: 2px; background-color: green; color: yellowgreen;"
     >{{ genre?.name }}</button>
   </span>
 </template>
