@@ -5,7 +5,7 @@
         <div id="profileText" class="col">
           <h1>프로필</h1>
           <!-- <button @click="goToWrite">작성하러 가기</button> -->
-          <button @click="goToUpdateProfile">수정하러 가기</button>
+          <button >수정하러 가기</button>
           <p>닉네임 : {{ profile?.nickname }}</p>
           <p>mbti : {{ profile?.mbti }}</p>
           <p>선호 장르 : </p>
@@ -15,8 +15,11 @@
         </div>
     
         <div id="profiledata" class="col">
-          <p>내가 좋아한 영화</p>
-          <p>내가 쓴 리뷰</p>
+          <p>내가 좋아한 영화 : </p>
+          <span v-for="movie in favoriteMovie" :key="movie.id">{{ movie.title }} <br></span>
+          <hr>
+          <p>내가 쓴 리뷰 : </p>
+          <span v-for="review in myReviewList" :key="review.id">{{ review.title }}</span>
         </div>
       </div>
       </div>
@@ -27,6 +30,12 @@
 <script>
 export default {
     name: 'ProfileView',
+    data() {
+      return {
+        favoriteMovie: null,
+        myReviewList: null,
+      }
+    },
     methods: {
       goToWrite() {
         this.$router.push({ name : 'ProfileCreateView' })
@@ -36,6 +45,18 @@ export default {
       },
       getPreferGenre() {
         this.$store.commit('GET_PREFER_GENRE')
+      },
+      myFavoriteMovie() {
+        const findMovie = []
+        for (let movie of this.$store.state.userInfo.movielike_set) {
+          findMovie.push(this.$store.state.popularMovie.find((movies) => {
+            return movie.movieLike === movies.id
+          }))
+        }
+        this.favoriteMovie = findMovie
+      },
+      getReviewList() {
+        this.myReviewList = this.$store.state.userInfo.review_set
       }
     },
     computed: {
@@ -50,6 +71,8 @@ export default {
     created() { 
       this.getProfile()
       this.getPreferGenre()
+      this.myFavoriteMovie()
+      this.getReviewList()
     },
 }
 </script>

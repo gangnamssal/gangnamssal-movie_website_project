@@ -82,6 +82,13 @@ const routes = [
     component: () => import('@/views/ProfileCreateView')
   },
   {
+    // MBTI 추천 페이지
+    path: '/RecommandMbti',
+    name: 'RecommandMbtiView',
+    component: () => import('@/views/RecommandMbtiView')
+  },
+  {
+    // 취향 추천 페이지
     path: '/RecommandGenre',
     name: 'RecommandGenreView',
     component: () => import('@/views/RecommandGenreView')

@@ -31,5 +31,5 @@ urlpatterns = [
     # 유저 선호 장르
     path('<int:genre_id>/userprefergenre/',views.userprefergenre),
     # 유저 선호 장르 취소
-    path('userprefergenre/<int:userprefergenre_pk>/', views.userprefergenreDelete)
+    path('userprefergenre/<int:userprefergenre_pk>/', views.userprefergenreDelete),
 ]

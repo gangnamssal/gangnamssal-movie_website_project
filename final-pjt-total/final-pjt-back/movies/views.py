@@ -205,4 +205,3 @@ def userprefergenreDelete(request, userprefergenre_pk):
     if request.method == 'DELETE':
         prefer_genre.delete()
         return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
-    
