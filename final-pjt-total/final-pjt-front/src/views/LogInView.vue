@@ -7,7 +7,7 @@
           <i class="fa fa-user"></i>
       </span>
       <input type="text" class="user authInput" placeholder="ursername" v-model="username"/>
-      <span class="entypo-key inputPassIcon">
+      <span class="entypo-key inputPassIcon2">
           <i class="fa fa-key"></i>
       </span>
       <input type="password" class="pass authInput" placeholder="password" v-model="password"/>

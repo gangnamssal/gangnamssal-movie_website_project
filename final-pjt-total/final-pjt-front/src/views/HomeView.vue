@@ -14,8 +14,8 @@
             <div class="container">
                 <div class="carousel-caption text-start">
                     <h1>Enjoy with us</h1>
-                    <p>Share photos and messages with friends and family in a simple, fun way.</p>
-                    <p><router-link :to="{ name : 'signup' }" class="btn btn-lg btn-primary">Sign up today</router-link></p>
+                    <p>Share your movie and message with friends and family in a simple, fun way.</p>
+                    <p><router-link :to="{ name : 'signup' }" class="btn btn-lg btn-danger" style="color:black">Sign up today</router-link></p>
                 </div>
             </div>
         </div>
@@ -24,8 +24,8 @@
             <div class="container">
                 <div class="carousel-caption">
                     <h1>You can create your world!</h1>
-                    <p>You can create whatever you want.</p>
-                    <p><router-link :to="{ name : 'hotmovie' }" class="btn btn-lg btn-primary">Recomand</router-link></p>
+                    <p>You can pick as much as you want.</p>
+                    <p><router-link :to="{ name : 'hotmovie' }" class="btn btn-lg btn-warning">Recomand</router-link></p>
                 </div>
             </div>
         </div>
@@ -34,8 +34,8 @@
             <div class="container">
                 <div class="carousel-caption text-end">
                     <h1>What's your favorite?</h1>
-                    <p>Some representative placeholder content for the third slide of this carousel.</p>
-                    <p><router-link :to="{ name : 'genre'}" class="btn btn-lg btn-primary" >Find movie</router-link></p>
+                    <p>There's a great big world of new stories waiting to be discovered!</p>
+                    <p><router-link :to="{ name : 'genre'}" class="btn btn-lg btn-primary" style="color:black" >Find movie</router-link></p>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
 
 <!-- 인기 영화 리스트 -->
   <div class="mt-5 pt-5">
-    <carousel-3d :height="900" :width="700" >
+    <carousel-3d :height="1000" :width="700" >
         <slide v-for="(movie, i) in APIpopularMovie" :index="i" :key="movie.id" style="background:black; text-align:center">
             <h1>{{ i+1 }}</h1>
             <HomeItem :movie="movie"/>

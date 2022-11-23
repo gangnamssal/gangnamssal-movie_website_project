@@ -1,18 +1,4 @@
 <template>
-  <!-- <div class="auth-bg">
-    <div class="auth">
-        <h1>회원가입</h1>
-        <label for="username">ID : </label>
-        <input type="text" id="username" v-model="username"><br>
-    
-        <label for="password1">비밀번호 : </label>
-        <input type="password" id="password1" v-model="password1"><br>
-    
-        <label for="password2">비밀번호 확인 : </label>
-        <input type="password" id="password2" v-model="password2" @keyup.enter="addSignUp">
-        <button @click="addSignUp">회원가입</button>
-    </div>
-  </div> -->
 
 <div class="auth">
     <form class="authForm" @submit.prevent="addSignUp">
@@ -22,11 +8,11 @@
             <i class="fa fa-user"></i>
         </span>
         <input type="text" class="user authInput" placeholder="ursername" v-model="username"/>
-        <span class="entypo-key inputPassIcon">
+        <span class="entypo-key inputPassIcon2">
             <i class="fa fa-key"></i>
         </span>
         <input type="password" class="pass authInput" placeholder="password" v-model="password1"/>
-        <span class="entypo-key inputPassIcon">
+        <span class="entypo-key inputPassIcon3">
             <i class="fa fa-key"></i>
         </span>
         <input type="password" class="pass authInput" placeholder="password check" v-model="password2"/>

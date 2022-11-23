@@ -6,14 +6,7 @@
 
     <div class="container">
       <footer class="py-3 my-4 ">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-      </ul>
-      <p class="text-center text-muted">&copy; 2022 SSAFY, 태헌, 아진</p>
+      <p class="text-center text-muted">MADE BY 2022 SSAFY 태헌, 아진</p>
       </footer>
     </div>
   </div>
@@ -88,12 +81,7 @@ body{
   background-color: black;
   color: aliceblue;
 }
-/* @font-face {
-    font-family: 'ChosunCentennial';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-} */
+
 @font-face {
     font-family: 'Tenada';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2') format('woff2');
@@ -101,11 +89,9 @@ body{
     font-style: normal;
 }
 #app {
-  /* font-family: 'ChosunCentennial'; */
   font-family: 'Tenada';
 
 }
-
 
 #first {
   position: fixed;
@@ -200,7 +186,19 @@ input:focus {
 
 .inputPassIcon {
   position:absolute;
+  top:68px;
+  right: 80px;
+  color:white;
+}
+.inputPassIcon2 {
+  position:absolute;
   top:136px;
+  right: 80px;
+  color:white;
+}
+.inputPassIcon3 {
+  position:absolute;
+  top:208px;
   right: 80px;
   color:white;
 }

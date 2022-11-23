@@ -1,149 +1,154 @@
 <template>
-    <div class="text-center">
-        <div class="form-signin w-100 m-auto">
+  <div class="create-profile text-center">
+    <div class="form-signin w-100 m-auto">
               
-        <h1>프로필 작성 페이지</h1>
+    <h1>프로필 작성 페이지</h1>
 
-        <label for="nickname">닉네임 : </label>
-        <input type="text" id="nickname" v-model="nickname"><br>
+    <label for="nickname">닉네임 : </label>
+    <input type="text" id="nickname" v-model="nickname" class="m-3" ><br>
 
-        <!-- MBTI -->
-        <label for="mbti">MBTI(선택 사항) : </label>
-        <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
-        <span>
-            <form class="d-flex justify-content-center" role="search">
-                <input class="form-control me-2" type="search" placeholder="MBTI를 선택해주세요!" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:1000px;" v-model="MBTI" id="mbti">
-            </form>
-    
-                <!-- Modal -->
-            <div class="modal fade" id="MBTIModal" tabindex="-1" aria-labelledby="MBTIModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="MBTIModalLabel" style="color: black;">
-                            MBTI
-                        </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        
+    <!-- MBTI -->
+    <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
+    <span>
+        <form class="d-flex justify-content-center" role="search">
+        <label for="mbti" class="m-3">MBTI(선택 사항) : </label>
+            <input class="form-control me-2" type="search" placeholder="MBTI를 선택해주세요!" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:200px;" v-model="MBTI" id="mbti">
+        </form>
 
-                    <div id="mbti">
-                        <div class="container">
+            <!-- Modal -->
+        <div class="modal fade" id="MBTIModal" tabindex="-1" aria-labelledby="MBTIModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="MBTIModalLabel" style="color: black;">
+                        MBTI
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
 
-
-                        <section class="buttonArea">
-
-                            <div class="buttonRow">
-                            <div class="btn" @click="mbti1" :class="{selected:isSelectedE}" id="mbti_btn">
-                                <span class="type" value="E">E</span>
-                                <span>외향형</span>
-                            </div>
-
-                            <div class="btn" @click="mbti1" :class="{selected:isSelectedI}" id="mbti_btn">
-                                <span class="type" value="I">I</span>
-                                <span>내향형</span>
-                            </div>
-                            </div>
+                <div id="mbti">
+                    <div class="container">
 
 
-                            <div class="buttonRow">
-                            <div class="btn" @click="mbti2" :class="{selected:isSelectedS}" id="mbti_btn"> 
-                                <span class="type" value="S">S</span>
-                                <span>감각형</span>
-                            </div>
-                            <div class="btn" @click="mbti2" :class="{selected:isSelectedN}" id="mbti_btn">
-                                <span class="type" value="N">N</span>
-                                <span>직관형</span>
-                            </div>
-                            </div>
+                    <section class="buttonArea">
 
-
-                            <div class="buttonRow">
-                            <div class="btn" @click="mbti3" :class="{selected:isSelectedT}" id="mbti_btn">
-                                <span class="type" value="T">T</span>
-                                <span>사고형</span>
-                            </div>
-                            <div class="btn" @click="mbti3" :class="{selected:isSelectedF}" id="mbti_btn">
-                                <span class="type" value="F">F</span>
-                                <span>감정형</span>
-                            </div>
-                            </div>
-
-
-                            <div class="buttonRow">
-                            <div class="btn" @click="mbti4" :class="{selected:isSelectedJ}" id="mbti_btn">
-                                <span class="type" value="J">J</span>
-                                <span>판단형</span>
-                            </div>
-                            <div class="btn" @click="mbti4" :class="{selected:isSelectedP}" id="mbti_btn">
-                                <span class="type" value="P">P</span>
-                                <span>인식형</span>
-                            </div>
-                            </div>
-
-                        </section>
+                        <div class="buttonRow">
+                        <div class="btn" @click="mbti1" :class="{selected:isSelectedE}" id="mbti_btn">
+                            <span class="type" value="E">E</span>
+                            <span>외향형</span>
                         </div>
-                    </div>
+
+                        <div class="btn" @click="mbti1" :class="{selected:isSelectedI}" id="mbti_btn">
+                            <span class="type" value="I">I</span>
+                            <span>내향형</span>
+                        </div>
+                        </div>
 
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="selectMBTIExit">Close</button>
-                        <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary" @click="saveMBTI">Save changes</button>
-                    </div>
-                    </div>
-                </div>
-            </div><br>
-        </span>
+                        <div class="buttonRow">
+                        <div class="btn" @click="mbti2" :class="{selected:isSelectedS}" id="mbti_btn"> 
+                            <span class="type" value="S">S</span>
+                            <span>감각형</span>
+                        </div>
+                        <div class="btn" @click="mbti2" :class="{selected:isSelectedN}" id="mbti_btn">
+                            <span class="type" value="N">N</span>
+                            <span>직관형</span>
+                        </div>
+                        </div>
 
 
+                        <div class="buttonRow">
+                        <div class="btn" @click="mbti3" :class="{selected:isSelectedT}" id="mbti_btn">
+                            <span class="type" value="T">T</span>
+                            <span>사고형</span>
+                        </div>
+                        <div class="btn" @click="mbti3" :class="{selected:isSelectedF}" id="mbti_btn">
+                            <span class="type" value="F">F</span>
+                            <span>감정형</span>
+                        </div>
+                        </div>
 
 
+                        <div class="buttonRow">
+                        <div class="btn" @click="mbti4" :class="{selected:isSelectedJ}" id="mbti_btn">
+                            <span class="type" value="J">J</span>
+                            <span>판단형</span>
+                        </div>
+                        <div class="btn" @click="mbti4" :class="{selected:isSelectedP}" id="mbti_btn">
+                            <span class="type" value="P">P</span>
+                            <span>인식형</span>
+                        </div>
+                        </div>
 
-
-         <!-- genre -->
-        <label for="mbti">선호하는 장르 : </label>
-        <span>
-            <form class="d-flex justify-content-center" role="search">
-                <input class="form-control me-2" type="search" placeholder="선호하는 장르를 선택해주세요!" aria-label="Search" data-bs-toggle="modal" data-bs-target="#genreModal" style="width:1000px;" v-model="genre" id="genre">
-            </form>
-    
-                <!-- Modal -->
-            <div class="modal fade" id="genreModal" tabindex="-1" aria-labelledby="genreModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="genreModalLabel" style="color: black;">
-                            선택된 장르
-                        </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="selectGenreExit"></button>
-                    </div>
-                    <div class="modal-body">
-                        <span>
-                            <SelectedPreference
-                                v-for="genre in selectedPreference" :key="genre.id"
-                                :genre="genre"
-                            />
-                        </span>
-                        <br>
-                        <hr>
-                        <PreferenceButton
-                            v-for="genre in preferenceGenre" :key="genre.id"
-                            :genre="genre"
-                        />
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="selectGenreExit">Close</button>
-                        <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary" @click="saveGenre">Save changes</button>
-                    </div>
+                    </section>
                     </div>
                 </div>
-            </div><br>
-        </span>
 
-        <button class="btn btn-lg btn-primary" @click="saveProfile">프로필 저장하기</button>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="selectMBTIExit">Close</button>
+                    <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary" @click="saveMBTI">Save changes</button>
+                </div>
+                </div>
+            </div>
+        </div><br>
+    </span>
+
+
+      <!-- genre -->
+    <label for="mbti">선호하는 장르 : </label>
+    <span>
+        <form class="d-flex justify-content-center" role="search">
+            <input class="form-control me-2" type="search" placeholder="선호하는 장르를 선택해주세요!" aria-label="Search" data-bs-toggle="modal" data-bs-target="#genreModal" style="width:1000px;" v-model="genre" id="genre">
+        </form>
+
+            <!-- Modal -->
+        <div class="modal fade" id="genreModal" tabindex="-1" aria-labelledby="genreModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="genreModalLabel" style="color: black;">
+                        선택된 장르
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="selectGenreExit"></button>
+                </div>
+
+                <!-- 모달 바디 -->
+                <div class="modal-body">
+
+                  <!-- 선택된 장르 -->
+                  <p style="color:black">선택함</p>
+                  <div class="row row-cols-lg-4 g-4 m-5">
+                      <SelectedPreference
+                            v-for="genre in selectedPreference" :key="genre.id"
+                            :genre="genre"/>
+                  </div>
+
+                  <!-- 선택 안한 장르 -->
+                  <p style="color:black">선택안함</p>
+                  <div class="row row-cols-lg-4 g-4 m-5">
+                    <PreferenceButton
+                        v-for="genre in preferenceGenre" :key="genre.id"
+                        :genre="genre"/>
+                  </div>
+                </div>
+
+              <!-- 모달 푸터 : 닫기 or 저장-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="selectGenreExit">Close</button>
+                    <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary" @click="saveGenre">Save changes</button>
+                </div>
+
+              </div>
+
+            </div>
+        </div><br>
+    </span>
+
+    <button class="btn btn-lg btn-primary" @click="saveProfile">프로필 저장하기</button>
 
     </div>
   </div>
@@ -311,7 +316,13 @@ export default {
 
 <style>
 /* MBTI */
+    .create-profile{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 70vh;
 
+    }
     .container {
       display: flex;
       flex-direction: column;

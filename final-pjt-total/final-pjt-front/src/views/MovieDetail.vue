@@ -85,8 +85,6 @@ export default {
             const payload = [this.$store.state.userInfo.id, movieLikeId[0].id]
             this.$store.dispatch('likeMovieDelete',payload)
         },
-<<<<<<< HEAD
-=======
         getMovieGenre() {
             let genreList = []
             const genre_ids = JSON.parse(this.detailMovie.genre_ids)
@@ -102,7 +100,6 @@ export default {
             }
             this.genres = genreList
         }
->>>>>>> 37e36efdb368669dcf012f8660bc8c3c5b45935c
     },
     created() {
         window.scrollTo(0,0)
