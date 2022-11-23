@@ -12,7 +12,7 @@
 
 <script>
 export default {    
-    name: 'RecommandGenreItem',
+    name: 'RecommandMbtiItem',
     props: {
         movie: Object
     },

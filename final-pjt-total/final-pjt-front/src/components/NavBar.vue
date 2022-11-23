@@ -27,7 +27,7 @@
             추천
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">엠비티아이</a></li>
+            <li><router-link :to="{ name : 'RecommandMbtiView' }" class="dropdown-item">엠비티아이</router-link></li>
             <li><router-link :to="{ name : 'RecommandGenreView' }" class="dropdown-item">취향</router-link></li>
             <li><router-link :to="{ name : 'hotmovie' }" class="dropdown-item">뜨거워</router-link></li>
             <!-- <li><a class="dropdown-item" href="#">Another Algo</a></li> -->
@@ -104,11 +104,12 @@
           <input 
             class="form-control me-5" 
             type="search" 
-            placeholder="Search" 
+            placeholder="영화를 입력해주세요." 
             aria-label="Search" 
             id="titleName"
             @keyup="searchIng"
             style="width:400px;"
+            autofocus
           >
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeSearching"></button>
@@ -183,7 +184,7 @@ export default {
       searchingMovie() {
         return this.$store.state.searchingMovie
       }
-    }
+    },
 }
 </script>
 

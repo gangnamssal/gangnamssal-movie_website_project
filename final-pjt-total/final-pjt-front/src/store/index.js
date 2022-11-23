@@ -36,6 +36,26 @@ export default new Vuex.Store({
     totalUserPreferGenre: null,
     userPreferGenre: null,
     recommandGenreMovie: null,
+
+    MbtiTable: {
+      'INFP' : ['로맨스', '애니메이션', '코미디', '음악', '가족'],
+      'ENFP' : ['액션','모험', '코미디', '로맨스', '판타지'],
+      'INFJ' : ['드라마', '미스터리', 'SF', '모험'],
+      'ENFJ' : ['로맨스', '코미디', '가족', '액션', '모험', 'SF', '범죄'],
+      'INTP' : ['SF', '모험', '미스터리', '역사','다큐멘터리', '범죄'],
+      'ENTP' : ['코미디', '공포' , '스릴러', '모험', '판타지', 'SF' ,'범죄'],
+      'INTJ' : ['미스터리', '범죄', '모험', '판타지', 'SF', '전쟁'],
+      'ENTJ' : ['스릴러', '범죄', '모험', '판타지', '역사', '액션', '공포'],
+      'ISFJ' : ['다큐멘터리', '역사', '음악', '미스터리', '가족', '로맨스', '코미디'],
+      'ESFJ' : ['로맨스', '코미디', '미스터리', '범죄', '가족', '애니메이션'],
+      'ISTJ' : ['범죄', '미스터리', '다큐멘터리', '역사', '서부', '드라마'],
+      'ESTJ' : ['역사', '서부', '다큐멘터리', '범죄', '가족', '드라마'],
+      'ISFP' : ['애니메이션', '판타지', '판타지', 'SF'],
+      'ESFP' : ['음악', '애니메이션', '액션', '판타지','코미디', '로맨스', '범죄'],
+      'ISTP' : ['코미디', '애니메이션', '로맨스', '액션', '미스터리' ],
+      'ESTP' : ['액션', '범죄', '다큐멘터리', '미스터리']
+    },
+    recommandMbtiMovie: null,
   },
   getters: {
     getProfile(state) {
@@ -278,6 +298,27 @@ export default new Vuex.Store({
       })
       // console.log(recommand)
       state.recommandGenreMovie = _.sampleSize(recommand,50)
+    },
+    GET_RECOMMAND_MBTI_MOVIE(state) {
+      const mbti = state.MbtiTable[state.userProfile.mbti]
+      const mbtiGenre = []
+      for (let mbtigenre of mbti) {
+        for (let genre of state.genres) {
+          if (mbtigenre === genre.name) {
+            mbtiGenre.push(genre)
+          }
+        }
+      }
+      const recommand = []
+      state.popularMovie.forEach((movie) => {
+        for (let genre of mbtiGenre) {
+          if (movie.genre_ids.includes(genre.id)) {
+            recommand.push(movie)
+          }
+        }
+      })
+      // console.log(recommand)
+      state.recommandMbtiMovie = _.sampleSize(recommand,50)
     }
   },
   actions: {
