@@ -44,9 +44,13 @@ class ReviewLike(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     reviewLike = models.ForeignKey(Review, on_delete=models.CASCADE, default=0)
 
+class UserPreferGenre(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    prefer_genre = models.ForeignKey(Genre, on_delete=models.CASCADE, default=0)
+
 class Profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     nickname = models.CharField(max_length=15, blank=True, null=True)
     mbti = models.CharField(max_length=4, blank=True, null=True)
-    prefer_genre = models.ManyToManyField(Genre, related_name="genre_profile", blank=True, null=True)
+
     

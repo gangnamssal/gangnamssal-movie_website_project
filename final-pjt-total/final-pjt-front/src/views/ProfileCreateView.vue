@@ -12,7 +12,7 @@
         <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
         <span>
             <form class="d-flex justify-content-center" role="search">
-                <input class="form-control me-2" type="search" :placeholder="firstMbti + secondMbti + thirdMbti + forthMbti" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:1000px;">
+                <input class="form-control me-2" type="search" placeholder="MBTI를 선택해주세요!" aria-label="Search" data-bs-toggle="modal" data-bs-target="#MBTIModal" style="width:1000px;" v-model="MBTI" id="mbti">
             </form>
     
                 <!-- Modal -->
@@ -90,7 +90,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="selectMBTIExit">Close</button>
-                        <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+                        <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary" @click="saveMBTI">Save changes</button>
                     </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
         <label for="mbti">선호하는 장르 : </label>
         <span>
             <form class="d-flex justify-content-center" role="search">
-                <input class="form-control me-2" type="search" :placeholder="selectedGenreName" aria-label="Search" data-bs-toggle="modal" data-bs-target="#genreModal" style="width:1000px;">
+                <input class="form-control me-2" type="search" placeholder="선호하는 장르를 선택해주세요!" aria-label="Search" data-bs-toggle="modal" data-bs-target="#genreModal" style="width:1000px;" v-model="genre" id="genre">
             </form>
     
                 <!-- Modal -->
@@ -136,7 +136,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="selectGenreExit">Close</button>
-                        <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+                        <button type="button" onclick="alert('저장이 완료되었습니다!');" data-bs-dismiss="modal" class="btn btn-primary" @click="saveGenre">Save changes</button>
                     </div>
                     </div>
                 </div>
@@ -158,7 +158,8 @@ export default {
     data() {
         return {
             nickname: null,
-
+            MBTI: null,
+            genre:null,
             firstMbti:null,
             secondMbti:null,
             thirdMbti:null,
@@ -189,13 +190,23 @@ export default {
             const payload = {
                 nickname,
                 mbti,
-                prefer_genre,
             }
             this.$store.dispatch('saveProfile',payload)
+            this.$store.dispatch('saveUserPreferGenre',prefer_genre)
             this.isSelectedE = this.isSelectedI = this.isSelectedS = this.isSelectedN = this.isSelectedT = this.isSelectedF = this.isSelectedJ = this.isSelectedP = false
             this.firstMbti = this.secondMbti = this.thirdMbti = this.forthMbti = null
 
             this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.pk }})
+        },
+        saveMBTI() {
+          this.MBTI = this.firstMbti + this.secondMbti + this.thirdMbti + this.forthMbti
+          const inputTag = document.querySelector('#mbti')
+          inputTag.setAttribute('readonly','true')
+        },
+        saveGenre() {
+          this.genre = this.selectedGenreName
+          const inputTag = document.querySelector('#genre')
+          inputTag.setAttribute('readonly','true')
         },
         mbti1(event) {
           let check = event.target.innerText[0]
