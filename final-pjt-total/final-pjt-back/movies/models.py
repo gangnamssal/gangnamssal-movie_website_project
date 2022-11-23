@@ -15,7 +15,6 @@ class Movie(models.Model):
 
 class Genre(models.Model):
     movies = models.ManyToManyField(Movie,blank=True, null=True)
-    user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="user_genre", blank=True, null=True)
     name = models.CharField(max_length=150)
 
 
@@ -49,5 +48,5 @@ class Profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     nickname = models.CharField(max_length=15, blank=True, null=True)
     mbti = models.CharField(max_length=4, blank=True, null=True)
-    
+    prefer_genre = models.ManyToManyField(Genre, related_name="genre_profile", blank=True, null=True)
     

@@ -42,18 +42,14 @@ def genreList(request):
         serializer = GenreListSerializer(genre, many=True)
         return Response(serializer.data) 
 
-@api_view(['GET','PUT'])
+@api_view(['GET'])
 def genreDetail(request,genre_pk):
     genre = get_object_or_404(Genre, pk=genre_pk)
     if request.method == 'GET':
         # genre = Genre.objects.get(pk=genre_pk)
         serializer = GenreDetailSerializer(genre)
         return Response(serializer.data)
-    elif request.method == 'PUT':
-        serializer = GenreDetailSerializer(genre,data = request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save(genre_user=request.user)
-            return Response(serializer.data)
+
 
 @api_view(['GET', 'POST'])
 def reviewList(request, movie_pk):
@@ -71,7 +67,7 @@ def reviewList(request, movie_pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET','PUT','DELETE',])
+@api_view(['GET','PUT','DELETE'])
 def review_detail(request, review_pk):
     # review = Review.objects.get(pk=review_pk)
     review = get_object_or_404(Review, pk=review_pk)

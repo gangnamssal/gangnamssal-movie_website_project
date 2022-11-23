@@ -185,14 +185,13 @@ export default {
         saveProfile() {
             const nickname = this.nickname
             const mbti = this.firstMbti + this.secondMbti + this.thirdMbti + this.forthMbti
+            const prefer_genre = this.$store.state.selectedPreference
             const payload = {
                 nickname,
                 mbti,
+                prefer_genre,
             }
-            // console.log(perferGenre[0].id)
-            // console.log(prefer_genre)
             this.$store.dispatch('saveProfile',payload)
-            this.$store.dispatch('savePreferenceGenre', this.$store.state.selectedPreference)
             this.isSelectedE = this.isSelectedI = this.isSelectedS = this.isSelectedN = this.isSelectedT = this.isSelectedF = this.isSelectedJ = this.isSelectedP = false
             this.firstMbti = this.secondMbti = this.thirdMbti = this.forthMbti = null
 

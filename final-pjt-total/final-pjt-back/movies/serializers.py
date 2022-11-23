@@ -87,7 +87,6 @@ class GenreDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = '__all__'
-        read_only_fields = ('genre_user',)
 
 
 # 댓글 디테일

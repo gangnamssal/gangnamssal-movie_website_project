@@ -556,26 +556,30 @@ export default new Vuex.Store({
         })
     },
     saveProfile(context, payload) {
-      axios({
-        method: 'post',
-        url: `${DJANGO_URL}/movies/profile/`,
-        data: {
-          nickname: payload.nickname,
-          mbti: payload.mbti,
-        },
-        headers: {
-          Authorization: `Token ${context.state.Token}`
-        }
-      })
-        .then((res) => {
-          // console.log(res)
-          console.log('성공')
-          context.commit('SAVE_PROFILE',res.data)
+      for (let genre in payload) {
+        console.log(genre)
+        axios({
+          method: 'post',
+          url: `${DJANGO_URL}/movies/profile/`,
+          data: {
+            nickname: payload.nickname,
+            mbti: payload.mbti,
+            prefer_genre: genre.id
+          },
+          headers: {
+            Authorization: `Token ${context.state.Token}`
+          }
         })
-        .catch((error) => {
-          console.log(error)
-          // console.log(context.state.selectedPreference)
-        })
+          .then((res) => {
+            // console.log(res)
+            console.log('성공')
+            context.commit('SAVE_PROFILE',res.data)
+          })
+          .catch((error) => {
+            console.log(error)
+            // console.log(context.state.selectedPreference)
+          })
+      }
     },
     getProfileDetail(context) {
       axios({
@@ -587,22 +591,6 @@ export default new Vuex.Store({
           context.commit('GET_PROFILE_DETAIL', res.data)
         })
     },
-    savePreferenceGenre(context, payload) {
-      for (let genre of payload) {
-        axios({
-          method: 'put',
-          url: `${DJANGO_URL}/movies/genres/${genre.id}/`,
-          data: {
-            user: context.state.userInfo.pk
-          },headers: {
-            Authorization: `Token ${context.state.Token}`
-          }
-        })
-          .then((res) => {
-            console.log(res)
-          })
-      }
-    }
   },
   modules: {
   }
