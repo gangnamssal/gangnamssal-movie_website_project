@@ -12,7 +12,7 @@
 
       <div class="item">
             <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="sortButton">
+        <button type="button" class="btn btn-warning dropdown-toggle mx-3" data-bs-toggle="dropdown" aria-expanded="false" id="sortButton">
           
         </button>
         <ul class="dropdown-menu">

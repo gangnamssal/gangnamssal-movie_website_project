@@ -319,6 +319,12 @@ export default new Vuex.Store({
       })
       // console.log(recommand)
       state.recommandMbtiMovie = _.sampleSize(recommand,50)
+    },
+    SAVE_UPDATE_PROFILE(state, payload) {
+      state.userProfile = payload
+    },
+    DELETE_USER_PREFER_GENRE(state) {
+      state.userPreferGenre = null
     }
   },
   actions: {
@@ -695,6 +701,44 @@ export default new Vuex.Store({
             // console.log('성공')
             // console.log(res.data)
             context.commit('SAVE_USER_PREFER_GENRE',res.data)
+          })
+      }
+    },
+    saveUpdateProfile(context, payload) {
+      axios({
+        method: 'put',
+        url: `${DJANGO_URL}/movies/${payload.id}/profile/`,
+        data: {
+          nickname: payload.nickname,
+          mbti: payload.mbti
+        },
+        headers: {
+          Authorization: `Token ${context.state.Token}`
+        },
+      })
+        .then((res) => {
+          console.log('수정 성공')
+          context.commit('SAVE_UPDATE_PROFILE',res.data)
+        })
+    },
+    deleteUserPreferGenre(context) {
+      const genres = context.state.totalUserPreferGenre.filter((genre) => {
+        return genre.user === context.state.userInfo.id
+      })
+      for(let genre of genres) {
+        axios({
+          method: 'delete',
+          url: `${DJANGO_URL}/movies/userprefergenre/${genre.id}/`,
+          headers: {
+            Authorization: `Token ${context.state.Token}`
+          },
+        })
+          .then(() => {
+            console.log('삭제 성공')
+            context.commit('DELETE_USER_PREFER_GENRE')
+          })
+          .catch(() => {
+            console.log('삭제 실패')
           })
       }
     }

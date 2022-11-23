@@ -148,6 +148,7 @@ def reviewLike(request, review_pk):
             serializer.save(user = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+# 리뷰 좋아요 취소
 @api_view(['DELETE'])
 def reviewLikeDelete(request, reviewlike_pk):
     # review = Review.objects.get(pk=review_pk)
@@ -156,6 +157,7 @@ def reviewLikeDelete(request, reviewlike_pk):
         reviewlike.delete()
         return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
 
+# 전체 유저 프로필
 @api_view(['GET', 'POST'])
 def allUserProfileInfo(request):
     if request.method == 'GET':
@@ -168,6 +170,7 @@ def allUserProfileInfo(request):
             serializer.save(user = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+# 유저 프로필 디테일
 @api_view(['PUT', 'GET'])
 def userProfileInfo(request, user_id):
     profile = Profile.objects.get(pk = user_id)
@@ -188,6 +191,7 @@ def totalUserPreferGenre(request):
         serializer = UserPreferGenreSerializer(userprefergenre, many=True)
         return Response(serializer.data)
 
+# 유저 선호 장르 생성
 @api_view(['POST'])
 def userprefergenre(request, genre_id):
     genre = get_object_or_404(Genre, pk=genre_id)
@@ -198,10 +202,11 @@ def userprefergenre(request, genre_id):
             serializer.save(user = request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+# 유저 선호 장르 삭제
 @api_view(['DELETE'])
 def userprefergenreDelete(request, userprefergenre_pk):
     # review = Review.objects.get(pk=review_pk)
-    prefer_genre = get_object_or_404(ReviewLike, pk=userprefergenre_pk)
+    prefer_genre = get_object_or_404(UserPreferGenre, pk=userprefergenre_pk)
     if request.method == 'DELETE':
         prefer_genre.delete()
         return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
