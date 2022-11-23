@@ -170,7 +170,7 @@ export default {
           alert('프로필을 생성해야합니다.!')
           this.$router.push({ name : 'ProfileCreateView' })
         } else {
-          this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.pk }})
+          this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.id }})
         }
       }
     },

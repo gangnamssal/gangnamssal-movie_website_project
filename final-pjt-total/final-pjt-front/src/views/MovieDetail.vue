@@ -75,9 +75,9 @@ export default {
         },
         likeMovieDelete() {
             const movieLikeId = this.detailMovie.movielike_set.filter((like) => {
-                return like.user === this.$store.state.userInfo.pk
+                return like.user === this.$store.state.userInfo.id
             })
-            const payload = [this.$store.state.userInfo.pk, movieLikeId[0].id]
+            const payload = [this.$store.state.userInfo.id, movieLikeId[0].id]
             this.$store.dispatch('likeMovieDelete',payload)
         }
     },
@@ -94,7 +94,7 @@ export default {
         },
         userIsLiked() {
             return this.$store.state.detailMovie.movielike_set.some((like) => {
-                return like.user === this.$store.state.userInfo.pk
+                return like.user === this.$store.state.userInfo.id
             })
         },
     },

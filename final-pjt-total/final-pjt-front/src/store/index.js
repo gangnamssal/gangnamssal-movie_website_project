@@ -60,7 +60,7 @@ export default new Vuex.Store({
   getters: {
     getProfile(state) {
       return state.totalUserProfile.filter((user) => {
-        return user.user === state.userInfo.pk
+        return user.user === state.userInfo.id
       })
     },
   },
@@ -272,7 +272,7 @@ export default new Vuex.Store({
     },
     GET_PREFER_GENRE(state) {
       const preferGenre = state.totalUserPreferGenre.filter((genre) => {
-        return genre.user === state.userInfo.pk
+        return genre.user === state.userInfo.id
       })
       const genre = []
       for (let i of preferGenre) {
@@ -666,7 +666,7 @@ export default new Vuex.Store({
     getProfileDetail(context) {
       axios({
         method: 'get',
-        url: `${DJANGO_URL}/movies/${context.state.userInfo.pk}/profile/`
+        url: `${DJANGO_URL}/movies/${context.state.userInfo.id}/profile/`
       })
         .then((res) => {
           // console.log(res)
