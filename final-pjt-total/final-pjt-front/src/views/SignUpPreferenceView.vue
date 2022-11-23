@@ -10,17 +10,14 @@
     </span>
     <br>
     <hr>
-
     <PreferenceButton
       v-for="genre in preferenceGenre" :key="genre.id"
       :genre="genre"
     />
-
     <br>
     <br>
     <br>
     <br>
-    
     <button>저장하기</button>
   </div>
 </template>

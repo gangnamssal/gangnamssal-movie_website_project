@@ -4,7 +4,6 @@
       <div  class="row row-cols-2">
         <div id="profileText" class="col">
           <h1>프로필</h1>
-          <!-- <button @click="goToWrite">작성하러 가기</button> -->
           <button @click="goToUpdateProfile">수정하러 가기</button>
           <p>닉네임 : {{ profile?.nickname }}</p>
           <p>mbti : {{ profile?.mbti }}</p>
@@ -23,7 +22,6 @@
         </div>
       </div>
       </div>
-
   </div>
 </template>
 

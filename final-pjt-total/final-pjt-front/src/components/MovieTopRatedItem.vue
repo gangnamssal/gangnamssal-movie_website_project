@@ -1,5 +1,4 @@
 <template>
-
   <div @click="getDetail(movie?.id)">
     <div class="col">
       <div class="h-100">

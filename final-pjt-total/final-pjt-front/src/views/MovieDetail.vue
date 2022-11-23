@@ -1,5 +1,4 @@
 <template>
-
     <div class="detail-container">
             <div class="item">
                 <!-- 영화 포스터 -->
@@ -10,14 +9,14 @@
                 <!-- 영화 좋아요 버튼 -->
                 <button class="like" @click="likeMovie" v-if="userIsLiked===false" style="color:white;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
                 </button>
 
                 <!-- 영화 좋아요 취소 버튼 -->
                 <button class="like" @click="likeMovieDelete" v-else-if="userIsLiked===true" style="color:red;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
                 </button>
                 
@@ -36,21 +35,15 @@
                     :movie-title="[detailMovie?.title,$route.params.movie_id]"
                     />
                 </div>
-                
                 <!-- 리뷰리스트 -->
-                
                 <h4 class="mx-2">Reviews</h4>    
                 <div class="reviews">
-                <ReviewsList v-for="review in detailMovie?.review_set" :key="review.id"
-                    :review="review"
-                />
-
+                    <ReviewsList v-for="review in detailMovie?.review_set" :key="review.id"
+                        :review="review"
+                    />
                 </div>
             </div>
-
-
     </div>
-        
 </template>
 
 <script>
@@ -89,12 +82,9 @@ export default {
             let genreList = []
             const genre_ids = JSON.parse(this.detailMovie.genre_ids)
             for (let genre of genre_ids) {
-                // console.log(this.$store.state.genres)
                 for (let genres of this.$store.state.genres) {
                     if (genre === genres.id) {
                         genreList.push(genres.name)
-                        // console.log(genres,this.$store.genres[genres].id)
-
                     }
                 }
             }
@@ -142,10 +132,6 @@ export default {
     font-family:  'IBMPlexSansKR-Regular';
 }
 .review-form{
-    /* background: linear-gradient(to bottom, #200122, #6f0000); */
-    /* background: linear-gradient(to bottom, #000000, #434343);  */
-    /* background: linear-gradient(to bottom, #0a0a0a, #aaaaa9);  */
-
     padding: 20px;
     margin-bottom: 50px;
 }

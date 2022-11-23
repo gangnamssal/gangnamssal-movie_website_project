@@ -1,7 +1,6 @@
 <template>
   <div class="create-profile text-center">
     <div class="form-signin w-100 m-auto">
-              
     <h1>프로필 작성 페이지</h1>
 
     <label for="nickname">닉네임 : </label>

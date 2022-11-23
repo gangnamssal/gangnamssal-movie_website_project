@@ -38,7 +38,7 @@ export default {
     text-transform: uppercase;
     font-weight: 500;
     font-style: normal;
-    font-size: 0.625rem;
+    font-size: 1rem;
     letter-spacing: 0.3em;
     color: rgba(223,190,106,0.7);
     border-radius: 0;

@@ -10,7 +10,6 @@
 <script>
 import UpcommingMovieItem from '../components/UpcommingMovieItem'
 
-
 export default {
   name: 'MovieUpComming',
   components: { 
