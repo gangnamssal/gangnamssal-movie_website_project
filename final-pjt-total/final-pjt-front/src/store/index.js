@@ -92,7 +92,9 @@ export default new Vuex.Store({
     },
     LOGOUT(state){
       state.Token = null
-      state.userProfile = null
+      // state.userProfile = null
+      state.selectedPreference = []
+      state.preferenceGenre = state.genres
     },
     GET_USER_INFO(state,userData) {
       state.userInfo = userData
