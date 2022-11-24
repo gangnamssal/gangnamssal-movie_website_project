@@ -76,6 +76,8 @@
       </div>
     </div>
   </div>
+
+  
 </template>
 
 <script>
@@ -104,6 +106,17 @@ export default {
         this.titleName = null
         inputTag.value = null
       },
+<<<<<<< HEAD
+      goToProfile() {
+        if (this.$store.state.userProfile === null) {
+          alert('프로필을 생성해야합니다.!')
+          this.$router.push({ name : 'ProfileCreateView' })
+        } else {
+          this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.id }})
+        }
+      },
+=======
+>>>>>>> 0ee49ef697a5033e888c6998bdda0da5356dab69
     },
     computed: {
       token() {
