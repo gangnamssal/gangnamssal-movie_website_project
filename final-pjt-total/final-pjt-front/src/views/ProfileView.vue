@@ -1,28 +1,26 @@
 <template>
-  <div id="profile">
-    <div class="container">
-      <div  class="row row-cols-2">
-        <div id="profileText" class="col">
-          <h1>프로필</h1>
-          <button @click="goToUpdateProfile">수정하러 가기</button>
-          <p>닉네임 : {{ profile?.nickname }}</p>
-          <p>mbti : {{ profile?.mbti }}</p>
-          <p>선호 장르 : </p>
-          <span v-for="genre in userPreferGenre" :key="genre.id">
-            {{ genre }}
-          </span>
-        </div>
-
-        <div id="profiledata" class="col">
-          <p>내가 좋아한 영화 : </p>
-          <span v-for="movie in favoriteMovie" :key="movie.id">{{ movie.title }} <br></span>
-          <hr>
-          <p>내가 쓴 리뷰 : </p>
-          <span v-for="review in myReviewList" :key="review.id">{{ review.title }}</span>
-        </div>
-      </div>
-      </div>
-    
+  <div>
+    <h1 style="text-align:center; margin:30px">프로필</h1>
+    <button @click="goToUpdateProfile">수정하러 가기</button>
+    <div class="profile">
+  
+          <div id="profileText" class="item">
+            <p>닉네임 : {{ profile?.nickname }}</p>
+            <p>mbti : {{ profile?.mbti }}</p>
+            <p>선호 장르 : </p>
+            <span v-for="genre in userPreferGenre" :key="genre.id">
+              {{ genre }}
+            </span>
+          </div>
+  
+          <div id="profiledata" class="item">
+            <p>내가 좋아한 영화 : </p>
+            <span v-for="movie in favoriteMovie" :key="movie.id">{{ movie.title }} <br></span>
+ 
+            <p>내가 쓴 리뷰 : </p>
+            <span v-for="review in myReviewList" :key="review.id">{{ review.title }}</span>
+          </div>  
+    </div>
   </div>
 </template>
 
@@ -88,23 +86,8 @@ export default {
 </script>
 
 <style>
-#profile{
-  /* background-size:cover ; */
-  /* background-position: center; */
-  height: 100vh;
-  width: 100%;
-  /* height: 100%; */
-  /* margin: 0; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  content: "";
-}
 
-#profile::after{
+.profile::after{
   background: url('../assets/back.jpg');
   background-size:cover ;
   background-position: center;
@@ -123,11 +106,26 @@ export default {
   opacity: 0.5;
   content: "";
 }
-
+.profile{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 80px;
+    margin: 3rem 10rem ;
+}
 #profileText{
   display: flex;
   flex-direction: column;
-  /* text-align: center; */
+  align-items: center;
+  margin-top: 100px;
+  border: solid 2px ;
+  padding: 1rem;  
+  font-size: larger;
+  /* height: 70vh; */
+}
+#profiledata{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   align-items: center;
   margin-top: 100px;
   border: solid 2px ;

@@ -51,7 +51,7 @@
   </div>
   <h1 class="box-office">Box Office 순위</h1>
   <!-- 인기 영화 리스트 -->
-  <div class="mt-5 pt-5">
+  <div style="margin:70px">
     <carousel-3d :height="1000" :width="700" >
         <slide v-for="(movie, i) in APIpopularMovie" :index="i" :key="movie.id" style="background:black; text-align:center">
             <h1>{{ i+1 }} 위</h1>
@@ -97,7 +97,7 @@ export default {
 <style>
 .box-office{
   text-align: center;
-  padding-top: 100px;
+  margin-top: 80px;
   color: red;
 }
 </style>

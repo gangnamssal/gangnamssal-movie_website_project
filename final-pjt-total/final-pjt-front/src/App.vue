@@ -6,11 +6,9 @@
       <router-view/>
     </transition>
 
-    <div class="container">
-      <footer class="py-3 my-4 ">
-      <p class="text-center text-muted">MADE BY 2022 SSAFY 태헌, 아진</p>
-      </footer>
-    </div>
+    <footer class="fixed-bottom">
+      MADE BY 2022 SSAFY 태헌, 아진
+    </footer>
   </div>
 </template>
 
@@ -66,6 +64,13 @@ export default {
 
 <style>
 
+footer{
+  text-align: center;
+  color: gray;
+  margin-top: 100px;
+  padding: 5px;
+  background-color: black;
+}
 
 img:hover{
   display: inline-block;
