@@ -64,7 +64,7 @@ export default {
             alert("프로필을 수정해주세요!");
             this.$router.push({ name: "ProfileUpdateView" });
           } else {
-            this.$router.push({ name: "RecommandMbtiView" });
+            this.$router.push({ name: "RecommandGenreView" });
           }
         }
       }
