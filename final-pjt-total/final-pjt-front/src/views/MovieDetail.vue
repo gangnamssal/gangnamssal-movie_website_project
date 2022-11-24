@@ -204,4 +204,9 @@ export default {
   margin: 10px;
   padding: 10px;
 }
+
+.like{
+  background: none;
+  border: 0;
+}
 </style>

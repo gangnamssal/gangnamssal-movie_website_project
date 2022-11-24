@@ -2,7 +2,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import _ from 'lodash'
-import createPersistedState  from 'vuex-persistedstate'
+import createPersistedState from 'vuex-persistedstate'
 import router from '../router'
 
 Vue.use(Vuex)
@@ -13,7 +13,7 @@ const LANGUAGE = 'ko-kr'
 const REGION = 'KR'
 
 export default new Vuex.Store({
-  plugins:[
+  plugins: [
     createPersistedState()
   ],
   state: {
@@ -26,11 +26,11 @@ export default new Vuex.Store({
     topRatedMovie: [],
     upcommingMovie: null,
     nowPlayingMovie: null,
-    Token:null,
+    Token: null,
     userInfo: null,
     detailMovie: null,
     searchingMovie: null,
-    HoTMovie:null,
+    HoTMovie: null,
     totalUserProfile: null,
     userProfile: null,
     totalUserPreferGenre: null,
@@ -38,22 +38,22 @@ export default new Vuex.Store({
     recommandGenreMovie: null,
 
     MbtiTable: {
-      'INFP' : ['로맨스', '애니메이션', '코미디', '음악', '가족'],
-      'ENFP' : ['액션','모험', '코미디', '로맨스', '판타지'],
-      'INFJ' : ['드라마', '미스터리', 'SF', '모험'],
-      'ENFJ' : ['로맨스', '코미디', '가족', '액션', '모험', 'SF', '범죄'],
-      'INTP' : ['SF', '모험', '미스터리', '역사','다큐멘터리', '범죄'],
-      'ENTP' : ['코미디', '공포' , '스릴러', '모험', '판타지', 'SF' ,'범죄'],
-      'INTJ' : ['미스터리', '범죄', '모험', '판타지', 'SF', '전쟁'],
-      'ENTJ' : ['스릴러', '범죄', '모험', '판타지', '역사', '액션', '공포'],
-      'ISFJ' : ['다큐멘터리', '역사', '음악', '미스터리', '가족', '로맨스', '코미디'],
-      'ESFJ' : ['로맨스', '코미디', '미스터리', '범죄', '가족', '애니메이션'],
-      'ISTJ' : ['범죄', '미스터리', '다큐멘터리', '역사', '서부', '드라마'],
-      'ESTJ' : ['역사', '서부', '다큐멘터리', '범죄', '가족', '드라마'],
-      'ISFP' : ['애니메이션', '판타지', '판타지', 'SF'],
-      'ESFP' : ['음악', '애니메이션', '액션', '판타지','코미디', '로맨스', '범죄'],
-      'ISTP' : ['코미디', '애니메이션', '로맨스', '액션', '미스터리' ],
-      'ESTP' : ['액션', '범죄', '다큐멘터리', '미스터리']
+      'INFP': ['로맨스', '애니메이션', '코미디', '음악', '가족'],
+      'ENFP': ['액션', '모험', '코미디', '로맨스', '판타지'],
+      'INFJ': ['드라마', '미스터리', 'SF', '모험'],
+      'ENFJ': ['로맨스', '코미디', '가족', '액션', '모험', 'SF', '범죄'],
+      'INTP': ['SF', '모험', '미스터리', '역사', '다큐멘터리', '범죄'],
+      'ENTP': ['코미디', '공포', '스릴러', '모험', '판타지', 'SF', '범죄'],
+      'INTJ': ['미스터리', '범죄', '모험', '판타지', 'SF', '전쟁'],
+      'ENTJ': ['스릴러', '범죄', '모험', '판타지', '역사', '액션', '공포'],
+      'ISFJ': ['다큐멘터리', '역사', '음악', '미스터리', '가족', '로맨스', '코미디'],
+      'ESFJ': ['로맨스', '코미디', '미스터리', '범죄', '가족', '애니메이션'],
+      'ISTJ': ['범죄', '미스터리', '다큐멘터리', '역사', '서부', '드라마'],
+      'ESTJ': ['역사', '서부', '다큐멘터리', '범죄', '가족', '드라마'],
+      'ISFP': ['애니메이션', '판타지', '판타지', 'SF'],
+      'ESFP': ['음악', '애니메이션', '액션', '판타지', '코미디', '로맨스', '범죄'],
+      'ISTP': ['코미디', '애니메이션', '로맨스', '액션', '미스터리'],
+      'ESTP': ['액션', '범죄', '다큐멘터리', '미스터리']
     },
     recommandMbtiMovie: null,
   },
@@ -65,32 +65,41 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    // DB에서 가져온 영화 데이터
     GET_POPULAR_MOVIE(state, movie) {
       state.popularMovie = movie
     },
+    // TMDB에 요청한 인기 영화
     API_POPULAR_MOVIE(state, movie) {
       state.APIpopularMovie = movie
     },
-    GET_GENRES(state, genres){
+    // TMDB에 요청한 장르
+    GET_GENRES(state, genres) {
       state.genres = genres
     },
-    GET_GENRE_MOVIE(state,movie){
+    // 장르별 영화 정보
+    GET_GENRE_MOVIE(state, movie) {
       state.genrepopularMovie = movie
     },
+    // TMDB에 요청한 명작
     GET_TOP_RATED_MOVIE(state, movies) {
       state.topRatedMovie.push(...movies)
     },
+    // TMDB에 요청한 개봉예정작
     GET_UP_COMMING_MOVIE(state, movie) {
       state.upcommingMovie = movie
     },
-    GET_NOW_PLAYING_MOVIE(state,movie) {
+    // TMDB에 요청한 현재 상영작
+    GET_NOW_PLAYING_MOVIE(state, movie) {
       state.nowPlayingMovie = movie
     },
-    SAVE_TOKEN(state,key){
+    // 사용자 토큰
+    SAVE_TOKEN(state, key) {
       state.Token = key
       router.push({ name: 'movie' })
     },
-    LOGOUT(state){
+    // 로그아웃
+    LOGOUT(state) {
       state.Token = null
       state.userProfile = null
       state.selectedPreference = []
@@ -99,22 +108,27 @@ export default new Vuex.Store({
       state.recommandMbtiMovie = null
       state.recommandGenreMovie = null
     },
-    GET_USER_INFO(state,userData) {
+    // 유저 정보
+    GET_USER_INFO(state, userData) {
       state.userInfo = userData
     },
+    // 영화 상세 정보
     GET_DETAIL_MOVIE(state, movie) {
       state.detailMovie = movie
       let sortedMovie = _.chain(state.detailMovie.review_set).sortBy('reviewlike_count').reverse()
       state.detailMovie.review_set = [...sortedMovie]
     },
+    // 리뷰 작성
     ADD_REVIEW(state, review) {
       state.detailMovie.review_set.push(review)
     },
+    // 리뷰 삭제
     DELETE_REVIEW(state, id) {
       state.detailMovie.review_set = state.detailMovie.review_set.filter((review) => {
         return review.id !== id
       })
     },
+    // 리뷰 수정
     SAVE_UPDATE_REVIEW(state, review) {
       state.detailMovie.review_set = state.detailMovie.review_set.map((item) => {
         if (item.id === review.id) {
@@ -123,14 +137,16 @@ export default new Vuex.Store({
         return item
       })
     },
+    // 댓글 작성
     ADD_COMMENT(state, comment) {
       state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
-        if(review.id === comment.review) {
+        if (review.id === comment.review) {
           review.comment_set.push(comment)
         }
         return review
       })
     },
+    // 댓글 작성
     DELETE_COMMENT(state, payload) {
       state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
         if (review.id === payload[0]) {
@@ -141,11 +157,12 @@ export default new Vuex.Store({
         return review
       })
     },
+    // 수정 댓글 저장
     ADD_UPDATE_COMMENT(state, payload) {
       state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
         if (review.id === payload.review) {
           review.comment_set = review.comment_set.map((comment) => {
-            if(comment.id === payload.id) {
+            if (comment.id === payload.id) {
               comment = payload
             }
             return comment
@@ -154,40 +171,42 @@ export default new Vuex.Store({
         return review
       })
     },
+    // 영화 좋아요
     LIKE_MOVIE(state, likeMovie) {
       state.detailMovie.movielike_set.push(likeMovie)
     },
+    // 영화 좋아요 취소
     LIKE_MOVIE_DELETE(state, userId) {
       state.detailMovie.movielike_set = state.detailMovie.movielike_set.filter((like) => {
-        return !(like.user === userId) 
+        return !(like.user === userId)
       })
     },
-
-
-// 리뷰 좋아요, 취소
+    // 리뷰 좋아요
     LIKE_REVIEW(state, likeReview) {
-      state.detailMovie.review_set = state.detailMovie.review_set.map((review)=>{
-        if (review.id === likeReview.reviewLike){
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if (review.id === likeReview.reviewLike) {
           review.reviewlike_set.push(likeReview)
         }
         return review
       })
     },
+    // 리뷰 좋아요 취소
     LIKE_REVIEW_DELETE(state, payload) {
-      state.detailMovie.review_set = state.detailMovie.review_set.map((review)=>{
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
         if (review.id === payload[2]) {
-          review.reviewlike_set = review.reviewlike_set.filter((like)=>{
-            return !(like.user === payload[0]) 
+          review.reviewlike_set = review.reviewlike_set.filter((like) => {
+            return !(like.user === payload[0])
           })
         }
         return review
       })
     },
+    // 영화 검색
     SEARCH_ING(state, titleName) {
       const arr = []
       for (let movie of state.popularMovie) {
         for (let word of movie.title) {
-          if (word === titleName || titleName===movie.title || movie.title.includes(titleName)) {
+          if (word === titleName || titleName === movie.title || movie.title.includes(titleName)) {
             arr.push(movie)
             break
           }
@@ -195,26 +214,32 @@ export default new Vuex.Store({
       }
       state.searchingMovie = arr
     },
+    // 검색 끝
     CLOSE_SEARCHING(state) {
       state.searchingMovie = null
     },
+    // 이름순 정렬
     NAME_SORT(state) {
       let sortedMovie = _.chain(state.genrepopularMovie).sortBy('title')
       state.genrepopularMovie = [...sortedMovie]
     },
+    // 인기순 정렬
     POPULARITY_SORT(state) {
       let sortedMovie = _.chain(state.genrepopularMovie).sortBy('popularity').reverse()
       state.genrepopularMovie = [...sortedMovie]
     },
+    // 개봉일순 정렬
     RELEASED_SORT(state) {
       let sortedMovie = _.chain(state.genrepopularMovie).sortBy('release_date').reverse()
       state.genrepopularMovie = [...sortedMovie]
     },
+    // 선택 안 한 장르
     GET_PREFERENCE_GENRE(state) {
       if (state.preferenceGenre === null) {
         state.preferenceGenre = state.genres
       }
     },
+    // 선택한 장르
     SELECTED_PREFERENCE_GENRE(state, seletedGenre) {
       state.preferenceGenre = state.preferenceGenre.filter((genre) => {
         return !(genre.id === seletedGenre.id)
@@ -223,8 +248,9 @@ export default new Vuex.Store({
         id: seletedGenre.id,
         name: seletedGenre.name
       }
-      state.selectedPreference.push(data) 
+      state.selectedPreference.push(data)
     },
+    // 장르 선택 취소
     DELETE_SELECTED_GENRE(state, seletedGenre) {
       state.selectedPreference = state.selectedPreference.filter((genre) => {
         return !(genre.id === seletedGenre.id)
@@ -233,14 +259,15 @@ export default new Vuex.Store({
         id: seletedGenre.id,
         name: seletedGenre.name
       }
-      state.preferenceGenre.push(data) 
+      state.preferenceGenre.push(data)
     },
-    GETHOTMOVIE(state){
+    // 좋아요 많이 받은 영화
+    GETHOTMOVIE(state) {
       let sortedMovie = _.chain(state.popularMovie).sortBy('movielike_count').reverse()
       let cnt = 0
       const arr = []
       for (let movie of sortedMovie) {
-        if (cnt >=20) {
+        if (cnt >= 20) {
           break
         } else {
           arr.push(movie)
@@ -249,32 +276,39 @@ export default new Vuex.Store({
       }
       state.HoTMovie = arr
     },
+    // 프로필 정보
     GET_PROFILE(state, userData) {
       state.totalUserProfile = userData
     },
+    // 장르 선택 취소
     SELECT_GENRE_EXIT(state) {
       state.selectedPreference = []
       state.preferenceGenre = state.genres
     },
+    // 프로필 정보 저장
     SAVE_PROFILE(state, payload) {
       state.userProfile = payload
       state.selectedPreference = []
       state.preferenceGenre = state.genres
     },
-    GET_PROFILE_DETAIL(state,payload) {
+    // 프로필 상세 정보
+    GET_PROFILE_DETAIL(state, payload) {
       state.userProfile = payload
     },
+    // 선택 장르 저장
     SAVE_USER_PREFER_GENRE(state, payload) {
-      state.genres = state.genres.map((genre)=>{
-        if (genre.id === payload.prefer_genre){
+      state.genres = state.genres.map((genre) => {
+        if (genre.id === payload.prefer_genre) {
           genre.userprefergenre_set.push(payload)
         }
         return genre
       })
     },
+    // 저장된 선택 장르
     GET_USER_PREFER_GENRE(state, payload) {
       state.totalUserPreferGenre = payload
     },
+    // 저장된 선택 안 한 장르
     GET_PREFER_GENRE(state) {
       const preferGenre = state.totalUserPreferGenre.filter((genre) => {
         return genre.user === state.userInfo.id
@@ -289,6 +323,7 @@ export default new Vuex.Store({
       }
       state.userPreferGenre = genre
     },
+    // 취향 추천 영화
     GET_RECOMMAND_GENRE_MOVIE(state) {
       const myGenreId = state.genres.filter((genre) => {
         return state.userPreferGenre.includes(genre.name)
@@ -302,8 +337,9 @@ export default new Vuex.Store({
         }
       })
       // console.log(recommand)
-      state.recommandGenreMovie = _.sampleSize(recommand,50)
+      state.recommandGenreMovie = _.sampleSize(recommand, 50)
     },
+    // MBTI 추천 영화
     GET_RECOMMAND_MBTI_MOVIE(state) {
       const mbti = state.MbtiTable[state.userProfile.mbti]
       const mbtiGenre = []
@@ -323,11 +359,13 @@ export default new Vuex.Store({
         }
       })
       // console.log(recommand)
-      state.recommandMbtiMovie = _.sampleSize(recommand,50)
+      state.recommandMbtiMovie = _.sampleSize(recommand, 50)
     },
+    // 프로필 정보 저장
     SAVE_UPDATE_PROFILE(state, payload) {
       state.userProfile = payload
     },
+    // 선택 장르 삭제
     DELETE_USER_PREFER_GENRE(state) {
       state.userPreferGenre = null
     }
@@ -339,7 +377,7 @@ export default new Vuex.Store({
         url: `${DJANGO_URL}/movies/`,
       })
         .then((res) => {
-          context.commit('GET_POPULAR_MOVIE',res.data)
+          context.commit('GET_POPULAR_MOVIE', res.data)
         })
     },
     APIPopularMovie(context) {
@@ -354,7 +392,7 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          context.commit('API_POPULAR_MOVIE',res.data.results)
+          context.commit('API_POPULAR_MOVIE', res.data.results)
         })
     },
     getGenres(context) {
@@ -370,11 +408,11 @@ export default new Vuex.Store({
       const newMovies = context.state.popularMovie.filter((movie) => {
         return movie.genre_ids.includes(payload)
       })
-      context.commit('GET_GENRE_MOVIE',newMovies)
+      context.commit('GET_GENRE_MOVIE', newMovies)
     },
     getTopRatedMovie(context) {
       context.state.topRatedMovie = []
-      for (let i=1; i<4; i++) {
+      for (let i = 1; i < 4; i++) {
         axios({
           method: 'get',
           url: 'https://api.themoviedb.org/3/movie/top_rated',
@@ -401,8 +439,8 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          const sortedData = _.sortBy(res.data.results,'release_date')
-          context.commit('GET_UP_COMMING_MOVIE',sortedData)
+          const sortedData = _.sortBy(res.data.results, 'release_date')
+          context.commit('GET_UP_COMMING_MOVIE', sortedData)
         })
     },
     getNowPlayingMovie(context) {
@@ -417,45 +455,45 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          const sortedData = _.sortBy(res.data.results,'release_date').reverse()
-          context.commit('GET_NOW_PLAYING_MOVIE',sortedData)
+          const sortedData = _.sortBy(res.data.results, 'release_date').reverse()
+          context.commit('GET_NOW_PLAYING_MOVIE', sortedData)
         })
     },
-    addSignUp(context,payload){
+    addSignUp(context, payload) {
       axios({
-        method : 'post',
+        method: 'post',
         url: `${DJANGO_URL}/movies/signup/`,
         data: {
           username: payload.username,
-          password1 : payload.password1,
-          password2 : payload.password2,
+          password1: payload.password1,
+          password2: payload.password2,
         }
       })
-      .then((res)=>{
-        console.log('가입 성공')
-        context.commit('SAVE_TOKEN',res.data.key)
-      })
+        .then((res) => {
+          console.log('가입 성공')
+          context.commit('SAVE_TOKEN', res.data.key)
+        })
 
     },
-    getLogIn(context,payload){
+    getLogIn(context, payload) {
       axios({
         method: 'post',
-        url:`${DJANGO_URL}/movies/auth/login/`,
+        url: `${DJANGO_URL}/movies/auth/login/`,
         data: {
           username: payload.username,
           password: payload.password
         }
       })
-      .then((res)=>{
-        console.log('로그인 성공')
-        context.commit('SAVE_TOKEN',res.data.key)
-        router.push({ name: 'movie' })
-      })
+        .then((res) => {
+          console.log('로그인 성공')
+          context.commit('SAVE_TOKEN', res.data.key)
+          router.push({ name: 'movie' })
+        })
     },
-    changePassword(context,payload){
+    changePassword(context, payload) {
       axios({
         method: 'post',
-        url:`${DJANGO_URL}/movies/auth/password/change/`,
+        url: `${DJANGO_URL}/movies/auth/password/change/`,
         data: {
           new_password1: payload.new_password1,
           new_password2: payload.new_password2,
@@ -464,24 +502,24 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.Token}`
         }
       })
-      .then(()=>{
-        console.log('변경 성공')
-        router.push({ name: 'movie' })
-      })
+        .then(() => {
+          console.log('변경 성공')
+          router.push({ name: 'movie' })
+        })
     },
-    logOut(context){
+    logOut(context) {
       axios({
-        method:'post',
-        url:`${DJANGO_URL}/movies/auth/logout/`,
+        method: 'post',
+        url: `${DJANGO_URL}/movies/auth/logout/`,
         headers: {
           Authorization: `Token ${context.state.Token}`
         }
       })
-      .then(()=>{
-        console.log('로그아웃 성공')
-        router.push({ name: 'movie' })
-        context.commit('LOGOUT')
-      })
+        .then(() => {
+          console.log('로그아웃 성공')
+          router.push({ name: 'movie' })
+          context.commit('LOGOUT')
+        })
     },
     getUserInfo(context) {
       axios({
@@ -492,7 +530,7 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          context.commit('GET_USER_INFO',res.data)
+          context.commit('GET_USER_INFO', res.data)
         })
     },
     getDetailMovie(context, movie_id) {
@@ -501,7 +539,7 @@ export default new Vuex.Store({
         url: `${DJANGO_URL}/movies/${movie_id}/`
       })
         .then((res) => {
-          context.commit('GET_DETAIL_MOVIE',res.data)
+          context.commit('GET_DETAIL_MOVIE', res.data)
         })
     },
     addReview(context, payload) {
@@ -519,7 +557,7 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          context.commit('ADD_REVIEW',res.data)
+          context.commit('ADD_REVIEW', res.data)
         })
     },
     deleteReview(context, id) {
@@ -531,7 +569,7 @@ export default new Vuex.Store({
         }
       })
         .then(() => {
-          context.commit('DELETE_REVIEW',id)
+          context.commit('DELETE_REVIEW', id)
         })
     },
     saveUpdateReview(context, payload) {
@@ -542,14 +580,14 @@ export default new Vuex.Store({
           title: payload.title,
           content: payload.content,
           rank: payload.rank,
-          movie_title : payload.movie_title
+          movie_title: payload.movie_title
         },
         headers: {
           Authorization: `Token ${context.state.Token}`
         }
       })
         .then((res) => {
-          context.commit('SAVE_UPDATE_REVIEW',res.data)
+          context.commit('SAVE_UPDATE_REVIEW', res.data)
         })
     },
     addComment(context, payload) {
@@ -557,7 +595,7 @@ export default new Vuex.Store({
         method: 'post',
         url: `${DJANGO_URL}/movies/reviews/${payload[0]}/comments/`,
         data: {
-          content:payload[1]
+          content: payload[1]
         },
         headers: {
           Authorization: `Token ${context.state.Token}`
@@ -576,7 +614,7 @@ export default new Vuex.Store({
         }
       })
         .then(() => {
-          context.commit('DELETE_COMMENT',payload)
+          context.commit('DELETE_COMMENT', payload)
         })
     },
     addUpdateComment(context, payload) {
@@ -666,7 +704,7 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res)
           // console.log('성공')
-          context.commit('SAVE_PROFILE',res.data)
+          context.commit('SAVE_PROFILE', res.data)
         })
         .catch((error) => {
           console.log(error)
@@ -690,7 +728,7 @@ export default new Vuex.Store({
         url: `${DJANGO_URL}/movies/userprefergenre/`,
       })
         .then((res) => {
-          context.commit('GET_USER_PREFER_GENRE',res.data)
+          context.commit('GET_USER_PREFER_GENRE', res.data)
         })
     },
     saveUserPreferGenre(context, genres) {
@@ -705,7 +743,7 @@ export default new Vuex.Store({
           .then((res) => {
             // console.log('성공')
             // console.log(res.data)
-            context.commit('SAVE_USER_PREFER_GENRE',res.data)
+            context.commit('SAVE_USER_PREFER_GENRE', res.data)
           })
       }
     },
@@ -723,14 +761,14 @@ export default new Vuex.Store({
       })
         .then((res) => {
           console.log('수정 성공')
-          context.commit('SAVE_UPDATE_PROFILE',res.data)
+          context.commit('SAVE_UPDATE_PROFILE', res.data)
         })
     },
     deleteUserPreferGenre(context) {
       const genres = context.state.totalUserPreferGenre.filter((genre) => {
         return genre.user === context.state.userInfo.id
       })
-      for(let genre of genres) {
+      for (let genre of genres) {
         axios({
           method: 'delete',
           url: `${DJANGO_URL}/movies/userprefergenre/${genre.id}/`,

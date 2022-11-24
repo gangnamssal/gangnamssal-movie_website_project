@@ -2,11 +2,9 @@
   <div class="create-profile text-center">
     <div class="form-signin w-100 m-auto">
       <h1>프로필 작성 페이지</h1>
-      <!-- 닉네임 작성 폼 -->
       <label for="nickname">닉네임 : </label>
       <input type="text" id="nickname" v-model="nickname" class="m-3" /><br />
       <!-- MBTI -->
-      <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
       <span>
         <form class="d-flex justify-content-center" role="search">
           <label for="mbti" class="m-3">MBTI(선택 사항) : </label>
@@ -22,7 +20,6 @@
             id="mbti"
           />
         </form>
-
         <!-- MBTI Modal -->
         <div
           class="modal fade"

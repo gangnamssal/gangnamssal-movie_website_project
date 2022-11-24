@@ -5,7 +5,6 @@
       <label for="nickname">닉네임 : </label>
       <input type="text" id="nickname" v-model="nickname" class="m-3" /><br />
       <!-- MBTI -->
-      <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
       <span>
         <form class="d-flex justify-content-center" role="search">
           <label for="mbti" class="m-3">MBTI(선택 사항) : </label>
@@ -31,6 +30,7 @@
         >
           <div class="modal-dialog">
             <div class="modal-content">
+              <!-- 모달헤더 -->
               <div class="modal-header">
                 <h1
                   class="modal-title fs-5"
@@ -47,11 +47,13 @@
                   @click="selectMBTIExit"
                 ></button>
               </div>
+              <!-- 모달 바디 -->
               <div class="modal-body">
                 <div id="mbti">
                   <div class="container">
                     <section class="buttonArea">
                       <div class="buttonRow">
+                        <!-- 외향형 -->
                         <div
                           class="btn"
                           @click="mbti1"
@@ -61,6 +63,7 @@
                           <span class="type" value="E">E</span>
                           <span>외향형</span>
                         </div>
+                        <!-- 내향형 -->
                         <div
                           class="btn"
                           @click="mbti1"
@@ -71,7 +74,9 @@
                           <span>내향형</span>
                         </div>
                       </div>
+
                       <div class="buttonRow">
+                        <!-- 감각형 -->
                         <div
                           class="btn"
                           @click="mbti2"
@@ -81,6 +86,7 @@
                           <span class="type" value="S">S</span>
                           <span>감각형</span>
                         </div>
+                        <!-- 직관형 -->
                         <div
                           class="btn"
                           @click="mbti2"
@@ -91,7 +97,9 @@
                           <span>직관형</span>
                         </div>
                       </div>
+
                       <div class="buttonRow">
+                        <!-- 사고형 -->
                         <div
                           class="btn"
                           @click="mbti3"
@@ -101,6 +109,7 @@
                           <span class="type" value="T">T</span>
                           <span>사고형</span>
                         </div>
+                        <!-- 감정형 -->
                         <div
                           class="btn"
                           @click="mbti3"
@@ -111,7 +120,9 @@
                           <span>감정형</span>
                         </div>
                       </div>
+
                       <div class="buttonRow">
+                        <!-- 판단형 -->
                         <div
                           class="btn"
                           @click="mbti4"
@@ -121,6 +132,7 @@
                           <span class="type" value="J">J</span>
                           <span>판단형</span>
                         </div>
+                        <!-- 인식형 -->
                         <div
                           class="btn"
                           @click="mbti4"
@@ -161,9 +173,10 @@
         <br />
       </span>
 
-      <!-- genre -->
+      <!-- 취향 -->
       <label for="mbti">선호하는 장르 : </label>
       <span>
+        <!-- 취향 장르 선택 폼 -->
         <form class="d-flex justify-content-center" role="search">
           <input
             class="form-control me-2"
@@ -177,7 +190,7 @@
             id="genre"
           />
         </form>
-        <!-- 장르 선택 Modal -->
+        <!-- 취향 선택 Modal -->
         <div
           class="modal fade"
           id="genreModal"
@@ -187,7 +200,7 @@
         >
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
-              <!-- 장르 모달 헤더 -->
+              <!-- 취향 모달 헤더 -->
               <div class="modal-header">
                 <h1
                   class="modal-title fs-5"
@@ -250,7 +263,6 @@
         </div>
       </span>
 
-      <!-- <button class="btn btn-lg btn-primary" @click="saveUpdateProfile">프로필 저장하기</button> -->
       <button
         style="--content: '저장하기!'"
         @click="saveUpdateProfile"
@@ -291,6 +303,7 @@ export default {
     };
   },
   methods: {
+    // 취향 모달 창 나가기
     selectGenreExit() {
       if (
         !confirm(
@@ -302,6 +315,7 @@ export default {
         this.$store.commit("SELECT_GENRE_EXIT");
       }
     },
+    // 프로필 정보 저장
     saveUpdateProfile() {
       const nickname = this.nickname;
       const mbti =
@@ -326,18 +340,20 @@ export default {
         this.isSelectedP =
           false;
       this.firstMbti = this.secondMbti = this.thirdMbti = this.forthMbti = null;
-
+      // 저장 후 프로필페이지로 보내기
       this.$router.push({
         name: "profile",
         params: { user_id: this.$store.state.userInfo.id },
       });
     },
+    // MBTI정보 저장
     saveMBTI() {
       this.MBTI =
         this.firstMbti + this.secondMbti + this.thirdMbti + this.forthMbti;
       const inputTag = document.querySelector("#mbti");
       inputTag.setAttribute("readonly", "true");
     },
+    // 취향 저장
     saveGenre() {
       this.genre = this.selectedGenreName;
       const inputTag = document.querySelector("#genre");
@@ -407,6 +423,7 @@ export default {
       }
       this.forthMbti = check;
     },
+    // MBTI 모달 나가기
     selectMBTIExit() {
       if (
         !confirm(
@@ -431,6 +448,7 @@ export default {
             null;
       }
     },
+    // 저장된 취향 정보 가져오기
     getPreferenceGenre() {
       this.$store.commit("GET_PREFERENCE_GENRE");
     },
@@ -440,12 +458,15 @@ export default {
     SelectedPreference,
   },
   computed: {
+    // 선택 안 된 장르 정보
     preferenceGenre() {
       return this.$store.state.preferenceGenre;
     },
+    // 선택 된 장르 정보
     selectedPreference() {
       return this.$store.state.selectedPreference;
     },
+    // 저장된 취향 정보
     selectedGenreName() {
       const data = [];
       this.selectedPreference.forEach((genre) => {
