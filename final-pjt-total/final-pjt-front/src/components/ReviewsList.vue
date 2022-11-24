@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import  Modal  from 'bootstrap'
+import  { Modal }  from 'bootstrap'
 import CommentList from '@/components/CommentList.vue'
 
 export default {

@@ -35,6 +35,7 @@ export default {
             password,
         }
         this.$store.dispatch('getLogIn',payload)
+        this.$store.dispatch('getProfileDetail')
       }
     }
 
