@@ -100,6 +100,24 @@ const routes = [
     component: () => import('@/views/RecommandGenreView')
   },
   {
+    // 영화 링크 페이지
+    path: '/MovieLinkPage',
+    name: 'MovieLinkPageView',
+    component: () => import('@/views/MovieLinkPageView')
+  },
+  {
+    // 추천 링크 페이지
+    path: '/RecommandLinkPage',
+    name: 'RecommandLinkPageView',
+    component: () => import('@/views/RecommandLinkPageView')
+  },
+  {
+    // 인증 링크 페이지
+    path: '/AuthLinkPage',
+    name: 'AuthLinkPageView',
+    component: () => import('@/views/AuthLinkPageView')
+  },
+  {
     // 404 page
     path: '/404',
     name: '404NotFound',

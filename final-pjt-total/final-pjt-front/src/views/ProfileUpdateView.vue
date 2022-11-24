@@ -122,8 +122,12 @@
           </div>
         </div>
       </span>
+<<<<<<< HEAD
 
       <br>  
+=======
+  
+>>>>>>> 0ee49ef697a5033e888c6998bdda0da5356dab69
       <!-- <button class="btn btn-lg btn-primary" @click="saveUpdateProfile">프로필 저장하기</button> -->
       <button style="--content: '저장하기!';" @click="saveUpdateProfile" class="profile-save-button">
         <div class="left"></div>
@@ -132,7 +136,11 @@
     </button>
   
       </div>
+<<<<<<< HEAD
     </div>
+=======
+  </div>
+>>>>>>> 0ee49ef697a5033e888c6998bdda0da5356dab69
 </template>
   
   <script>
@@ -185,7 +193,7 @@
               this.isSelectedE = this.isSelectedI = this.isSelectedS = this.isSelectedN = this.isSelectedT = this.isSelectedF = this.isSelectedJ = this.isSelectedP = false
               this.firstMbti = this.secondMbti = this.thirdMbti = this.forthMbti = null
   
-              this.$router.push({ name : 'movie' })
+              this.$router.push({ name : 'profile', params: {user_id : this.$store.state.userInfo.id }})
           },
           saveMBTI() {
             this.MBTI = this.firstMbti + this.secondMbti + this.thirdMbti + this.forthMbti

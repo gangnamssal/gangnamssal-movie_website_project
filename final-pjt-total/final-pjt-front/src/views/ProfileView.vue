@@ -8,11 +8,11 @@
           <p>닉네임 : {{ profile?.nickname }}</p>
           <p>mbti : {{ profile?.mbti }}</p>
           <p>선호 장르 : </p>
-          <p v-for="genre in userPreferGenre" :key="genre.id">
+          <span v-for="genre in userPreferGenre" :key="genre.id">
             {{ genre }}
-          </p>
+          </span>
         </div>
-    
+
         <div id="profiledata" class="col">
           <p>내가 좋아한 영화 : </p>
           <span v-for="movie in favoriteMovie" :key="movie.id">{{ movie.title }} <br></span>
@@ -22,6 +22,7 @@
         </div>
       </div>
       </div>
+    
   </div>
 </template>
 
