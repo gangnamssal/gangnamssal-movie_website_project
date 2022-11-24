@@ -43,6 +43,8 @@
                     />
                 </div>
             </div>
+
+            
     </div>
 </template>
 
@@ -95,9 +97,6 @@ export default {
         window.scrollTo(0,0)
         this.getDetailMovie(this.movie_id)
         this.getMovieGenre()
-    },
-    destroyed() {
-        window.scrollTo(0,0)
     },
     computed: {
         detailMovie() {

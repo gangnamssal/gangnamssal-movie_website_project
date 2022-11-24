@@ -104,6 +104,8 @@
       </div>
     </div>
   </div>
+
+  
 </template>
 
 <script>
@@ -141,7 +143,7 @@ export default {
         } else {
           this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.id }})
         }
-      }
+      },
     },
     computed: {
       token() {

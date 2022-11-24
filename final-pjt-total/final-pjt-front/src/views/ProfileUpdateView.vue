@@ -122,11 +122,8 @@
           </div>
         </div>
       </span>
-<<<<<<< HEAD
-      <!-- 프로필 저장 버튼 -->
-      <button class="btn btn-lg btn-primary" @click="saveUpdateProfile">프로필 저장하기</button>
-=======
-  
+
+      <br>  
       <!-- <button class="btn btn-lg btn-primary" @click="saveUpdateProfile">프로필 저장하기</button> -->
       <button style="--content: '저장하기!';" @click="saveUpdateProfile" class="profile-save-button">
         <div class="left"></div>
@@ -135,9 +132,7 @@
     </button>
   
       </div>
->>>>>>> 3d1a95e4dc059cfd21f74fb338628db892ffe6cc
     </div>
-  </div>
 </template>
   
   <script>
