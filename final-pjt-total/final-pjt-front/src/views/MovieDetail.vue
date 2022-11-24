@@ -144,6 +144,7 @@ export default {
     },
   },
   created() {
+    // 디테일 페이지로 들어갔을 때 스크롤을 최상단으로 초기화하는 함수!
     window.scrollTo(0, 0); // 태헌님 이건뭔가요?
     this.getDetailMovie(this.movie_id);
     this.getMovieGenre();
@@ -162,6 +163,7 @@ export default {
   },
 
   // 태헌님 여기도 주석 달아주세요
+  // 디테일에 params가 변화되었을 때 변화된 값을 인지해 데이터도 같이 바뀌게 해주는 부분
   watch: {
     $route(to, from) {
       if (to.params !== from.params) {

@@ -117,10 +117,6 @@ export default {
     };
   },
   methods: {
-    // 태헌님 이거 필요없나요
-    goToWrite() {
-      this.$router.push({ name: "ProfileCreateView" });
-    },
     // 프로필 정보 가져오기
     getProfile() {
       this.$store.dispatch("getProfileDetail");
@@ -150,6 +146,7 @@ export default {
       this.$router.push({ name: "ProfileUpdateView" });
     },
     // 태헌님 이거 주석 달아 주세요
+    // 프로필 페이지로 들어갈 때 페이지를 한번 새로고침하게 해주는 함수!
     refreshAll() {
       if (self.name != "reload") {
         self.name = "reload";
