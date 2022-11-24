@@ -90,10 +90,14 @@ export default {
       // buttonTag.innerText = "최신 개봉일순으로";
     },
     // 장르 선택
-    // genreButtonClick() {
-    //   const buttonTag = document.querySelector(".rad-label");
-    //   buttonTag.innerText = null;
-    // },
+    genreButtonClick() {
+      // 라디오 버튼 초기화
+      const obj = document.getElementsByClassName('rad-input');
+
+        for (let i = 0; i < obj.length; i++) {
+            obj[i].checked = false;
+        }
+    },
   },
   computed: {
     genres() {
