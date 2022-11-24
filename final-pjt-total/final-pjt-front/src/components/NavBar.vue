@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
       <div class="container-fluid">
         
         <!-- 홈으로 -->
@@ -11,7 +11,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          
+
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <!-- 영화버튼 -->
             <li class="nav-item">
@@ -120,7 +120,6 @@ export default {
 </script>
 
 <style>
-
 </style>
 
 
