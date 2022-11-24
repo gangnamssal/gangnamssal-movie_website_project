@@ -1,92 +1,255 @@
-# final-pjt
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+# 과정
+## 2022/11/16
+1. 기획서 작성
+2. 모델 만들기
+3. How do I get data from API to database?
+   1. api data 받아올 py파일 만들기
+   2. pip install requests
+   3. import requests
+   4. 가져온 데이터에서 우리가 쓸 데이터만 뽑아서 새로운 json파일 생성 성공
 ```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/ggnsall/final-pjt.git
-git branch -M master
-git push -uf origin master
+import requests
+import json
+
+API_KEY = '42584510a0a43e09681fec8c6f36f050'
+language = 'ko-kr'
+page = '1'
+url = 'https://api.themoviedb.org/3/movie/popular'
+
+def get_data(url, PAGE):
+    API_URL = f'{url}?api_key={API_KEY}&language={language}&page={PAGE}'
+    return API_URL
+
+
+new_list = []
+for i in range(1,5):
+    get_data(url, i)
+    response = requests.get(get_data(url,i)).json()
+
+    for data in response['results']:
+        new_data = {'model' : 'movies.movie'}
+        new_data['pk'] = data['id']
+        new_data['fields'] = {}
+        new_data['fields']['title'] = data['title']
+        new_data['fields']['release_date'] = data['release_date']
+        new_data['fields']['adult'] = data['adult']
+        new_data['fields']['overview'] = data['overview']
+        new_data['fields']['popularity'] = data['popularity']
+        new_data['fields']['poster_path'] = data['poster_path']
+        # new_data['fields']['innermovie_id'] = data['id']
+        new_list.append(new_data)
+        print(new_data)
+
+with open('movies/fixtures/movies.json', 'a', encoding='UTF-8') as f:
+    json.dump(new_list, f, ensure_ascii=False, indent=2)
+```
+   5. 데이터베이스에 저장하고 싶은데 방법을 찾는중
+   - 가져온 데이터에서 우리가 쓸 데이터만 뽑아서 새로운 json파일 생성까지는 성공 했으나, 그것을 데이터 베이스에 넣는 과정에서 애를 먹는 중
+   - 오류1
+  > app_label, model_name = app_label.split('.')
+
+  > ValueError: not enough values to unpack (expected 2, got 1)
+
+- 해결:  ` new_data = {'model' : 'movies.movie'}   `
+- 'movie'를 'movies.movie' 로 고침
+- 오류2
+> NULL constraint failed: movies_movie.release_date
+
+- 해결: ` new_data['fields']['release_date'] = data['release_date']`
+- :을 =로 고침
+- migrate를 잘하자
+- 오류3
+> 데이터 베이스에 id가 1번부터 순서대로 저장된다.
+- 해결: ` new_data['pk'] = data['id']`
+
+4. serializer
+- 오류1
+> .accepted_renderer not set on Response
+
+해결: 데코레이터를 달아준다 *@도 까먹지 않기*
+
+5. app삭제
+- 영화 상세정보에 리뷰를 달고 싶어서 커뮤니티 앱을 지우기로 했다. 리뷰를 커뮤니티 앱이 아닌, 무비 앱에서 모델을 생성 하려고 앱 지우는 방법을 구글링 했다.
+> 1. 단계-필요한 코드 및 파일을 안전한 위치로 이동
+> 2. 단계-모든 가져 오기 및 파일 경로 수정
+> 3. 단계-models.py를 비우고 마이그레이션하기
+> 4. 단계-settings.py파일 수정
+> 5. 단계-앱 폴더 삭제
+
+6. view.py
+
+7. user
+---
+## 2022/11/17
+
+1. 댓글 views.py , serializer 수정
+- 오류1 : 댓글 수정 된 결과는 나왔으나, 전체 조회하면 저장이 되지 않음
+- 해결 : comment = Review.objects.get(pk=comment_pk) 리뷰에서 가져오느라 코멘트에 리뷰 정보가 없었다. 리뷰가 아니라 코멘트에서 가져오는 걸로 수정.
+```
+@api_view(['GET','PUT','DELETE',])
+def comment_detail(request,comment_pk):
+# comment = Review.objects.get(pk=comment_pk) 리뷰에서 가져오느라 코멘트에 리뷰 정보가 없었다.
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.method == 'GET':
+        serializer = CommentDetailSerializer(comment)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = CommentDetailSerializer(instance=comment,data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+    elif request.method == 'DELETE':
+        comment.delete()
+        return Response('{성공}',status=status.HTTP_204_NO_CONTENT)
 ```
 
-## Integrate with your tools
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/ggnsall/final-pjt/-/settings/integrations)
+- 오류2 : 리뷰와 댓글 작성에 작성자가 안뜸
+- 해결: blank=True, null=True 를 넣으니 해결
+```
+user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+```
 
-## Collaborate with your team
+2. vue 메인메뉴 작성
+- navbar 영화 리스트 : TMDB API 이용, 인기영화, 명작, 개봉예정, 상영중영화 리스트 뽑아오기
+  - 홈화면: 인기영화 20개 보여줌
+  - 장르별 영화 리스트 구현
+  - 명작: 60개 영화
+  - 현재 상영작: 날짜 순으로 정렬
+  - 개봉예정작 : 개봉일 빠른 순으로 정렬 
+  - lodash 설치, import
+```
+getUpCommingMovie(context) {
+      axios({
+        method: 'get',
+        url: 'https://api.themoviedb.org/3/movie/upcoming',
+        params: {
+          api_key: API_KEY,
+          language: LANGUAGE,
+          page: '1',
+          region: REGION
+        }
+      })
+        .then((res) => {
+          // console.log(res)
+          // console.log(context)
+          // 개봉일 기준으로 
+          const sortedData = _.sortBy(res.data.results,'release_date')
+          context.commit('GET_UP_COMMING_MOVIE',sortedData)
+        })
+    }
+```
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
+3. 인증 관련 기능 완성
 
-Use the built-in continuous integration in GitLab.
+4. dj-auth-rest에서 제공한 유저 정보를 사용해 유저 프로필을 구성하였다.
+    라우터를 활용한 movie detail을 구현하였다.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+5. 데이터베이스에서 영화 상세 정보를 불러옴
 
-***
+6. 영화 상세 정보에서 영화에 달린 리뷰와 리뷰에 달린 댓글 불러옴
 
-# Editing this README
+7. 리뷰 작성 폼만들고 저장
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+8. 리뷰 삭제 및 수정
+    - 삭제 : 리뷰의 id를 받아 Django 서버의 주소로 axios 요청을 보낸 후 데이터베이스에서 삭제하였다.
+    - 수정 : 삭제와 같이 리뷰의 id를 받아 Django 서버 주소로 axios 요청을 보낸 뒤 변경된 내용을 데이터베이스에 저장하였다.
+    - 두 개를 구현하는 과정에서 원래 데이터가 실시간으로 변하지 않았는데 이것을 vuex의 state 값을 바꿔주면서 실시간으로 변하도록 하였다.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+---
+## 2022/11/18
 
-## Name
-Choose a self-explaining name for your project.
+1. 댓글 작성, 삭제
+- 댓글을 작성하고 삭제하는 요청을 axios로 보낸다.
+- 새로고침을 하지 않아도 작성, 삭제가 되도록 mutations에서 작성해줌
+```
+  // 댓글 작성
+    ADD_COMMENT(state, comment) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if(review.id === comment.review) {
+          review.comment_set.push(comment)
+        }
+        return review
+      })
+    },
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+  // 댓글 삭제
+    DELETE_COMMENT(state, payload) {
+      state.detailMovie.review_set = state.detailMovie.review_set.map((review) => {
+        if (review.id === payload[0]) {
+          review.comment_set = review.comment_set.filter((comment) => {
+            return !(comment.id === payload[1])
+          })
+        }
+        return review
+      })
+    }
+```
+- 댓글 작성자만 댓글을 삭제 할 수 있도록 한다.
+2. 댓글 수정
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+3. 각 영화마다 디테일을 보면 상세정보와 리뷰, 댓글 기능이 보이도록 구현
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+4. 영화 좋아요 기능 구현
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+5. 리뷰 좋아요 기능 구현
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+---
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## 2022/11/19
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+1. 리뷰 좋아요 순으로 정렬해서 보여주기
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+   - 리뷰들의 리스트를 좋아요를 많이 받은 순으로 위쪽에 보일 수 있게 구현했습니다.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+   - ```
+     let a = _.chain(state.detailMovie.review_set).sortBy('reviewlike_count').reverse()
+           state.detailMovie.review_set = [...a]
+     ```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+   - 좋아요를 누르고 새로고침을 통해 다시 리뷰 페이즈로 오면 좋아요 순으로 정렬되어 보여준다.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+2. 검색 기능 추가
 
-## License
-For open source projects, say how it is licensed.
+   - 네비게이션바에 검색 기능을 추가하여 제목을 입력할 때마다 영화가 보이도록 하였다.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+   - ```
+     SEARCH_ING(state, titleName) {
+           const arr = []
+           for (let movie of state.popularMovie) {
+             for (let word of movie.title) {
+               if (word === titleName || titleName===movie.title || movie.title.includes(titleName)) {
+                 arr.push(movie)
+                 break
+               }
+             }
+           }
+           state.searchingMovie = arr
+     ```
+
+     - 조건문을 활용하여 검색을 실시하였다.
+
+## 2022/11/21
+1. vabvar 수정
+
+2. 장르별로 인기순, 이름순, 리뷰 많은 순으로 정렬 할 수 있게 구현
+
+3. 유저의 취향대로 추천해 주기 위해 유저가 좋아하는 장르를 선택하게 하고 저장. 미완성.
+
+4. 영화 좋아요 많이 받은 순으로 알고리즘 추천
+
+5. 유저 프로필 작성중...
+
+
+## 2022/11/22
+1. 프로필 페이지 완성(mbti, 취향)
+
+2. 홈, 검색, 상세정보, 계정 디자인 수정
+
+
+## 2022/11/23
+2조(김태헌, 권아진)
+mbti 추천알고리즘 구현,
+취향 추천 알고리즘 구현,
+프로필 페이지 수정
