@@ -19,7 +19,7 @@
                 <h1 class="modal-title fs-5" id="MBTIModalLabel" style="color: black;">
                   MBTI
                 </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="selectMBTIExit"></button>
               </div>
               <div class="modal-body">
                 <div id="mbti">

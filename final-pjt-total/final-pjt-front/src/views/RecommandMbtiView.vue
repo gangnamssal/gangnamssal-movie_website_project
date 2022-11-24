@@ -24,7 +24,7 @@ export default {
         recommandMbtiMovie(){
             return this.$store.state.recommandMbtiMovie
         }
-    }
+    },
 }
 </script>
 

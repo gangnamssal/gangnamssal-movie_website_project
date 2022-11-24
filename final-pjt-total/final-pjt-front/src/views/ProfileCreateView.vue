@@ -22,7 +22,7 @@
                     <h1 class="modal-title fs-5" id="MBTIModalLabel" style="color: black;">
                         MBTI
                     </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="selectMBTIExit"></button>
                 </div>
                 <div class="modal-body">
                     
@@ -213,7 +213,7 @@ export default {
             this.isSelectedE = this.isSelectedI = this.isSelectedS = this.isSelectedN = this.isSelectedT = this.isSelectedF = this.isSelectedJ = this.isSelectedP = false
             this.firstMbti = this.secondMbti = this.thirdMbti = this.forthMbti = null
 
-            this.$router.push({ name : 'movie' })
+            this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.id } })
         },
         saveMBTI() {
           this.MBTI = this.firstMbti + this.secondMbti + this.thirdMbti + this.forthMbti

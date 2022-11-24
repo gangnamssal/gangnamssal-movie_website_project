@@ -95,6 +95,9 @@ export default new Vuex.Store({
       state.userProfile = null
       state.selectedPreference = []
       state.preferenceGenre = state.genres
+      state.userPreferGenre = null
+      state.recommandMbtiMovie = null
+      state.recommandGenreMovie = null
     },
     GET_USER_INFO(state,userData) {
       state.userInfo = userData

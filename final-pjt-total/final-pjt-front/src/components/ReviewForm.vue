@@ -49,7 +49,11 @@ export default {
                 rank,
                 movie_id
             }
-            if (title === null || content === null || rank === null) {
+            if (this.$store.state.Token === null) {
+                alert('로그인을 해주세요!')
+                this.$router.push({ name : 'login' })
+            }
+            else if (title === null || content === null || rank === null) {
                 alert('내용을 전부 작성해주세요!')
             } else {
                 this.$store.dispatch('addReview',payload)

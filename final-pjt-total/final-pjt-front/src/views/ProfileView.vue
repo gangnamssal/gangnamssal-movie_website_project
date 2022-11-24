@@ -59,7 +59,7 @@
 			<div class="profile-bio">
 
 				<!-- <p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p> -->
-        <p><span v-for="genre in userPreferGenre" :key="genre.id">{{ genre }} <span style="color:gray;">/</span></span></p>
+        <p><span v-for="genre in userPreferGenre" :key="genre.id" @click="goToprofileGenre" style="cursor: pointer;">{{ genre }} <span style="color:gray;">/</span></span></p>
 
 			</div>
 
@@ -80,15 +80,13 @@
 				<img :src="`https://www.themoviedb.org/t/p/original/${movie.poster_path}`" class="gallery-image" :alt="movie.title">
 				<div class="gallery-item-info">
 					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+						<li class="gallery-item-likes"><span>좋아요: </span>{{ movie.movielike_count }}</li><br>
+						<li class="gallery-item-comments"><span>리뷰: </span>{{ movie.review_set.length }}</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<!-- End of gallery -->
-
-		<div class="loader"></div>
 
 	</div>
 	<!-- End of container -->
@@ -143,6 +141,9 @@ export default {
       getDetail(movie_id) {
         this.$router.push({ name: 'detail', params: { movie_id } })
       },
+      goToprofileGenre() {
+        this.$router.push({ name : 'genre' })
+      }
     },
     computed: {
       profile() {
@@ -353,17 +354,6 @@ img {
     object-fit: cover;
 }
 
-/* Loader */
-
-.loader {
-    width: 5rem;
-    height: 5rem;
-    border: 0.6rem solid #999;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    margin: 0 auto;
-    animation: loader 500ms linear infinite;
-}
 
 /* Media Query */
 

@@ -71,14 +71,24 @@ export default {
             this.$store.dispatch("getDetailMovie", movie_id);
         },
         likeMovie() {
-            this.$store.dispatch('likeMovie', this.detailMovie.id)
+            if (this.$store.state.Token === null) {
+                alert('로그인을 해주세요!')
+                this.$router.push({ name : 'login' })
+            } else {
+                this.$store.dispatch('likeMovie', this.detailMovie.id)
+            }
         },
         likeMovieDelete() {
-            const movieLikeId = this.detailMovie.movielike_set.filter((like) => {
-                return like.user === this.$store.state.userInfo.id
-            })
-            const payload = [this.$store.state.userInfo.id, movieLikeId[0].id]
-            this.$store.dispatch('likeMovieDelete',payload)
+            if (this.$store.state.Token === null) {
+                alert('로그인을 해주세요!')
+                this.$router.push({ name : 'login' })
+            } else {
+                const movieLikeId = this.detailMovie.movielike_set.filter((like) => {
+                    return like.user === this.$store.state.userInfo.id
+                })
+                const payload = [this.$store.state.userInfo.id, movieLikeId[0].id]
+                this.$store.dispatch('likeMovieDelete',payload)
+            }
         },
         getMovieGenre() {
             let genreList = []

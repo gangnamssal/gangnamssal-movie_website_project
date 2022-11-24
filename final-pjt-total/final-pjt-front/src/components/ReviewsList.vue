@@ -160,21 +160,33 @@ export default {
             this.isUpdate = !this.isUpdate
         },
         addComment() {
-            const payload = [this.review.id, this.comment]
-            this.$store.dispatch('addComment',payload)
-            this.comment = null
+            if (this.$store.state.Token === null) {
+                alert('로그인을 해주세요!')
+            } else {
+                const payload = [this.review.id, this.comment]
+                this.$store.dispatch('addComment',payload)
+                this.comment = null
+            }
         },
         likeReview() {
-            this.$store.dispatch('likeReview', this.review.id)
-            console.log(this.IsLiked)
+            if (this.$store.state.Token === null) {
+                alert('로그인을 해주세요!')
+            } else {
+                this.$store.dispatch('likeReview', this.review.id)
+                console.log(this.IsLiked)
+            }
         },
         likeReviewDelete() {
-            const reviewLikeId = this.review.reviewlike_set.filter((review) => {
-                return review.user === this.$store.state.userInfo.id
-            })
-            const payload = [this.$store.state.userInfo.id, reviewLikeId[0].id, reviewLikeId[0].reviewLike]
-            this.$store.dispatch('likeReviewDelete',payload)
-            console.log(this.IsLiked)
+            if (this.$store.state.Token === null) {
+                alert('로그인을 해주세요!')
+            } else {
+                const reviewLikeId = this.review.reviewlike_set.filter((review) => {
+                    return review.user === this.$store.state.userInfo.id
+                })
+                const payload = [this.$store.state.userInfo.id, reviewLikeId[0].id, reviewLikeId[0].reviewLike]
+                this.$store.dispatch('likeReviewDelete',payload)
+                console.log(this.IsLiked)
+            }
         },
     },
     computed: {

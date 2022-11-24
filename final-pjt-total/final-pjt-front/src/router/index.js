@@ -11,7 +11,7 @@ const routes = [
     component: () => import('@/views/HomeView')
   },
   {
-    // 인기 영화
+    // 장르별 영화
     path: '/movie/genre',
     name: 'genre',
     component: () => import('@/views/MovieGenre')
@@ -91,7 +91,7 @@ const routes = [
     // MBTI 추천 페이지
     path: '/RecommandMbti',
     name: 'RecommandMbtiView',
-    component: () => import('@/views/RecommandMbtiView')
+    component: () => import('@/views/RecommandMbtiView'),
   },
   {
     // 취향 추천 페이지
