@@ -1,15 +1,15 @@
 <template>
   <div class="create-profile text-center">
     <div class="form-signin w-100 m-auto">
-      <h1>프로필 작성 페이지</h1>
+      <h1>프로필 생성</h1>
       <!-- 닉네임 작성 폼 -->
-      <label for="nickname">닉네임 : </label>
+      <label for="nickname">별명 : </label>
       <input type="text" id="nickname" v-model="nickname" class="m-3" /><br />
       <!-- MBTI -->
       <!-- <input type="text" id="mbti" v-model="mbti"><br> -->
       <span>
         <form class="d-flex justify-content-center" role="search">
-          <label for="mbti" class="m-3">MBTI(선택 사항) : </label>
+          <label for="mbti" class="m-3">엠비티아이 : </label>
           <input
             class="form-control me-2"
             type="search"
@@ -40,7 +40,7 @@
                   id="MBTIModalLabel"
                   style="color: black"
                 >
-                  MBTI
+                엠비티아이
                 </h1>
                 <button
                   type="button"
@@ -158,7 +158,7 @@
                   data-bs-dismiss="modal"
                   @click="selectMBTIExit"
                 >
-                  Close
+                  닫기
                 </button>
                 <button
                   type="button"
@@ -167,7 +167,7 @@
                   class="btn btn-primary"
                   @click="saveMBTI"
                 >
-                  Save changes
+                  저장
                 </button>
               </div>
             </div>
@@ -210,7 +210,6 @@
                   id="genreModalLabel"
                   style="color: black"
                 >
-                  선택된 장르
                 </h1>
                 <!-- 닫기버튼 -->
                 <button
@@ -253,7 +252,7 @@
                   data-bs-dismiss="modal"
                   @click="selectGenreExit"
                 >
-                  Close
+                  닫기
                 </button>
                 <button
                   type="button"
@@ -262,7 +261,7 @@
                   class="btn btn-primary"
                   @click="saveGenre"
                 >
-                  Save changes
+                  저장
                 </button>
               </div>
             </div>

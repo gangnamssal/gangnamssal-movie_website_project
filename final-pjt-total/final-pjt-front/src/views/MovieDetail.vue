@@ -14,7 +14,7 @@
         class="like"
         @click="likeMovie"
         v-if="userIsLiked === false"
-        style="color: white"
+        style="color: white;"
       >
         <!-- 하트 아이콘 -->
         <svg
