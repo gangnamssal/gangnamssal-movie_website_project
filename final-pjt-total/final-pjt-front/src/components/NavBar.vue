@@ -11,57 +11,29 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
             <!-- 영화버튼 -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                영화
-              </a>
-              <!-- 영화버튼 메뉴 -->
-              <ul class="dropdown-menu">
-                <li><router-link :to="{ name : 'genre'}" class="dropdown-item" >장르</router-link></li>
-                <li><router-link :to="{ name : 'toprated'}" class="dropdown-item" >명작</router-link></li>
-                <li><router-link :to="{ name : 'nowplaying'}" class="dropdown-item" >현재 상영</router-link></li>
-                <li><router-link :to="{ name : 'upcomming'}" class="dropdown-item" >다가오는 상영</router-link></li>
-              </ul>
+            <li class="nav-item">
+              <router-link :to="{ name : 'MovieLinkPageView'}" class="nav-link">영화</router-link>
             </li>
 
             <!-- 추천 버튼 -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                추천
-              </a>
-              <!-- 추천 메뉴 버튼 -->
-              <ul class="dropdown-menu">
-                <li><router-link :to="{ name : 'RecommandMbtiView' }" class="dropdown-item">엠비티아이</router-link></li>
-                <li><router-link :to="{ name : 'RecommandGenreView' }" class="dropdown-item">취향</router-link></li>
-                <li><router-link :to="{ name : 'hotmovie' }" class="dropdown-item">뜨거워</router-link></li>
-              </ul>
+            <li class="nav-item">
+              <router-link :to="{ name : 'RecommandLinkPageView'}" class="nav-link">추천</router-link>
             </li>
 
             <!-- 계정 버튼 -->
             <!-- 로그인 되지 않은 사용자 -->
-            <li class="nav-item dropdown" v-if="!token">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                안녕하시오 나그네!
-              </a>
-              <ul class="dropdown-menu" >
-                <li><router-link :to="{ name : 'signup' }" class="dropdown-item">장부 등록(회원가입)</router-link></li>
-                <li><router-link :to="{ name : 'login' }" class="dropdown-item">로그인</router-link></li>
-              </ul>
-            </li>
+              <li class="nav-item"  v-if="!token">
+                <router-link :to="{ name : 'AuthLinkPageView'}" class="nav-link">안녕하시오 나그네!</router-link>
+              </li>
+
+
             <!-- 로그인 된 사용자 -->
-            <li class="nav-item dropdown"  v-else-if="token">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                안녕하시오 {{ userInfo?.username }}!
-              </a>
-              <ul class="dropdown-menu" >
-                <li><a class="dropdown-item" @click.prevent="goToProfile" href="#">내 장부</a></li>
-                <li><a class="dropdown-item" @click="logOut" href="#">내 흔적 지우기</a></li>
-                <li><router-link :to="{ name : 'changepassword' }" class="dropdown-item">비밀번호 변경</router-link></li>
-              </ul>
-            </li>
+            <li class="nav-item"  v-else-if="token">
+                <router-link :to="{ name : 'AuthLinkPageView'}" class="nav-link">안녕하시오 {{ userInfo?.username }}!</router-link>
+              </li>
           </ul>
 
           <!-- 영화검색 -->
@@ -120,9 +92,7 @@ export default {
       }
     },
     methods:{
-      logOut(){
-        this.$store.dispatch('logOut')
-      },
+   
       searchIng() {
         const inputTag = document.querySelector('#titleName')
         this.titleName = inputTag.value
@@ -134,14 +104,6 @@ export default {
         this.titleName = null
         inputTag.value = null
       },
-      goToProfile() {
-        if (this.$store.state.userProfile === null) {
-          alert('프로필을 생성해야합니다.!')
-          this.$router.push({ name : 'ProfileCreateView' })
-        } else {
-          this.$router.push({ name : 'profile', params: { user_id : this.$store.state.userInfo.id }})
-        }
-      }
     },
     computed: {
       token() {
